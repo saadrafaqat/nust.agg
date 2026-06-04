@@ -15,581 +15,271 @@
     <script src="questions.js"></script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; }
-        body { background-color: #FFFFFF; user-select: none; overflow-x: hidden; }
-
-        /* ── ANIMATIONS ── */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes scaleIn {
-            from { opacity: 0; transform: scale(0.85); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes slideInRight {
-            from { opacity: 0; transform: translateX(50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes shimmer {
-            0% { background-position: -200% center; }
-            100% { background-position: 200% center; }
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-        }
-        @keyframes pulseGlow {
-            0%, 100% { box-shadow: 0 0 5px rgba(0,85,165,0.3); }
-            50% { box-shadow: 0 0 25px rgba(0,85,165,0.6); }
-        }
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        @keyframes borderGlow {
-            0%, 100% { border-color: #0055A5; }
-            50% { border-color: #00BFFF; }
-        }
-        @keyframes typewriter {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-        @keyframes confettiFall {
-            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
-        }
-        @keyframes bounceIn {
-            0% { transform: scale(0.3); opacity: 0; }
-            50% { transform: scale(1.05); }
-            70% { transform: scale(0.9); }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        @keyframes scoreCount {
-            from { transform: scale(0.5); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-        @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(39,174,96,0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(39,174,96,0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(39,174,96,0); }
-        }
-        @keyframes ripple {
-            0% { transform: scale(0); opacity: 0.5; }
-            100% { transform: scale(4); opacity: 0; }
-        }
-
-        /* ── PARTICLE BACKGROUND ── */
-        .particles-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: 0; overflow: hidden;
-        }
-        .particle {
-            position: absolute; border-radius: 50%; opacity: 0.15;
-            animation: floatParticle linear infinite;
-        }
-        @keyframes floatParticle {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.15; }
-            90% { opacity: 0.15; }
-            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
-        }
+        body { background-color: #FFFFFF; user-select: none; }
 
         /* ── LOGIN SCREEN ── */
         .login-screen { 
-            display: flex; flex-direction: column; align-items: center; justify-content: center; 
-            min-height: 100vh; background-image: url('nust.jpg'); background-size: cover; 
-            background-position: center; background-repeat: no-repeat; position: relative;
-        }
-        .login-screen::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(135deg, rgba(0,51,153,0.3), rgba(0,0,0,0.4));
-            z-index: 0;
-        }
-        .login-container {
-            width: 100%; max-width: 520px; background: rgba(255,255,255,0.97);
-            padding: 35px; border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.1);
-            animation: fadeInUp 0.8s ease-out;
-            z-index: 1; position: relative;
-            backdrop-filter: blur(20px);
+            display:flex; flex-direction:column; align-items:center; justify-content:center; 
+            min-height:100vh; background-image:url('nust.jpg'); background-size:cover; 
+            background-position:center; background-repeat:no-repeat;
         }
 
         /* ── INSTRUCTIONS SCREEN ── */
         .instructions-screen {
-            display: none; flex-direction: column; align-items: center; justify-content: flex-start;
-            min-height: 100vh; background-image: url('nust.jpg'); background-size: cover;
-            background-position: center; background-repeat: no-repeat; padding: 20px;
-            position: relative;
-        }
-        .instructions-screen::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(135deg, rgba(0,51,153,0.35), rgba(0,0,0,0.45));
-            z-index: 0;
+            display:none; flex-direction:column; align-items:center; justify-content:center;
+            min-height:100vh; background-image:url('nust.jpg'); background-size:cover;
+            background-position:center; background-repeat:no-repeat; padding:20px;
         }
         .instructions-container {
-            width: 100%; max-width: 720px; background: rgba(255,255,255,0.98);
-            padding: 35px; border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            max-height: 92vh; overflow-y: auto;
-            animation: fadeInUp 0.8s ease-out;
-            z-index: 1; position: relative;
-            backdrop-filter: blur(20px);
+            width:100%; max-width:680px; background:rgba(255,255,255,0.97);
+            padding:35px; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,0.3);
+            max-height:90vh; overflow-y:auto;
         }
-        .instructions-container::-webkit-scrollbar { width: 6px; }
-        .instructions-container::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 3px; }
-        .instructions-container::-webkit-scrollbar-thumb { background: #0055A5; border-radius: 3px; }
-
         .instructions-title {
-            color: #003399; font-size: 22px; font-weight: 800; text-align: center;
-            margin-bottom: 4px; letter-spacing: -0.5px;
-            animation: fadeInDown 0.6s ease-out 0.2s both;
+            color:#003399; font-size:20px; font-weight:800; text-align:center;
+            margin-bottom:6px; letter-spacing:-0.5px;
         }
         .instructions-subtitle {
-            text-align: center; font-size: 12px; color: #FF0000; font-weight: 700;
-            margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1.5px;
-            animation: fadeInDown 0.6s ease-out 0.3s both;
+            text-align:center; font-size:12px; color:#FF0000; font-weight:700;
+            margin-bottom:18px; text-transform:uppercase; letter-spacing:1px;
         }
         .instructions-section-heading {
-            background: linear-gradient(135deg, #003399, #0055A5);
-            color: white; font-size: 13px; font-weight: 700;
-            padding: 9px 16px; border-radius: 8px; margin: 18px 0 10px 0;
-            text-transform: uppercase; letter-spacing: 0.5px;
-            animation: slideInLeft 0.5s ease-out both;
-            box-shadow: 0 3px 10px rgba(0,51,153,0.2);
+            background:#003399; color:white; font-size:13px; font-weight:700;
+            padding:7px 14px; border-radius:5px; margin:16px 0 8px 0;
+            text-transform:uppercase; letter-spacing:0.5px;
         }
         .instructions-list {
-            list-style: none; padding: 0; margin: 0;
+            list-style:none; padding:0; margin:0;
         }
         .instructions-list li {
-            font-size: 13px; color: #333; padding: 8px 0 8px 24px;
-            border-bottom: 1px solid #F0F0F0; line-height: 1.7; position: relative;
-            transition: all 0.3s ease;
-        }
-        .instructions-list li:hover {
-            background: #F8FBFF; padding-left: 30px; border-radius: 6px;
+            font-size:13px; color:#333; padding:5px 0 5px 20px;
+            border-bottom:1px solid #F0F0F0; line-height:1.6; position:relative;
         }
         .instructions-list li::before {
-            content: '▸'; position: absolute; left: 6px; color: #003399; font-weight: bold;
-            transition: all 0.3s ease;
+            content:'▸'; position:absolute; left:0; color:#003399; font-weight:bold;
         }
-        .instructions-list li:hover::before { left: 10px; color: #0077CC; }
-        .instructions-list li strong { color: #003399; }
+        .instructions-list li strong { color:#003399; }
         .instructions-warning {
-            background: linear-gradient(135deg, #FFF8E1, #FFF3CD);
-            border: 1px solid #FFE082; border-left: 5px solid #F39C12;
-            padding: 14px 18px; border-radius: 8px; font-size: 12.5px; color: #856404;
-            margin: 16px 0; line-height: 1.7;
-            animation: fadeIn 0.6s ease-out both;
-            box-shadow: 0 2px 8px rgba(243,156,18,0.15);
+            background:#FFF3CD; border:1px solid #FFEAA7; border-left:4px solid #F39C12;
+            padding:10px 14px; border-radius:5px; font-size:12px; color:#856404;
+            margin:12px 0; line-height:1.6;
         }
         .instructions-important {
-            background: linear-gradient(135deg, #FFF5F5, #F8D7DA);
-            border: 1px solid #F5C6CB; border-left: 5px solid #DC3545;
-            padding: 14px 18px; border-radius: 8px; font-size: 12.5px; color: #721C24;
-            margin: 16px 0; line-height: 1.7;
-            animation: fadeIn 0.6s ease-out both;
-            box-shadow: 0 2px 8px rgba(220,53,69,0.15);
+            background:#F8D7DA; border:1px solid #F5C6CB; border-left:4px solid #DC3545;
+            padding:10px 14px; border-radius:5px; font-size:12px; color:#721C24;
+            margin:12px 0; line-height:1.6;
         }
 
         /* ── FIELD SELECT SCREEN ── */
         .field-select-screen { 
-            display: none; flex-direction: column; align-items: center; justify-content: center; 
-            min-height: 100vh; background-image: url('nust.jpg'); background-size: cover; 
-            background-position: center; background-repeat: no-repeat; position: relative;
-        }
-        .field-select-screen::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(135deg, rgba(0,51,153,0.3), rgba(0,0,0,0.4));
-            z-index: 0;
-        }
-        .field-select-container {
-            width: 100%; max-width: 560px; background: rgba(255,255,255,0.97);
-            padding: 35px; border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            animation: scaleIn 0.7s ease-out;
-            z-index: 1; position: relative;
-            backdrop-filter: blur(20px);
+            display:none; flex-direction:column; align-items:center; justify-content:center; 
+            min-height:100vh; background-image:url('nust.jpg'); background-size:cover; 
+            background-position:center; background-repeat:no-repeat;
         }
 
-        .login-header { 
-            color: #003399; font-size: 22px; font-weight: 800; text-align: center; 
-            letter-spacing: -0.5px;
+        @keyframes gradientBG { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+
+        .login-container, .field-select-container { 
+            width:100%; max-width:520px; background:rgba(255,255,255,0.95); 
+            padding:35px; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,0.3); 
         }
-        .nust-logo-sub { 
-            text-align: center; font-size: 13px; color: #FF0000; font-weight: 700; 
-            margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;
-        }
-        .status-badge { 
-            display: flex; align-items: center; justify-content: center; gap: 6px; 
-            background: linear-gradient(135deg, #E8F8F5, #D1F2EB); color: #117A65; 
-            font-size: 11px; font-weight: bold; padding: 8px 18px; border-radius: 25px; 
-            width: fit-content; margin: 0 auto 18px auto; border: 1px solid #A3E4D7;
-            box-shadow: 0 2px 8px rgba(17,122,101,0.15);
-        }
-        .pulse-dot { 
-            width: 8px; height: 8px; background-color: #27AE60; border-radius: 50%; 
-            animation: pulse 1.8s infinite;
-        }
-        .form-group { margin-bottom: 16px; }
-        .form-group label { 
-            display: block; font-size: 12px; font-weight: 700; color: #444; 
-            margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;
-        }
-        .form-group input { 
-            width: 100%; padding: 13px 15px; border: 2px solid #D5DBDB; border-radius: 10px; 
-            font-size: 15px; outline: none; transition: all 0.3s ease; color: #333; 
-            background: #FAFAFA;
-        }
-        .form-group input:focus { 
-            background: #FFF; border-color: #0055A5; 
-            box-shadow: 0 0 0 4px rgba(0,85,165,0.12), 0 4px 12px rgba(0,85,165,0.1);
-        }
-        .password-wrapper { position: relative; display: flex; align-items: center; width: 100%; }
-        .password-wrapper input { padding-right: 65px; }
-        .toggle-password-btn { 
-            position: absolute; right: 10px; background: #E5E7E9; border: none; 
-            font-size: 11px; font-weight: 700; padding: 5px 9px; cursor: pointer; 
-            color: #444; border-radius: 4px; text-transform: uppercase;
-            transition: all 0.2s;
-        }
-        .toggle-password-btn:hover { background: #BDC3C7; }
-        .login-btn { 
-            width: 100%; padding: 14px; 
-            background: linear-gradient(135deg, #0055A5, #003399); 
-            color: white; border: none; border-radius: 10px; font-weight: 700; font-size: 15px; 
-            cursor: pointer; margin-top: 10px; transition: all 0.3s ease; 
-            box-shadow: 0 4px 15px rgba(0,51,153,0.3);
-            position: relative; overflow: hidden;
-        }
-        .login-btn:hover { 
-            background: linear-gradient(135deg, #003399, #002266); 
-            transform: translateY(-2px); 
-            box-shadow: 0 8px 25px rgba(0,51,153,0.4);
-        }
-        .login-btn:active { transform: translateY(0); }
-        .login-btn .btn-ripple {
-            position: absolute; border-radius: 50%; background: rgba(255,255,255,0.3);
-            animation: ripple 0.6s linear;
-        }
+        .login-header { color:#003399; font-size:22px; font-weight:800; text-align:center; letter-spacing:-0.5px; }
+        .nust-logo-sub { text-align:center; font-size:13px; color:#FF0000; font-weight:700; margin-bottom:20px; text-transform:uppercase; letter-spacing:1px; }
+        .status-badge { display:flex; align-items:center; justify-content:center; gap:6px; background:#E8F8F5; color:#117A65; font-size:11px; font-weight:bold; padding:6px 14px; border-radius:20px; width:fit-content; margin:0 auto 18px auto; border:1px solid #A3E4D7; }
+        .pulse-dot { width:8px; height:8px; background-color:#27AE60; border-radius:50%; animation:pulse 1.8s infinite; }
+        @keyframes pulse { 0%{transform:scale(0.95);box-shadow:0 0 0 0 rgba(39,174,96,0.7)} 70%{transform:scale(1);box-shadow:0 0 0 6px rgba(39,174,96,0)} 100%{transform:scale(0.95);box-shadow:0 0 0 0 rgba(39,174,96,0)} }
+        .form-group { margin-bottom:16px; }
+        .form-group label { display:block; font-size:12px; font-weight:700; color:#444; margin-bottom:6px; text-transform:uppercase; letter-spacing:0.5px; }
+        .form-group input { width:100%; padding:12px 14px; border:2px solid #D5DBDB; border-radius:8px; font-size:15px; outline:none; transition:all 0.2s; color:#333; background:#FAFAFA; }
+        .form-group input:focus { background:#FFF; border-color:#0055A5; box-shadow:0 0 0 4px rgba(0,85,165,0.15); }
+        .password-wrapper { position:relative; display:flex; align-items:center; width:100%; }
+        .password-wrapper input { padding-right:65px; }
+        .toggle-password-btn { position:absolute; right:10px; background:#E5E7E9; border:none; font-size:11px; font-weight:700; padding:5px 9px; cursor:pointer; color:#444; border-radius:4px; text-transform:uppercase; }
+        .toggle-password-btn:hover { background:#BDC3C7; }
+        .login-btn { width:100%; padding:14px; background:linear-gradient(135deg,#0055A5,#003399); color:white; border:none; border-radius:8px; font-weight:700; font-size:15px; cursor:pointer; margin-top:10px; transition:all 0.2s; box-shadow:0 4px 12px rgba(0,51,153,0.3); }
+        .login-btn:hover { background:linear-gradient(135deg,#003399,#002266); transform:scale(1.01); }
         
         /* ── FIELD SELECTION CARDS ── */
-        .field-selector { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
-        .field-card { 
-            display: flex; align-items: flex-start; gap: 14px; border: 2px solid #D5DBDB; 
-            border-radius: 12px; padding: 14px 16px; cursor: pointer; 
-            transition: all 0.3s ease; background: #FAFAFA;
-            animation: fadeInUp 0.5s ease-out both;
-        }
-        .field-card:nth-child(1) { animation-delay: 0.1s; }
-        .field-card:nth-child(2) { animation-delay: 0.15s; }
-        .field-card:nth-child(3) { animation-delay: 0.2s; }
-        .field-card:nth-child(4) { animation-delay: 0.25s; }
-        .field-card:nth-child(5) { animation-delay: 0.3s; }
-        .field-card:hover { 
-            border-color: #0055A5; background: #EBF5FB; 
-            transform: translateX(4px);
-            box-shadow: 0 3px 12px rgba(0,85,165,0.15);
-        }
-        .field-card.selected { 
-            border-color: #0055A5; background: #D4E6F1; 
-            box-shadow: 0 0 0 3px rgba(0,85,165,0.2), 0 4px 15px rgba(0,85,165,0.2);
-            animation: pulseGlow 2s ease-in-out infinite;
-        }
-        .field-card input[type="radio"] { transform: scale(1.3); accent-color: #0055A5; flex-shrink: 0; margin-top: 4px; }
-        .field-card-content { flex: 1; }
-        .field-card-title { font-weight: 700; font-size: 13px; color: #003399; }
-        .field-card-detail { font-size: 11px; color: #555; margin-top: 2px; }
-        .field-card-weightage { font-size: 10px; color: #777; margin-top: 3px; background: #EFF6FF; padding: 2px 8px; border-radius: 3px; display: inline-block; }
-        .field-card-code { 
-            font-size: 10px; font-weight: bold; color: #0055A5; 
-            background: #E8F0FE; padding: 4px 10px; border-radius: 6px; flex-shrink: 0;
-        }
-        .btn-back { 
-            width: 100%; padding: 10px; margin-top: 8px; background: transparent; 
-            color: #999; border: 1px solid #ccc; border-radius: 10px; font-size: 13px; 
-            cursor: pointer; transition: all 0.3s ease;
-        }
-        .btn-back:hover { color: #0055A5; border-color: #0055A5; background: rgba(0,85,165,0.05); }
+        .field-selector { display:flex; flex-direction:column; gap:8px; margin-bottom:10px; }
+        .field-card { display:flex; align-items:flex-start; gap:14px; border:2px solid #D5DBDB; border-radius:10px; padding:12px 16px; cursor:pointer; transition:all 0.2s; background:#FAFAFA; }
+        .field-card:hover { border-color:#0055A5; background:#EBF5FB; }
+        .field-card.selected { border-color:#0055A5; background:#D4E6F1; box-shadow:0 0 0 3px rgba(0,85,165,0.2); }
+        .field-card input[type="radio"] { transform:scale(1.3); accent-color:#0055A5; flex-shrink:0; margin-top:4px; }
+        .field-card-content { flex:1; }
+        .field-card-title { font-weight:700; font-size:13px; color:#003399; }
+        .field-card-detail { font-size:11px; color:#555; margin-top:2px; }
+        .field-card-weightage { font-size:10px; color:#777; margin-top:3px; background:#EFF6FF; padding:2px 8px; border-radius:3px; display:inline-block; }
+        .field-card-code { font-size:10px; font-weight:bold; color:#0055A5; background:#E8F0FE; padding:3px 8px; border-radius:4px; flex-shrink:0; }
+        .btn-back { width:100%; padding:10px; margin-top:8px; background:transparent; color:#999; border:1px solid #ccc; border-radius:8px; font-size:13px; cursor:pointer; }
+        .btn-back:hover { color:#0055A5; border-color:#0055A5; }
 
         /* ── AGGREGATE CALCULATOR BUTTON ── */
         .btn-aggregate {
-            width: 100%; padding: 12px; margin-top: 8px;
-            background: linear-gradient(135deg, #117A65, #0E6655);
-            color: white; border: none; border-radius: 10px; font-weight: 700;
-            font-size: 13px; cursor: pointer; transition: all 0.3s ease;
-            box-shadow: 0 3px 12px rgba(17,122,101,0.3);
-            display: flex; align-items: center; justify-content: center; gap: 8px;
+            width:100%; padding:11px; margin-top:8px;
+            background:linear-gradient(135deg,#117A65,#0E6655);
+            color:white; border:none; border-radius:8px; font-weight:700;
+            font-size:13px; cursor:pointer; transition:all 0.2s;
+            box-shadow:0 3px 10px rgba(17,122,101,0.3);
+            display:flex; align-items:center; justify-content:center; gap:8px;
         }
-        .btn-aggregate:hover { 
-            background: linear-gradient(135deg, #0E6655, #0A5345); 
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(17,122,101,0.4);
-        }
+        .btn-aggregate:hover { background:linear-gradient(135deg,#0E6655,#0A5345); transform:scale(1.01); }
 
         /* ── AGGREGATE MODAL ── */
         .aggregate-modal-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.65); justify-content: center; align-items: center;
-            z-index: 9999; padding: 15px;
-            animation: fadeIn 0.3s ease;
+            display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+            background:rgba(0,0,0,0.65); justify-content:center; align-items:center;
+            z-index:9999; padding:15px;
         }
         .aggregate-modal-body {
-            background: white; border-radius: 18px; padding: 30px;
-            max-width: 520px; width: 100%; max-height: 92vh; overflow-y: auto;
-            box-shadow: 0 25px 80px rgba(0,0,0,0.4);
-            animation: scaleIn 0.4s ease-out;
+            background:white; border-radius:14px; padding:28px;
+            max-width:500px; width:100%; max-height:92vh; overflow-y:auto;
+            box-shadow:0 20px 60px rgba(0,0,0,0.4);
         }
-        .aggregate-modal-body::-webkit-scrollbar { width: 5px; }
-        .aggregate-modal-body::-webkit-scrollbar-thumb { background: #0055A5; border-radius: 3px; }
-        .agg-title { color: #003399; font-size: 20px; font-weight: 800; text-align: center; margin-bottom: 4px; }
-        .agg-subtitle { color: #FF0000; font-size: 11px; font-weight: 700; text-align: center; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
-        .agg-tab-row { display: flex; gap: 8px; margin-bottom: 18px; }
+        .agg-title {
+            color:#003399; font-size:18px; font-weight:800; text-align:center;
+            margin-bottom:4px;
+        }
+        .agg-subtitle {
+            color:#FF0000; font-size:11px; font-weight:700; text-align:center;
+            text-transform:uppercase; letter-spacing:1px; margin-bottom:20px;
+        }
+        .agg-tab-row {
+            display:flex; gap:8px; margin-bottom:18px;
+        }
         .agg-tab {
-            flex: 1; padding: 10px; border: 2px solid #D5DBDB; border-radius: 10px;
-            background: #FAFAFA; font-size: 12px; font-weight: 700; cursor: pointer;
-            text-align: center; color: #555; transition: all 0.3s ease;
+            flex:1; padding:9px; border:2px solid #D5DBDB; border-radius:8px;
+            background:#FAFAFA; font-size:12px; font-weight:700; cursor:pointer;
+            text-align:center; color:#555; transition:all 0.2s;
         }
-        .agg-tab.active { border-color: #003399; background: #003399; color: white; box-shadow: 0 3px 10px rgba(0,51,153,0.3); }
-        .agg-tab:hover:not(.active) { border-color: #0055A5; color: #0055A5; background: #F0F7FF; }
-        .agg-panel { display: none; }
-        .agg-panel.active { display: block; animation: fadeIn 0.4s ease; }
+        .agg-tab.active {
+            border-color:#003399; background:#003399; color:white;
+        }
+        .agg-tab:hover:not(.active) { border-color:#0055A5; color:#0055A5; }
+        .agg-panel { display:none; }
+        .agg-panel.active { display:block; }
         .agg-formula-box {
-            background: linear-gradient(135deg, #EFF6FF, #E8F0FE);
-            border: 1px solid #BFDBFE; border-left: 5px solid #003399;
-            padding: 12px 16px; border-radius: 8px; font-size: 12px; color: #1E3A5F;
-            margin-bottom: 18px; line-height: 1.8;
+            background:#EFF6FF; border:1px solid #BFDBFE; border-left:4px solid #003399;
+            padding:10px 14px; border-radius:6px; font-size:12px; color:#1E3A5F;
+            margin-bottom:16px; line-height:1.7;
         }
-        .agg-formula-box strong { color: #003399; }
-        .agg-field-group { margin-bottom: 14px; }
+        .agg-formula-box strong { color:#003399; }
+        .agg-field-group { margin-bottom:13px; }
         .agg-field-group label {
-            display: block; font-size: 11px; font-weight: 700; color: #444;
-            margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.4px;
+            display:block; font-size:11px; font-weight:700; color:#444;
+            margin-bottom:5px; text-transform:uppercase; letter-spacing:0.4px;
         }
-        .agg-input-row { display: flex; gap: 8px; align-items: center; }
+        .agg-input-row { display:flex; gap:8px; }
         .agg-input-row input {
-            flex: 1; padding: 10px 12px; border: 2px solid #D5DBDB; border-radius: 8px;
-            font-size: 14px; outline: none; color: #333; background: #FAFAFA;
-            transition: all 0.3s ease;
+            flex:1; padding:10px 12px; border:2px solid #D5DBDB; border-radius:7px;
+            font-size:14px; outline:none; color:#333; background:#FAFAFA;
+            transition:all 0.2s;
         }
-        .agg-input-row input:focus { border-color: #0055A5; background: #FFF; box-shadow: 0 0 0 3px rgba(0,85,165,0.1); }
-        .agg-input-row input.input-error { border-color: #E74C3C; background: #FFF5F5; box-shadow: 0 0 0 3px rgba(231,76,60,0.15); }
+        .agg-input-row input:focus { border-color:#0055A5; background:#FFF; box-shadow:0 0 0 3px rgba(0,85,165,0.12); }
         .agg-input-row span {
-            display: flex; align-items: center; font-size: 11px; color: #777;
-            font-weight: 600; white-space: nowrap;
+            display:flex; align-items:center; font-size:11px; color:#777;
+            font-weight:600; white-space:nowrap;
         }
         .agg-calculate-btn {
-            width: 100%; padding: 13px;
-            background: linear-gradient(135deg, #0055A5, #003399);
-            color: white; border: none; border-radius: 10px; font-weight: 700; font-size: 14px;
-            cursor: pointer; margin-top: 8px; transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,51,153,0.3);
+            width:100%; padding:12px; background:linear-gradient(135deg,#0055A5,#003399);
+            color:white; border:none; border-radius:8px; font-weight:700; font-size:14px;
+            cursor:pointer; margin-top:5px; transition:all 0.2s;
         }
-        .agg-calculate-btn:hover { background: linear-gradient(135deg, #003399, #002266); transform: translateY(-2px); }
+        .agg-calculate-btn:hover { background:linear-gradient(135deg,#003399,#002266); }
         .agg-result-box {
-            display: none; margin-top: 18px; background: linear-gradient(135deg, #F4FBF7, #E8F8F0);
-            border: 2px solid #2ECC71; border-radius: 14px; padding: 20px; text-align: center;
-            animation: bounceIn 0.5s ease-out;
+            display:none; margin-top:16px; background:#F4FBF7;
+            border:2px solid #2ECC71; border-radius:10px; padding:16px; text-align:center;
         }
-        .agg-result-box.show { display: block; }
+        .agg-result-box.show { display:block; }
         .agg-result-score {
-            font-size: 42px; font-weight: 800; color: #117A65; font-family: monospace;
-            margin: 8px 0; animation: scoreCount 0.5s ease-out;
+            font-size:36px; font-weight:800; color:#117A65; font-family:monospace;
+            margin:6px 0;
         }
-        .agg-result-label { font-size: 12px; color: #555; margin-bottom: 6px; font-weight: 600; }
+        .agg-result-label { font-size:12px; color:#555; margin-bottom:6px; }
         .agg-result-breakdown {
-            font-size: 12px; color: #333; background: rgba(255,255,255,0.8);
-            border: 1px solid #A3E4D7; border-radius: 8px; padding: 12px;
-            margin-top: 12px; text-align: left; line-height: 1.9;
+            font-size:12px; color:#333; background:#E8F8F5;
+            border:1px solid #A3E4D7; border-radius:6px; padding:10px;
+            margin-top:10px; text-align:left; line-height:1.8;
         }
         .agg-close-btn {
-            width: 100%; padding: 11px; margin-top: 16px; background: transparent;
-            color: #999; border: 1px solid #ddd; border-radius: 10px; font-size: 13px;
-            cursor: pointer; font-weight: 600; transition: all 0.3s ease;
+            width:100%; padding:10px; margin-top:14px; background:transparent;
+            color:#999; border:1px solid #ccc; border-radius:8px; font-size:13px;
+            cursor:pointer; font-weight:600;
         }
-        .agg-close-btn:hover { color: #C0392B; border-color: #C0392B; background: #FFF5F5; }
-        .agg-error {
-            color: #C0392B; font-size: 12px; margin-top: 8px; font-weight: 600; display: none;
-            background: #FFF5F5; border: 1px solid #FADBD8; border-radius: 6px; padding: 8px 12px;
-            line-height: 1.5;
-        }
+        .agg-close-btn:hover { color:#C0392B; border-color:#C0392B; }
+        .agg-error { color:#C0392B; font-size:12px; margin-top:6px; font-weight:600; display:none; }
 
-        /* ── EXAM INTERFACE (KEPT IDENTICAL) ── */
-        .exam-interface { display: none; padding: 10px; }
-        .test-table { width: 100%; border-collapse: collapse; border: 3px double #0055A5; margin-bottom: 8px; }
-        .top-header-row { background: #FFF; border-bottom: 2px solid #0055A5; color: #008000; font-weight: bold; padding: 6px 10px; font-size: 14px; text-transform: uppercase; }
-        .stream-title { text-align: center; color: #FF0000; font-weight: bold; font-size: 13px; border-bottom: 2px solid #0055A5; padding: 5px; background: #F9F9F9; }
-        .workspace-container { display: flex; border-bottom: 2px solid #0055A5; min-height: 300px; }
-        .left-main-canvas { flex: 1; display: flex; flex-direction: column; border-right: 2px solid #0055A5; }
-        .question-meta-bar { background: #D4E6F1; color: #003399; font-weight: bold; font-size: 13px; padding: 5px 10px; border-bottom: 1px solid #0055A5; display: flex; justify-content: space-between; }
-        .question-body-pane { padding: 18px 20px; font-size: 15px; font-weight: 600; color: #000; min-height: 100px; border-bottom: 2px solid #0055A5; line-height: 1.6; background: #FFF; text-align: left; }
-        .passage-container { background: #F8F9FA; border: 1px solid #BDC3C7; border-left: 4px solid #0055A5; padding: 14px 16px; margin-bottom: 14px; font-weight: 400; font-size: 14px; line-height: 1.7; color: #333; border-radius: 4px; }
-        .passage-label { font-size: 11px; font-weight: 700; color: #0055A5; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
-        .question-text { font-weight: 600; font-size: 15px; }
-        .question-diagram { display: block; max-width: 280px; height: auto; margin: 12px auto; border-radius: 6px; border: 1px solid #D5DBDB; }
-        .options-pane-title { background: #D4E6F1; color: #003399; font-weight: bold; font-size: 13px; padding: 5px 10px; border-bottom: 1px solid #0055A5; }
-        .options-list-wrapper { padding: 12px 15px; display: flex; flex-direction: column; gap: 6px; background: #FFF; flex: 1; }
-        .option-row-item { display: flex; align-items: center; border: 1px solid #A9CCE3; padding: 10px 14px; background: white; cursor: pointer; border-radius: 4px; }
-        .option-row-item:hover { background: #EBF5FB; border-color: #2980B9; }
-        .option-row-item.selected { background: #D4E6F1; border: 1px solid #0055A5; font-weight: bold; }
-        .option-radio-input { display: none; }
-        .option-text { text-align: left; font-size: 14px; }
-        .option-text .katex { font-size: 1.05em; }
-        .option-text .katex-display { display: inline-block; }
-        .right-photo-panel { width: 160px; padding: 12px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; background: #FFF; }
-        .photo-box-frame { width: 120px; height: 140px; border: 1px solid #003399; display: flex; align-items: center; justify-content: center; text-align: center; font-weight: bold; font-size: 13px; color: #555; background: #FAFAFA; margin-bottom: 12px; }
-        .navigation-grid-wrapper { border: 1px solid #0055A5; margin: 8px 0; padding: 8px; background: #F2F4F4; }
-        .nav-section-label { display: flex; align-items: center; gap: 8px; margin: 4px 0 6px 0; }
-        .nav-section-label span { font-size: 10px; font-weight: bold; color: #003399; background: #D4E6F1; padding: 2px 10px; border-radius: 3px; text-transform: uppercase; }
-        .nav-sub-grid { display: grid; gap: 3px; margin-bottom: 8px; }
-        .nav-square-btn { background: #E5E7E9; border: 1px solid #7F8C8D; text-align: center; font-size: 10px; padding: 4px 0; cursor: pointer; font-weight: bold; color: #000; border-radius: 2px; }
-        .nav-square-btn.active-focus { border: 2px solid #FF0000; background: #FFF; color: #FF0000; }
-        .nav-square-btn.filled { background: #2ECC71; color: white; border-color: #27AE60; }
-        .nav-square-btn.flagged-review { background: #F1C40F; color: black; border-color: #D4AC0D; }
-        .bottom-action-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; background: #FFF; flex-wrap: wrap; gap: 6px; }
-        .timer-dashboard { display: flex; border: 1px solid #008000; background: #FFF; height: 48px; align-items: center; flex-shrink: 0; }
-        .timer-left-banner { background: #008000; color: #FFF; font-size: 10px; padding: 5px 8px; height: 100%; display: flex; flex-direction: column; justify-content: center; font-weight: bold; text-align: center; text-transform: uppercase; }
-        .timer-countdown-clock { font-size: 22px; font-weight: bold; color: #008000; padding: 0 10px; font-family: monospace; min-width: 120px; text-align: center; }
-        .finish-trigger-link { color: #003399; font-weight: bold; text-decoration: underline; cursor: pointer; font-size: 12px; }
-        .finish-trigger-link:hover { color: #FF0000; }
-        .button-bar-right { display: flex; gap: 3px; align-items: center; flex-wrap: wrap; }
-        .retro-control-btn { padding: 5px 10px; font-size: 11px; font-weight: bold; color: white; border: 1px solid #2471A3; cursor: pointer; border-radius: 3px; white-space: nowrap; }
-        .btn-system { background: linear-gradient(to bottom, #3498DB, #2980B9); }
-        .btn-navigational { background: linear-gradient(to bottom, #5DADE2, #2874A6); }
-        .btn-review { background: linear-gradient(to bottom, #F39C12, #D35400); border-color: #B03A2E; }
-        .btn-subject { background: linear-gradient(to bottom, #34495E, #2C3E50); border-color: #1A252F; }
-        .retro-control-btn:hover { opacity: 0.9; }
+        /* ── EXAM INTERFACE ── */
+        .exam-interface { display:none; padding:10px; }
+        .test-table { width:100%; border-collapse:collapse; border:3px double #0055A5; margin-bottom:8px; }
+        .top-header-row { background:#FFF; border-bottom:2px solid #0055A5; color:#008000; font-weight:bold; padding:6px 10px; font-size:14px; text-transform:uppercase; }
+        .stream-title { text-align:center; color:#FF0000; font-weight:bold; font-size:13px; border-bottom:2px solid #0055A5; padding:5px; background:#F9F9F9; }
+        .workspace-container { display:flex; border-bottom:2px solid #0055A5; min-height:300px; }
+        .left-main-canvas { flex:1; display:flex; flex-direction:column; border-right:2px solid #0055A5; }
+        .question-meta-bar { background:#D4E6F1; color:#003399; font-weight:bold; font-size:13px; padding:5px 10px; border-bottom:1px solid #0055A5; display:flex; justify-content:space-between; }
+        .question-body-pane { padding:18px 20px; font-size:15px; font-weight:600; color:#000; min-height:100px; border-bottom:2px solid #0055A5; line-height:1.6; background:#FFF; text-align:left; }
+        .passage-container { background:#F8F9FA; border:1px solid #BDC3C7; border-left:4px solid #0055A5; padding:14px 16px; margin-bottom:14px; font-weight:400; font-size:14px; line-height:1.7; color:#333; border-radius:4px; }
+        .passage-label { font-size:11px; font-weight:700; color:#0055A5; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px; }
+        .question-text { font-weight:600; font-size:15px; }
+        .question-diagram { display:block; max-width:280px; height:auto; margin:12px auto; border-radius:6px; border:1px solid #D5DBDB; }
+        .options-pane-title { background:#D4E6F1; color:#003399; font-weight:bold; font-size:13px; padding:5px 10px; border-bottom:1px solid #0055A5; }
+        .options-list-wrapper { padding:12px 15px; display:flex; flex-direction:column; gap:6px; background:#FFF; flex:1; }
+        .option-row-item { display:flex; align-items:center; border:1px solid #A9CCE3; padding:10px 14px; background:white; cursor:pointer; border-radius:4px; }
+        .option-row-item:hover { background:#EBF5FB; border-color:#2980B9; }
+        .option-row-item.selected { background:#D4E6F1; border:1px solid #0055A5; font-weight:bold; }
+        .option-radio-input { margin-right:12px; transform:scale(1.2); cursor:pointer; flex-shrink:0; }
+        .option-text { text-align:left; font-size:14px; }
+        .option-text .katex { font-size:1.05em; }
+        .option-text .katex-display { display:inline-block; }
+        .right-photo-panel { width:160px; padding:12px; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; background:#FFF; }
+        .photo-box-frame { width:120px; height:140px; border:1px solid #003399; display:flex; align-items:center; justify-content:center; text-align:center; font-weight:bold; font-size:13px; color:#555; background:#FAFAFA; margin-bottom:12px; }
+        .navigation-grid-wrapper { border:1px solid #0055A5; margin:8px 0; padding:8px; background:#F2F4F4; }
+        .nav-section-label { display:flex; align-items:center; gap:8px; margin:4px 0 6px 0; }
+        .nav-section-label span { font-size:10px; font-weight:bold; color:#003399; background:#D4E6F1; padding:2px 10px; border-radius:3px; text-transform:uppercase; }
+        .nav-sub-grid { display:grid; gap:3px; margin-bottom:8px; }
+        .nav-square-btn { background:#E5E7E9; border:1px solid #7F8C8D; text-align:center; font-size:10px; padding:4px 0; cursor:pointer; font-weight:bold; color:#000; border-radius:2px; }
+        .nav-square-btn.active-focus { border:2px solid #FF0000; background:#FFF; color:#FF0000; }
+        .nav-square-btn.filled { background:#2ECC71; color:white; border-color:#27AE60; }
+        .nav-square-btn.flagged-review { background:#F1C40F; color:black; border-color:#D4AC0D; }
+        .bottom-action-row { display:flex; justify-content:space-between; align-items:center; padding:5px 0; background:#FFF; flex-wrap:wrap; gap:6px; }
+        .timer-dashboard { display:flex; border:1px solid #008000; background:#FFF; height:48px; align-items:center; flex-shrink:0; }
+        .timer-left-banner { background:#008000; color:#FFF; font-size:10px; padding:5px 8px; height:100%; display:flex; flex-direction:column; justify-content:center; font-weight:bold; text-align:center; text-transform:uppercase; }
+        .timer-countdown-clock { font-size:22px; font-weight:bold; color:#008000; padding:0 10px; font-family:monospace; min-width:120px; text-align:center; }
+        .finish-trigger-link { color:#003399; font-weight:bold; text-decoration:underline; cursor:pointer; font-size:12px; }
+        .finish-trigger-link:hover { color:#FF0000; }
+        .button-bar-right { display:flex; gap:3px; align-items:center; flex-wrap:wrap; }
+        .retro-control-btn { padding:5px 10px; font-size:11px; font-weight:bold; color:white; border:1px solid #2471A3; cursor:pointer; border-radius:3px; white-space:nowrap; }
+        .btn-system { background:linear-gradient(to bottom,#3498DB,#2980B9); }
+        .btn-navigational { background:linear-gradient(to bottom,#5DADE2,#2874A6); }
+        .btn-review { background:linear-gradient(to bottom,#F39C12,#D35400); border-color:#B03A2E; }
+        .btn-subject { background:linear-gradient(to bottom,#34495E,#2C3E50); border-color:#1A252F; }
+        .retro-control-btn:hover { opacity:0.9; }
+
+        /* ── RESULT MODAL ── */
+        .modal-screen { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:9999; }
+        .modal-body { background:white; border:3px double #0055A5; padding:25px; text-align:center; max-width:680px; width:95%; max-height:90vh; overflow-y:auto; }
+        .score-output { font-size:38px; font-weight:bold; color:#008000; margin:15px 0; font-family:monospace; }
+        .review-header { background:#003399; color:white; text-align:left; padding:6px 10px; font-size:14px; font-weight:bold; margin-top:15px; text-transform:uppercase; }
+        .review-box { border:1px solid #BDC3C7; text-align:left; padding:12px; margin-top:8px; font-size:13px; line-height:1.5; background:#FFF9F9; border-left:5px solid #FF0000; }
+        .review-box.box-correct { background:#F4FBF7; border-left:5px solid #2ECC71; }
+        .hidden { display:none !important; }
+        .katex-display { display:inline-block; margin:0; }
+        .katex { font-size:1.1em; }
+        .option-radio-input { display:none; }
         .option-row-item::before {
-            content: ''; display: inline-block; width: 18px; height: 18px; border-radius: 50%;
-            border: 2px solid #A9CCE3; margin-right: 12px; flex-shrink: 0;
-            background: white; transition: all 0.2s;
+            content:''; display:inline-block; width:18px; height:18px; border-radius:50%;
+            border:2px solid #A9CCE3; margin-right:12px; flex-shrink:0;
+            background:white; transition:all 0.2s;
         }
         .option-row-item.selected::before {
-            border-color: #0055A5; background: #0055A5; box-shadow: inset 0 0 0 3px white;
-        }
-
-        /* ── RESULT MODAL (ENHANCED) ── */
-        .modal-screen { 
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(0,0,0,0.75); justify-content: center; align-items: center; 
-            z-index: 9999;
-        }
-        .modal-body { 
-            background: white; border: none; border-radius: 20px; padding: 30px; 
-            text-align: center; max-width: 720px; width: 95%; max-height: 92vh; 
-            overflow-y: auto; animation: scaleIn 0.5s ease-out;
-            box-shadow: 0 25px 80px rgba(0,0,0,0.4);
-        }
-        .modal-body::-webkit-scrollbar { width: 6px; }
-        .modal-body::-webkit-scrollbar-thumb { background: #0055A5; border-radius: 3px; }
-
-        /* Confetti */
-        .confetti-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: 10000; overflow: hidden;
-        }
-        .confetti-piece {
-            position: absolute; width: 10px; height: 10px; top: -20px;
-            animation: confettiFall linear forwards;
-        }
-
-        .score-output { 
-            font-size: 48px; font-weight: 800; color: #008000; margin: 15px 0; 
-            font-family: monospace; animation: bounceIn 0.8s ease-out;
-        }
-        .result-grade-badge {
-            display: inline-block; padding: 8px 24px; border-radius: 30px;
-            font-size: 14px; font-weight: 700; margin-bottom: 15px;
-            animation: scaleIn 0.5s ease-out 0.3s both;
-        }
-        .grade-excellent { background: linear-gradient(135deg, #27AE60, #2ECC71); color: white; }
-        .grade-good { background: linear-gradient(135deg, #2980B9, #3498DB); color: white; }
-        .grade-average { background: linear-gradient(135deg, #F39C12, #F1C40F); color: #333; }
-        .grade-poor { background: linear-gradient(135deg, #E74C3C, #C0392B); color: white; }
-
-        .result-stats-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 10px; margin: 15px 0;
-        }
-        .result-stat-card {
-            background: #F8F9FA; border-radius: 12px; padding: 14px 10px;
-            border: 1px solid #E5E7E9; animation: fadeInUp 0.4s ease-out both;
-        }
-        .result-stat-card .stat-value {
-            font-size: 24px; font-weight: 800; color: #003399; font-family: monospace;
-        }
-        .result-stat-card .stat-label {
-            font-size: 10px; color: #777; text-transform: uppercase; letter-spacing: 0.5px;
-            margin-top: 4px; font-weight: 600;
-        }
-
-        .review-header { 
-            background: linear-gradient(135deg, #003399, #0055A5); color: white; 
-            text-align: left; padding: 10px 16px; font-size: 14px; font-weight: bold; 
-            margin-top: 20px; text-transform: uppercase; border-radius: 8px;
-            box-shadow: 0 3px 10px rgba(0,51,153,0.2);
-        }
-        .review-box { 
-            border: 1px solid #BDC3C7; text-align: left; padding: 14px; margin-top: 8px; 
-            font-size: 13px; line-height: 1.6; background: #FFF9F9; 
-            border-left: 5px solid #FF0000; border-radius: 6px;
-            transition: all 0.3s ease;
-        }
-        .review-box:hover { transform: translateX(3px); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-        .review-box.box-correct { 
-            background: #F4FBF7; border-left: 5px solid #2ECC71;
-        }
-
-        /* Review filter tabs */
-        .review-filter-bar {
-            display: flex; gap: 8px; margin: 20px 0 10px 0; flex-wrap: wrap;
-            justify-content: center;
-        }
-        .review-filter-btn {
-            padding: 6px 16px; border: 2px solid #D5DBDB; border-radius: 20px;
-            font-size: 11px; font-weight: 700; cursor: pointer; background: #FAFAFA;
-            color: #555; transition: all 0.3s ease;
-        }
-        .review-filter-btn.active { border-color: #003399; background: #003399; color: white; }
-        .review-filter-btn:hover:not(.active) { border-color: #0055A5; color: #0055A5; }
-
-        .hidden { display: none !important; }
-        .katex-display { display: inline-block; margin: 0; }
-        .katex { font-size: 1.1em; }
-
-        /* ── NUST LOGO ANIMATION ── */
-        .nust-crest {
-            width: 80px; height: 80px; margin: 0 auto 15px auto;
-            background: linear-gradient(135deg, #003399, #0055A5);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            color: white; font-weight: 800; font-size: 24px;
-            box-shadow: 0 4px 20px rgba(0,51,153,0.3);
-            animation: float 3s ease-in-out infinite;
-            letter-spacing: -1px;
+            border-color:#0055A5; background:#0055A5; box-shadow:inset 0 0 0 3px white;
         }
     </style>
 </head>
 <body>
 
-<!-- ===== PARTICLES ===== -->
-<div class="particles-container" id="particlesContainer"></div>
-
 <!-- ===== LOGIN SCREEN ===== -->
 <div class="login-screen" id="loginScreenView">
     <div class="login-container">
-        <div class="nust-crest">NUST</div>
         <div class="status-badge"><div class="pulse-dot"></div><span>SYSTEM STATUS: OPERATIONAL</span></div>
         <div class="login-header">National University of Sciences &amp; Technology</div>
         <div class="nust-logo-sub">Computer Based Entry Test Portal (CBNET)</div>
@@ -604,8 +294,9 @@
                 <button type="button" class="toggle-password-btn" onclick="togglePasswordVisibility()">Show</button>
             </div>
         </div>
-        <button class="login-btn" onclick="authenticateUserLogin()">🔐 Login &amp; View Instructions</button>
+        <button class="login-btn" onclick="authenticateUserLogin()">Login &amp; View Instructions</button>
     </div>
+    <!-- Instructions box REMOVED from login page as requested -->
 </div>
 
 <!-- ===== INSTRUCTIONS SCREEN ===== -->
@@ -615,10 +306,10 @@
             <div class="pulse-dot"></div>
             <span>CANDIDATE: <span id="instructionsCandidateId">---</span></span>
         </div>
-        <div class="nust-crest" style="width:60px;height:60px;font-size:18px;">NUST</div>
         <div class="instructions-title">NUST NET — Candidate Instructions</div>
         <div class="instructions-subtitle">Computer Based Entry Test (CBNET) — Official Guidelines</div>
 
+        <!-- General Information -->
         <div class="instructions-section-heading">📋 General Information</div>
         <ul class="instructions-list">
             <li>This is a <strong>Computer Based Entry Test (CBNET / NET)</strong> conducted by the National University of Sciences &amp; Technology (NUST), Islamabad.</li>
@@ -628,6 +319,7 @@
             <li>Candidates must attempt the test <strong>individually</strong>. Any form of assistance or collaboration is strictly prohibited.</li>
         </ul>
 
+        <!-- Test Structure -->
         <div class="instructions-section-heading">📐 Test Structure by Field</div>
         <ul class="instructions-list">
             <li><strong>NET-Engineering:</strong> Mathematics (100 MCQs) · Physics (60 MCQs) · English (40 MCQs)</li>
@@ -637,6 +329,7 @@
             <li><strong>NET-Natural Sciences:</strong> Mathematics (100 MCQs) · English (100 MCQs)</li>
         </ul>
 
+        <!-- Navigation Instructions -->
         <div class="instructions-section-heading">🖥️ How to Navigate the Test</div>
         <ul class="instructions-list">
             <li>Click on any option to <strong>select your answer</strong>. Your selection will be highlighted immediately.</li>
@@ -647,6 +340,7 @@
             <li>You may <strong>revisit and change</strong> any answer at any time before submitting.</li>
         </ul>
 
+        <!-- Question Status Colours -->
         <div class="instructions-section-heading">🎨 Navigation Button Colour Legend</div>
         <ul class="instructions-list">
             <li><strong style="color:#7F8C8D;">Grey</strong> — Question not yet visited or answered.</li>
@@ -655,6 +349,7 @@
             <li><strong style="color:#FF0000;">Red Border</strong> — Currently active / viewed question.</li>
         </ul>
 
+        <!-- Marking and Review -->
         <div class="instructions-section-heading">🚩 Review &amp; Flagging</div>
         <ul class="instructions-list">
             <li>Click the <strong>Review</strong> button to flag a question for later review. Flagged questions appear in <strong>yellow</strong>.</li>
@@ -662,6 +357,7 @@
             <li>You are encouraged to answer all questions, even if you are unsure, as there is no penalty for wrong answers.</li>
         </ul>
 
+        <!-- Timer -->
         <div class="instructions-section-heading">⏱️ Timer &amp; Submission</div>
         <ul class="instructions-list">
             <li>The countdown timer is displayed at the bottom left of the screen throughout the test.</li>
@@ -670,23 +366,26 @@
             <li>Once submitted, you <strong>cannot return</strong> to the test. All answers are final.</li>
         </ul>
 
+        <!-- Aggregate -->
         <div class="instructions-warning">
             ⚠️ <strong>Aggregate Formula Reminder:</strong> Your final NUST merit is calculated as:
             <strong>75% NET Score + 15% FSc/A-Level Marks + 10% Matric/O-Level Marks</strong>.
             Use the Aggregate Calculator on the next screen to estimate your merit.
         </div>
 
+        <!-- Important Rules -->
         <div class="instructions-important">
             🚫 <strong>Important Rules:</strong> Do not refresh or close the browser during the test. Do not use any unfair means. 
             NUST reserves the right to cancel the candidature of any candidate found violating examination rules.
             Results shown at the end are for practice purposes only.
         </div>
 
+        <!-- Scroll hint + button -->
         <p style="text-align:center;font-size:12px;color:#888;margin:14px 0 6px 0;">
             Please read all instructions carefully before proceeding.
         </p>
         <button class="login-btn" onclick="goToFieldSelect()" style="margin-top:6px;">
-            📝 Select Field / Stream ➜
+            Select Field / Stream ➜
         </button>
     </div>
 </div>
@@ -749,8 +448,13 @@
             </div>
         </div>
 
-        <button class="login-btn" onclick="startExam()">🚀 Start Assessment</button>
-        <button class="btn-aggregate" onclick="openAggregateModal()">🧮 Aggregate Calculator</button>
+        <button class="login-btn" onclick="startExam()">Start Assessment</button>
+
+        <!-- Aggregate Calculator Button -->
+        <button class="btn-aggregate" onclick="openAggregateModal()">
+            🧮 Aggregate Calculator
+        </button>
+
         <button class="btn-back" onclick="goBackToInstructions()">&larr; Back to Instructions</button>
     </div>
 </div>
@@ -759,49 +463,56 @@
 <div class="aggregate-modal-overlay" id="aggregateModalOverlay" onclick="closeAggOnBackdrop(event)">
     <div class="aggregate-modal-body">
         <div class="agg-title">🧮 NUST Aggregate Calculator</div>
-        <div class="agg-subtitle">Estimate your merit score</div>
+        <div class="agg-subtitle">Estimate your merit score instantly</div>
 
+        <!-- Tabs -->
         <div class="agg-tab-row">
             <div class="agg-tab active" id="tabFsc" onclick="switchAggTab('fsc')">FSc / Matric</div>
             <div class="agg-tab" id="tabAlevel" onclick="switchAggTab('alevel')">A-Level / O-Level</div>
         </div>
 
-        <!-- ─── FSc / Matric Panel ─── -->
+        <!-- FSc / Matric Panel -->
         <div class="agg-panel active" id="panelFsc">
             <div class="agg-formula-box">
-                <strong>NUST Official Formula (FSc/Matric):</strong><br>
-                Aggregate = <strong>75%</strong> × (NET Obtained ÷ 200 × 100) + <strong>15%</strong> × (FSc Obtained ÷ FSc Total × 100) + <strong>10%</strong> × (Matric Obtained ÷ Matric Total × 100)
+                <strong>Formula:</strong><br>
+                Aggregate = <strong>75%</strong> × (NET/200) + <strong>15%</strong> × (FSc Obtained/FSc Total) + <strong>10%</strong> × (Matric Obtained/Matric Total)
+                <br><br>
+                <em>All components are scaled to a score out of <strong>100</strong> before applying weights.</em>
             </div>
 
+            <!-- NET Marks -->
             <div class="agg-field-group">
-                <label>NET Score</label>
+                <label>NET Score (out of 200)</label>
                 <div class="agg-input-row">
-                    <input type="number" id="fsc_net" placeholder="Obtained (max 200)" min="0" max="200">
+                    <input type="number" id="fsc_net" placeholder="e.g. 160" min="0" max="200">
                     <span>/ 200</span>
                 </div>
             </div>
 
+            <!-- FSc Marks -->
             <div class="agg-field-group">
-                <label>FSc / HSSC Marks</label>
+                <label>FSc Marks</label>
                 <div class="agg-input-row">
                     <input type="number" id="fsc_obtained" placeholder="Obtained" min="0">
                     <span>out of</span>
-                    <input type="number" id="fsc_total" placeholder="Total (max 1200)" min="0">
+                    <input type="number" id="fsc_total" placeholder="Total" min="0">
                 </div>
             </div>
 
+            <!-- Matric Marks -->
             <div class="agg-field-group">
-                <label>Matric / SSC Marks</label>
+                <label>Matric Marks</label>
                 <div class="agg-input-row">
                     <input type="number" id="matric_obtained" placeholder="Obtained" min="0">
                     <span>out of</span>
-                    <input type="number" id="matric_total" placeholder="Total (max 1200)" min="0">
+                    <input type="number" id="matric_total" placeholder="Total" min="0">
                 </div>
             </div>
 
-            <div class="agg-error" id="fscError"></div>
+            <div class="agg-error" id="fscError">⚠ Please enter valid marks in all fields.</div>
             <button class="agg-calculate-btn" onclick="calculateAggregateFsc()">Calculate Aggregate</button>
 
+            <!-- Result -->
             <div class="agg-result-box" id="fscResultBox">
                 <div class="agg-result-label">Your Estimated NUST Aggregate</div>
                 <div class="agg-result-score" id="fscResultScore">—</div>
@@ -809,48 +520,48 @@
             </div>
         </div>
 
-        <!-- ─── A-Level / O-Level Panel ─── -->
+        <!-- A-Level / O-Level Panel -->
         <div class="agg-panel" id="panelAlevel">
             <div class="agg-formula-box">
-                <strong>NUST Official Formula (A-Level / O-Level):</strong><br><br>
-                NUST converts A-Level and O-Level grades to equivalent marks using the <strong>IBCC Equivalence</strong> system:<br><br>
-                <strong>A-Level Grade → IBCC Marks (per subject):</strong><br>
-                A* = 90 &nbsp;|&nbsp; A = 85 &nbsp;|&nbsp; B = 75 &nbsp;|&nbsp; C = 65 &nbsp;|&nbsp; D = 55 &nbsp;|&nbsp; E = 45<br><br>
-                <strong>O-Level Grade → IBCC Marks (per subject):</strong><br>
-                A* = 90 &nbsp;|&nbsp; A = 85 &nbsp;|&nbsp; B = 75 &nbsp;|&nbsp; C = 65 &nbsp;|&nbsp; D = 55 &nbsp;|&nbsp; E = 45<br><br>
-                Enter your <strong>IBCC equivalent total marks</strong> below. IBCC equivalence is typically computed out of <strong>1100</strong> for A-Level (FSc-equiv) and <strong>1050</strong> for O-Level (Matric-equiv), but may vary.<br><br>
-                Aggregate = <strong>75%</strong> × (NET/200 × 100) + <strong>15%</strong> × (A-Level Equiv ÷ Total × 100) + <strong>10%</strong> × (O-Level Equiv ÷ Total × 100)
+                <strong>Formula:</strong><br>
+                Aggregate = <strong>75%</strong> × (NET/200) + <strong>15%</strong> × (A-Level Obtained/A-Level Total) + <strong>10%</strong> × (O-Level Obtained/O-Level Total)
+                <br><br>
+                <em>All components are scaled to a score out of <strong>100</strong> before applying weights.</em>
             </div>
 
+            <!-- NET Marks -->
             <div class="agg-field-group">
-                <label>NET Score</label>
+                <label>NET Score (out of 200)</label>
                 <div class="agg-input-row">
-                    <input type="number" id="al_net" placeholder="Obtained (max 200)" min="0" max="200">
+                    <input type="number" id="al_net" placeholder="e.g. 160" min="0" max="200">
                     <span>/ 200</span>
                 </div>
             </div>
 
+            <!-- A-Level Marks -->
             <div class="agg-field-group">
-                <label>A-Level IBCC Equivalent Marks</label>
+                <label>A-Level Marks</label>
                 <div class="agg-input-row">
                     <input type="number" id="al_obtained" placeholder="Obtained" min="0">
                     <span>out of</span>
-                    <input type="number" id="al_total" placeholder="Total (max 1200)" min="0">
+                    <input type="number" id="al_total" placeholder="Total" min="0">
                 </div>
             </div>
 
+            <!-- O-Level Marks -->
             <div class="agg-field-group">
-                <label>O-Level IBCC Equivalent Marks</label>
+                <label>O-Level Marks</label>
                 <div class="agg-input-row">
                     <input type="number" id="ol_obtained" placeholder="Obtained" min="0">
                     <span>out of</span>
-                    <input type="number" id="ol_total" placeholder="Total (max 1200)" min="0">
+                    <input type="number" id="ol_total" placeholder="Total" min="0">
                 </div>
             </div>
 
-            <div class="agg-error" id="alevelError"></div>
+            <div class="agg-error" id="alevelError">⚠ Please enter valid marks in all fields.</div>
             <button class="agg-calculate-btn" onclick="calculateAggregateAlevel()">Calculate Aggregate</button>
 
+            <!-- Result -->
             <div class="agg-result-box" id="alevelResultBox">
                 <div class="agg-result-label">Your Estimated NUST Aggregate</div>
                 <div class="agg-result-score" id="alevelResultScore">—</div>
@@ -862,7 +573,7 @@
     </div>
 </div>
 
-<!-- ===== EXAM INTERFACE (UNCHANGED) ===== -->
+<!-- ===== EXAM INTERFACE ===== -->
 <div class="exam-interface" id="examPortalView">
     <div class="test-table">
         <div class="top-header-row" id="currentSubjectHeader">MATHEMATICS</div>
@@ -902,84 +613,21 @@
     </div>
 </div>
 
-<!-- ===== CONFETTI CONTAINER ===== -->
-<div class="confetti-container" id="confettiContainer"></div>
-
-<!-- ===== RESULT MODAL (ENHANCED) ===== -->
+<!-- ===== RESULT MODAL ===== -->
 <div class="modal-screen" id="reportCardModalOverlay">
     <div class="modal-body">
-        <div class="nust-crest" style="width:60px;height:60px;font-size:16px;animation:bounceIn 0.6s ease-out;">NUST</div>
-        <h2 style="color:#0055A5;font-size:22px;margin-top:5px;animation:fadeInDown 0.5s ease-out 0.2s both;">NUST Examination Result Summary</h2>
-        <p style="margin-top:8px;font-size:13px;color:#555;animation:fadeIn 0.5s ease-out 0.3s both;">Scoring: +1 correct, 0 incorrect (no negative marking).</p>
-        
+        <h2 style="color:#0055A5;font-size:20px;">NUST Examination Result Summary</h2>
+        <p style="margin-top:8px;font-size:13px;color:#555;">Scoring: +1 correct, 0 incorrect (no negative marking).</p>
         <div class="score-output" id="totalScoreTarget">0 / 200</div>
-        <div id="resultGradeBadge"></div>
-        <div class="result-stats-grid" id="resultStatsGrid"></div>
-        <div id="subjectScoreBreakdownBox" style="text-align:left;background:#F8F9F9;padding:14px;font-size:13px;line-height:1.6;border:1px solid #E5E7E9;margin-bottom:15px;border-radius:10px;animation:fadeInUp 0.5s ease-out 0.5s both;"></div>
-        
-        <button class="login-btn" style="margin:0 auto 20px auto;display:block;width:180px;background:linear-gradient(135deg,#C0392B,#E74C3C);box-shadow:0 4px 12px rgba(192,57,43,0.3);border-radius:10px;" onclick="window.location.reload()">🚪 Exit Portal</button>
-        
-        <div class="review-filter-bar" id="reviewFilterBar">
-            <button class="review-filter-btn active" onclick="filterReview('all')">📋 All Questions</button>
-            <button class="review-filter-btn" onclick="filterReview('wrong')">❌ Wrong Only</button>
-            <button class="review-filter-btn" onclick="filterReview('correct')">✅ Correct Only</button>
-            <button class="review-filter-btn" onclick="filterReview('unattempted')">⬜ Unattempted</button>
-        </div>
-        
+        <div id="subjectScoreBreakdownBox" style="text-align:left;background:#F8F9F9;padding:12px;font-size:13px;line-height:1.6;border:1px solid #BDC3C7;margin-bottom:15px;"></div>
+        <button class="login-btn" style="margin:0 auto 20px auto;display:block;width:150px;background:linear-gradient(135deg,#C0392B,#E74C3C);box-shadow:0 4px 12px rgba(192,57,43,0.3);" onclick="window.location.reload()">Exit Portal</button>
         <div id="wrongQuestionsReviewPanel" style="text-align:left;margin-bottom:20px;"></div>
-        <button class="login-btn" style="margin:0 auto;display:block;width:180px;border-radius:10px;" onclick="window.location.reload()">🔄 Restart Portal</button>
+        <button class="login-btn" style="margin:0 auto;display:block;width:150px;" onclick="window.location.reload()">Restart Portal</button>
     </div>
 </div>
 
 <!-- ===== JAVASCRIPT ===== -->
 <script>
-/* ─────────────────────────────────────────────
-   PARTICLES
-───────────────────────────────────────────── */
-function createParticles() {
-    const container = document.getElementById('particlesContainer');
-    const colors = ['#003399','#0055A5','#27AE60','#FF0000','#F39C12'];
-    for (let i = 0; i < 20; i++) {
-        const p = document.createElement('div');
-        p.className = 'particle';
-        const size = Math.random() * 6 + 3;
-        p.style.width = size + 'px';
-        p.style.height = size + 'px';
-        p.style.left = Math.random() * 100 + '%';
-        p.style.background = colors[Math.floor(Math.random() * colors.length)];
-        p.style.animationDuration = (Math.random() * 15 + 10) + 's';
-        p.style.animationDelay = (Math.random() * 10) + 's';
-        container.appendChild(p);
-    }
-}
-createParticles();
-
-/* ─────────────────────────────────────────────
-   CONFETTI
-───────────────────────────────────────────── */
-function launchConfetti() {
-    const container = document.getElementById('confettiContainer');
-    container.innerHTML = '';
-    const colors = ['#003399','#FF0000','#27AE60','#F39C12','#0055A5','#E74C3C','#2ECC71','#FFD700','#9B59B6','#1ABC9C'];
-    const shapes = ['square','circle'];
-    for (let i = 0; i < 80; i++) {
-        const piece = document.createElement('div');
-        piece.className = 'confetti-piece';
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        const shape = shapes[Math.floor(Math.random() * shapes.length)];
-        const size = Math.random() * 8 + 5;
-        piece.style.width = size + 'px';
-        piece.style.height = size + 'px';
-        piece.style.background = color;
-        piece.style.left = Math.random() * 100 + '%';
-        piece.style.borderRadius = shape === 'circle' ? '50%' : '2px';
-        piece.style.animationDuration = (Math.random() * 3 + 2) + 's';
-        piece.style.animationDelay = (Math.random() * 2) + 's';
-        container.appendChild(piece);
-    }
-    setTimeout(() => { container.innerHTML = ''; }, 6000);
-}
-
 /* ─────────────────────────────────────────────
    FIELD CONFIG & SECTION LABELS
 ───────────────────────────────────────────── */
@@ -1023,7 +671,6 @@ const SECTION_LABELS = {
 ───────────────────────────────────────────── */
 let candidateId = '', selectedField = null, activeTestSessionPool = [], globalPointerIndex = 0;
 let totalSecondsRemaining = 180 * 60, trackingIntervalEngine = null;
-let allReviewData = []; // stored for filtering
 
 /* ─────────────────────────────────────────────
    LOGIN
@@ -1040,6 +687,7 @@ function authenticateUserLogin() {
     const pass = document.getElementById('candidatePassInput').value.trim();
     if (!candidateId || !pass) { alert('Both Roll Number and Password are required.'); return; }
     if (pass !== 'nust2027') { alert('Access Denied: Invalid Access Password.'); return; }
+    // Go to instructions screen
     document.getElementById('instructionsCandidateId').innerText = candidateId;
     document.getElementById('loginScreenView').style.display = 'none';
     document.getElementById('instructionsScreenView').style.display = 'flex';
@@ -1065,12 +713,15 @@ function goBackToInstructions() {
 function openAggregateModal() {
     document.getElementById('aggregateModalOverlay').style.display = 'flex';
 }
+
 function closeAggregateModal() {
     document.getElementById('aggregateModalOverlay').style.display = 'none';
 }
+
 function closeAggOnBackdrop(e) {
     if (e.target === document.getElementById('aggregateModalOverlay')) closeAggregateModal();
 }
+
 function switchAggTab(tab) {
     document.getElementById('tabFsc').classList.toggle('active', tab === 'fsc');
     document.getElementById('tabAlevel').classList.toggle('active', tab === 'alevel');
@@ -1078,23 +729,16 @@ function switchAggTab(tab) {
     document.getElementById('panelAlevel').classList.toggle('active', tab === 'alevel');
 }
 
-function clearInputErrors(ids) {
-    ids.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.classList.remove('input-error');
-    });
-}
-
-function setInputError(id) {
-    const el = document.getElementById(id);
-    if (el) el.classList.add('input-error');
+function validateNum(val, min, max) {
+    const n = parseFloat(val);
+    if (isNaN(n) || n < min) return false;
+    if (max !== undefined && n > max) return false;
+    return true;
 }
 
 function calculateAggregateFsc() {
     const errEl = document.getElementById('fscError');
     const resultBox = document.getElementById('fscResultBox');
-    const inputIds = ['fsc_net','fsc_obtained','fsc_total','matric_obtained','matric_total'];
-    clearInputErrors(inputIds);
     errEl.style.display = 'none';
     resultBox.classList.remove('show');
 
@@ -1104,62 +748,38 @@ function calculateAggregateFsc() {
     const matObt = parseFloat(document.getElementById('matric_obtained').value);
     const matTot = parseFloat(document.getElementById('matric_total').value);
 
-    let errors = [];
-
-    // Basic empty checks
-    if (isNaN(net)) { errors.push('NET score is required.'); setInputError('fsc_net'); }
-    if (isNaN(fscObt)) { errors.push('FSc obtained marks required.'); setInputError('fsc_obtained'); }
-    if (isNaN(fscTot)) { errors.push('FSc total marks required.'); setInputError('fsc_total'); }
-    if (isNaN(matObt)) { errors.push('Matric obtained marks required.'); setInputError('matric_obtained'); }
-    if (isNaN(matTot)) { errors.push('Matric total marks required.'); setInputError('matric_total'); }
-
-    if (errors.length > 0) {
-        errEl.innerHTML = '⚠ ' + errors.join('<br>⚠ ');
+    // Validation
+    if (!validateNum(net, 0, 200) || !validateNum(fscObt, 0) || !validateNum(fscTot, 1)
+        || !validateNum(matObt, 0) || !validateNum(matTot, 1)
+        || fscObt > fscTot || matObt > matTot) {
         errEl.style.display = 'block';
         return;
     }
 
-    // Range validations
-    if (net < 0 || net > 200) { errors.push('NET score must be between 0 and 200.'); setInputError('fsc_net'); }
-    if (fscTot > 1200) { errors.push('FSc total marks cannot exceed 1200.'); setInputError('fsc_total'); }
-    if (fscTot <= 0) { errors.push('FSc total marks must be greater than 0.'); setInputError('fsc_total'); }
-    if (fscObt < 0) { errors.push('FSc obtained marks cannot be negative.'); setInputError('fsc_obtained'); }
-    if (fscObt > fscTot && !isNaN(fscTot) && fscTot > 0) { errors.push('FSc obtained marks (' + fscObt + ') cannot exceed total marks (' + fscTot + ').'); setInputError('fsc_obtained'); }
-    if (matTot > 1200) { errors.push('Matric total marks cannot exceed 1200.'); setInputError('matric_total'); }
-    if (matTot <= 0) { errors.push('Matric total marks must be greater than 0.'); setInputError('matric_total'); }
-    if (matObt < 0) { errors.push('Matric obtained marks cannot be negative.'); setInputError('matric_obtained'); }
-    if (matObt > matTot && !isNaN(matTot) && matTot > 0) { errors.push('Matric obtained marks (' + matObt + ') cannot exceed total marks (' + matTot + ').'); setInputError('matric_obtained'); }
-
-    if (errors.length > 0) {
-        errEl.innerHTML = '⚠ ' + errors.join('<br>⚠ ');
-        errEl.style.display = 'block';
-        return;
-    }
-
-    const netPct    = (net / 200) * 100;
-    const fscPct    = (fscObt / fscTot) * 100;
+    const netPct   = (net / 200) * 100;
+    const fscPct   = (fscObt / fscTot) * 100;
     const matricPct = (matObt / matTot) * 100;
-    const netC      = 0.75 * netPct;
-    const fscC      = 0.15 * fscPct;
-    const matC      = 0.10 * matricPct;
-    const aggregate = netC + fscC + matC;
+
+    const netContrib    = 0.75 * netPct;
+    const fscContrib    = 0.15 * fscPct;
+    const matricContrib = 0.10 * matricPct;
+    const aggregate     = netContrib + fscContrib + matricContrib;
 
     document.getElementById('fscResultScore').innerText = aggregate.toFixed(2) + '%';
     document.getElementById('fscResultBreakdown').innerHTML =
         `<strong>Component Breakdown:</strong><br>
-         ▸ NET (75%): ${net}/200 = ${netPct.toFixed(2)}% × 0.75 = <strong>${netC.toFixed(2)}</strong><br>
-         ▸ FSc (15%): ${fscObt}/${fscTot} = ${fscPct.toFixed(2)}% × 0.15 = <strong>${fscC.toFixed(2)}</strong><br>
-         ▸ Matric (10%): ${matObt}/${matTot} = ${matricPct.toFixed(2)}% × 0.10 = <strong>${matC.toFixed(2)}</strong><br>
-         <hr style="border:1px dashed #A3E4D7;margin:8px 0;">
-         <strong style="font-size:14px;">Total Aggregate: ${aggregate.toFixed(2)}%</strong>`;
+         ▸ NET (75%): ${netPct.toFixed(2)}% × 0.75 = <strong>${netContrib.toFixed(2)}</strong><br>
+         ▸ FSc (15%): ${fscPct.toFixed(2)}% × 0.15 = <strong>${fscContrib.toFixed(2)}</strong><br>
+         ▸ Matric (10%): ${matricPct.toFixed(2)}% × 0.10 = <strong>${matricContrib.toFixed(2)}</strong><br>
+         <hr style="border:1px dashed #A3E4D7;margin:6px 0;">
+         <strong>Total Aggregate: ${aggregate.toFixed(2)}%</strong>`;
+
     resultBox.classList.add('show');
 }
 
 function calculateAggregateAlevel() {
     const errEl = document.getElementById('alevelError');
     const resultBox = document.getElementById('alevelResultBox');
-    const inputIds = ['al_net','al_obtained','al_total','ol_obtained','ol_total'];
-    clearInputErrors(inputIds);
     errEl.style.display = 'none';
     resultBox.classList.remove('show');
 
@@ -1169,53 +789,32 @@ function calculateAggregateAlevel() {
     const olObt = parseFloat(document.getElementById('ol_obtained').value);
     const olTot = parseFloat(document.getElementById('ol_total').value);
 
-    let errors = [];
-
-    if (isNaN(net)) { errors.push('NET score is required.'); setInputError('al_net'); }
-    if (isNaN(alObt)) { errors.push('A-Level obtained marks required.'); setInputError('al_obtained'); }
-    if (isNaN(alTot)) { errors.push('A-Level total marks required.'); setInputError('al_total'); }
-    if (isNaN(olObt)) { errors.push('O-Level obtained marks required.'); setInputError('ol_obtained'); }
-    if (isNaN(olTot)) { errors.push('O-Level total marks required.'); setInputError('ol_total'); }
-
-    if (errors.length > 0) {
-        errEl.innerHTML = '⚠ ' + errors.join('<br>⚠ ');
+    // Validation
+    if (!validateNum(net, 0, 200) || !validateNum(alObt, 0) || !validateNum(alTot, 1)
+        || !validateNum(olObt, 0) || !validateNum(olTot, 1)
+        || alObt > alTot || olObt > olTot) {
         errEl.style.display = 'block';
         return;
     }
 
-    if (net < 0 || net > 200) { errors.push('NET score must be between 0 and 200.'); setInputError('al_net'); }
-    if (alTot > 1200) { errors.push('A-Level total marks cannot exceed 1200.'); setInputError('al_total'); }
-    if (alTot <= 0) { errors.push('A-Level total marks must be greater than 0.'); setInputError('al_total'); }
-    if (alObt < 0) { errors.push('A-Level obtained marks cannot be negative.'); setInputError('al_obtained'); }
-    if (alObt > alTot && !isNaN(alTot) && alTot > 0) { errors.push('A-Level obtained (' + alObt + ') cannot exceed total (' + alTot + ').'); setInputError('al_obtained'); }
-    if (olTot > 1200) { errors.push('O-Level total marks cannot exceed 1200.'); setInputError('ol_total'); }
-    if (olTot <= 0) { errors.push('O-Level total marks must be greater than 0.'); setInputError('ol_total'); }
-    if (olObt < 0) { errors.push('O-Level obtained marks cannot be negative.'); setInputError('ol_obtained'); }
-    if (olObt > olTot && !isNaN(olTot) && olTot > 0) { errors.push('O-Level obtained (' + olObt + ') cannot exceed total (' + olTot + ').'); setInputError('ol_obtained'); }
+    const netPct  = (net / 200) * 100;
+    const alPct   = (alObt / alTot) * 100;
+    const olPct   = (olObt / olTot) * 100;
 
-    if (errors.length > 0) {
-        errEl.innerHTML = '⚠ ' + errors.join('<br>⚠ ');
-        errEl.style.display = 'block';
-        return;
-    }
-
-    const netPct = (net / 200) * 100;
-    const alPct  = (alObt / alTot) * 100;
-    const olPct  = (olObt / olTot) * 100;
-    const netC   = 0.75 * netPct;
-    const alC    = 0.15 * alPct;
-    const olC    = 0.10 * olPct;
-    const aggregate = netC + alC + olC;
+    const netContrib = 0.75 * netPct;
+    const alContrib  = 0.15 * alPct;
+    const olContrib  = 0.10 * olPct;
+    const aggregate  = netContrib + alContrib + olContrib;
 
     document.getElementById('alevelResultScore').innerText = aggregate.toFixed(2) + '%';
     document.getElementById('alevelResultBreakdown').innerHTML =
-        `<strong>Component Breakdown (IBCC Equivalence):</strong><br>
-         ▸ NET (75%): ${net}/200 = ${netPct.toFixed(2)}% × 0.75 = <strong>${netC.toFixed(2)}</strong><br>
-         ▸ A-Level Equiv (15%): ${alObt}/${alTot} = ${alPct.toFixed(2)}% × 0.15 = <strong>${alC.toFixed(2)}</strong><br>
-         ▸ O-Level Equiv (10%): ${olObt}/${olTot} = ${olPct.toFixed(2)}% × 0.10 = <strong>${olC.toFixed(2)}</strong><br>
-         <hr style="border:1px dashed #A3E4D7;margin:8px 0;">
-         <strong style="font-size:14px;">Total Aggregate: ${aggregate.toFixed(2)}%</strong><br>
-         <br><em style="font-size:11px;color:#777;">Note: Use your IBCC equivalence certificate marks for accurate results.</em>`;
+        `<strong>Component Breakdown:</strong><br>
+         ▸ NET (75%): ${netPct.toFixed(2)}% × 0.75 = <strong>${netContrib.toFixed(2)}</strong><br>
+         ▸ A-Level (15%): ${alPct.toFixed(2)}% × 0.15 = <strong>${alContrib.toFixed(2)}</strong><br>
+         ▸ O-Level (10%): ${olPct.toFixed(2)}% × 0.10 = <strong>${olContrib.toFixed(2)}</strong><br>
+         <hr style="border:1px dashed #A3E4D7;margin:6px 0;">
+         <strong>Total Aggregate: ${aggregate.toFixed(2)}%</strong>`;
+
     resultBox.classList.add('show');
 }
 
@@ -1259,8 +858,8 @@ function renderMathInElementSafe(element) {
     try {
         renderMathInElement(element, {
             delimiters: [
-                {left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false},
-                {left:"\\(",right:"\\)",display:false},{left:"\\[",right:"\\]",display:true},
+                {left:"$$",right:"$$",display:true}, {left:"$",right:"$",display:false},
+                {left:"\\(",right:"\\)",display:false}, {left:"\\[",right:"\\]",display:true},
                 {left:"\\begin{equation}",right:"\\end{equation}",display:true},
                 {left:"\\begin{align}",right:"\\end{align}",display:true},
                 {left:"\\begin{alignat}",right:"\\end{alignat}",display:true},
@@ -1282,11 +881,13 @@ function startExam() {
     const cfg = FIELD_CONFIG[selectedField];
     if (typeof QUESTION_BANK === 'undefined') { alert('questions.js missing or corrupted.'); return; }
     if (!QUESTION_BANK[selectedField]) { alert('No question data for this field in questions.js'); return; }
+
     document.getElementById('displayCandidateId').innerText = candidateId;
     document.getElementById('displayFieldCode').innerText = cfg.code;
     document.getElementById('streamTitleBar').innerText = cfg.description + ' Mock Portal';
     document.getElementById('fieldSelectScreenView').style.display = 'none';
     document.getElementById('examPortalView').style.display = 'block';
+
     buildSectionButtons();
     launchTestEngine();
 }
@@ -1315,6 +916,7 @@ function launchTestEngine() {
     const cfg = FIELD_CONFIG[selectedField];
     const fieldData = QUESTION_BANK[selectedField];
     const bpOrder = Object.keys(cfg.blueprint);
+
     for (const sec of bpOrder) {
         const bankKey = cfg.bankKeys[sec];
         if (fieldData[bankKey]) {
@@ -1324,16 +926,19 @@ function launchTestEngine() {
             activeTestSessionPool = activeTestSessionPool.concat(qs);
         }
     }
+
     activeTestSessionPool.sort((a, b) => {
         const oa = bpOrder.indexOf(a.sectionKeyName), ob = bpOrder.indexOf(b.sectionKeyName);
         return oa !== ob ? oa - ob : a.innerIndexValue - b.innerIndexValue;
     });
+
     const counts = {};
     activeTestSessionPool.forEach(i => {
         if (!counts[i.sectionKeyName]) counts[i.sectionKeyName] = 0;
         counts[i.sectionKeyName]++;
         i.innerIndexValue = counts[i.sectionKeyName];
     });
+
     globalPointerIndex = 0;
     totalSecondsRemaining = 180 * 60;
     updateTimerDisplay();
@@ -1359,9 +964,11 @@ function refreshWorkspace() {
     const q = activeTestSessionPool[globalPointerIndex];
     const label = SECTION_LABELS[q.sectionKeyName] || q.sectionKeyName.toUpperCase();
     const cfg = FIELD_CONFIG[selectedField];
+
     document.getElementById('currentSubjectHeader').innerHTML = label;
     document.getElementById('questionNumTracker').innerHTML =
         `Question No: ${q.innerIndexValue} of ${cfg.blueprint[q.sectionKeyName]} (${q.sectionKeyName.toUpperCase()})`;
+
     const qBox = document.getElementById('questionTextBox');
     let html = '';
     if (q.passage) {
@@ -1373,6 +980,7 @@ function refreshWorkspace() {
     }
     qBox.innerHTML = html;
     renderMathInElementSafe(qBox);
+
     const cont = document.getElementById('optionsRadioGroup');
     cont.innerHTML = '';
     q.a.forEach((opt, idx) => {
@@ -1392,6 +1000,7 @@ function refreshWorkspace() {
             refreshWorkspace();
         });
     });
+
     document.querySelectorAll('.nav-square-btn').forEach(b => {
         b.classList.remove('active-focus');
         if (parseInt(b.getAttribute('data-sid'), 10) === globalPointerIndex) b.classList.add('active-focus');
@@ -1461,114 +1070,45 @@ function triggerSubmitConfirmation() {
     if (confirm('Do you want to finalise and submit your assessment?')) compileExamResults();
 }
 
-/* ─────────────────────────────────────────────
-   RESULTS (ENHANCED)
-───────────────────────────────────────────── */
 function compileExamResults() {
     if (trackingIntervalEngine) clearInterval(trackingIntervalEngine);
-    let score = 0, attempted = 0;
+    let score = 0;
     const cfg = FIELD_CONFIG[selectedField];
     const stats = {};
     for (const k of Object.keys(cfg.blueprint)) stats[k] = 0;
+    let reviewHTML = `<h3 style="color:#003399;margin-top:20px;font-size:16px;text-align:center;">Comprehensive Test Evaluation Log</h3>`;
     const logs = {};
     for (const k of Object.keys(cfg.blueprint)) logs[k] = '';
-    
-    allReviewData = []; // reset
 
     activeTestSessionPool.forEach(i => {
         const correct = i.chosenIndexValue !== null && i.chosenIndexValue === i.c;
-        const wasAttempted = i.chosenIndexValue !== null;
-        if (wasAttempted) attempted++;
         if (correct) { score++; stats[i.sectionKeyName]++; }
-
-        const chosen = wasAttempted ? i.a[i.chosenIndexValue] : 'Unattempted';
+        const chosen = i.chosenIndexValue !== null ? i.a[i.chosenIndexValue] : 'Unattempted';
         const right = i.a[i.c];
         const exp = i.e || 'No explanation provided.';
-        
-        let status = 'wrong';
-        if (correct) status = 'correct';
-        else if (!wasAttempted) status = 'unattempted';
-
-        let boxHTML = '';
         if (correct) {
-            boxHTML = `<div class="review-box box-correct" data-status="correct" data-section="${i.sectionKeyName}"><p><strong>Q${i.innerIndexValue} (${(SECTION_LABELS[i.sectionKeyName]||i.sectionKeyName).toUpperCase()}):</strong> ${i.q}</p><p style="color:#2ECC71;font-weight:700;margin-top:4px;">✅ Correct — ${right}</p></div>`;
+            logs[i.sectionKeyName] += `<div class="review-box box-correct"><p><strong>Q${i.innerIndexValue}:</strong> ${i.q}</p><p style="color:#2ECC71;font-weight:700;margin-top:4px;">&#128994; Correct</p></div>`;
         } else {
-            boxHTML = `<div class="review-box" data-status="${status}" data-section="${i.sectionKeyName}"><p><strong>Q${i.innerIndexValue} (${(SECTION_LABELS[i.sectionKeyName]||i.sectionKeyName).toUpperCase()}):</strong> ${i.q}</p><p style="color:#C0392B;font-weight:600;margin-top:4px;">❌ Your: ${chosen}</p><p style="color:#27AE60;font-weight:600;">✅ Correct: ${right}</p><p style="color:#555;margin-top:6px;font-style:italic;background:#F2F4F4;padding:8px;border-left:3px solid #0055A5;border-radius:4px;"><strong>Explanation:</strong> ${exp}</p></div>`;
+            logs[i.sectionKeyName] += `<div class="review-box"><p><strong>Q${i.innerIndexValue}:</strong> ${i.q}</p><p style="color:#C0392B;font-weight:600;margin-top:4px;">&#10060; Your: ${chosen}</p><p style="color:#27AE60;font-weight:600;">&#9989; Correct: ${right}</p><p style="color:#555;margin-top:6px;font-style:italic;background:#F2F4F4;padding:6px;border-left:3px solid #0055A5;"><strong>Explanation:</strong> ${exp}</p></div>`;
         }
-        allReviewData.push({ html: boxHTML, status: status, section: i.sectionKeyName });
-        logs[i.sectionKeyName] += boxHTML;
     });
 
-    // Score display
-    document.getElementById('totalScoreTarget').innerText = `${score} / ${cfg.totalMCQs}`;
-
-    // Grade badge
-    const pct = (score / cfg.totalMCQs) * 100;
-    let gradeText = '', gradeClass = '';
-    if (pct >= 80) { gradeText = '🏆 Excellent Performance'; gradeClass = 'grade-excellent'; }
-    else if (pct >= 60) { gradeText = '👍 Good Performance'; gradeClass = 'grade-good'; }
-    else if (pct >= 40) { gradeText = '📊 Average Performance'; gradeClass = 'grade-average'; }
-    else { gradeText = '📉 Needs Improvement'; gradeClass = 'grade-poor'; }
-    document.getElementById('resultGradeBadge').innerHTML = `<div class="result-grade-badge ${gradeClass}">${gradeText}</div>`;
-
-    // Stats grid
-    const wrong = attempted - score;
-    const unattempted = cfg.totalMCQs - attempted;
-    let statsHTML = '';
-    statsHTML += `<div class="result-stat-card" style="animation-delay:0.1s;"><div class="stat-value" style="color:#27AE60;">${score}</div><div class="stat-label">Correct</div></div>`;
-    statsHTML += `<div class="result-stat-card" style="animation-delay:0.2s;"><div class="stat-value" style="color:#E74C3C;">${wrong}</div><div class="stat-label">Wrong</div></div>`;
-    statsHTML += `<div class="result-stat-card" style="animation-delay:0.3s;"><div class="stat-value" style="color:#7F8C8D;">${unattempted}</div><div class="stat-label">Unattempted</div></div>`;
-    statsHTML += `<div class="result-stat-card" style="animation-delay:0.4s;"><div class="stat-value" style="color:#003399;">${pct.toFixed(1)}%</div><div class="stat-label">Percentage</div></div>`;
-    document.getElementById('resultStatsGrid').innerHTML = statsHTML;
-
-    // Subject breakdown
-    let bd = `<strong>Subject Breakdown (${cfg.label}):</strong><br>`;
-    for (const k of Object.keys(stats)) {
-        const secPct = ((stats[k] / cfg.blueprint[k]) * 100).toFixed(1);
-        bd += `▸ ${SECTION_LABELS[k] || k.toUpperCase()}: <strong>${stats[k]} / ${cfg.blueprint[k]}</strong> (${secPct}%)<br>`;
-    }
-    document.getElementById('subjectScoreBreakdownBox').innerHTML = bd;
-
-    // Build full review
-    let reviewHTML = `<h3 style="color:#003399;margin-top:20px;font-size:16px;text-align:center;">📝 Comprehensive Test Evaluation Log</h3>`;
     for (const k of Object.keys(logs)) {
         const lbl = SECTION_LABELS[k] || k.toUpperCase();
-        reviewHTML += `<div class="review-header">${lbl} Record (${stats[k]}/${cfg.blueprint[k]})</div>` +
+        reviewHTML += `<div class="review-header">${lbl} Record</div>` +
             (logs[k] || '<p style="padding:10px;color:#888;">No questions in this section.</p>');
     }
+
+    document.getElementById('totalScoreTarget').innerText = `${score} / ${cfg.totalMCQs}`;
+    let bd = `<strong>Subject Breakdown (${cfg.label}):</strong><br>`;
+    for (const k of Object.keys(stats)) {
+        bd += `&bull; ${SECTION_LABELS[k] || k.toUpperCase()}: ${stats[k]} / ${cfg.blueprint[k]}<br>`;
+    }
+    document.getElementById('subjectScoreBreakdownBox').innerHTML = bd;
     document.getElementById('wrongQuestionsReviewPanel').innerHTML = reviewHTML;
     renderMathInElementSafe(document.getElementById('wrongQuestionsReviewPanel'));
     renderMathInElementSafe(document.getElementById('subjectScoreBreakdownBox'));
-
     document.getElementById('reportCardModalOverlay').style.display = 'flex';
-    
-    // Launch confetti for good scores
-    if (pct >= 60) launchConfetti();
-}
-
-/* ─────────────────────────────────────────────
-   REVIEW FILTER
-───────────────────────────────────────────── */
-function filterReview(type) {
-    // Update active tab
-    document.querySelectorAll('.review-filter-btn').forEach(b => b.classList.remove('active'));
-    event.target.classList.add('active');
-
-    const panel = document.getElementById('wrongQuestionsReviewPanel');
-    const boxes = panel.querySelectorAll('.review-box');
-    
-    boxes.forEach(box => {
-        const status = box.getAttribute('data-status');
-        if (type === 'all') {
-            box.style.display = '';
-        } else if (type === 'wrong') {
-            box.style.display = (status === 'wrong') ? '' : 'none';
-        } else if (type === 'correct') {
-            box.style.display = (status === 'correct') ? '' : 'none';
-        } else if (type === 'unattempted') {
-            box.style.display = (status === 'unattempted') ? '' : 'none';
-        }
-    });
 }
 </script>
 </body>
