@@ -928,7 +928,7 @@ function authenticateUserLogin() {
     candidateId = document.getElementById('candidateIdInput').value.trim();
     var pass = document.getElementById('candidatePassInput').value.trim();
     if (!candidateId || !pass) { alert('Both Roll Number and Password are required.'); return; }
-    if (pass !== 'nust2027') { alert('Access Denied: Invalid Access Password.'); return; }
+    if (pass !== 'NUST2026Sep') { alert('Access Denied: Invalid Access Password.'); return; }
     document.getElementById('instructionsCandidateId').innerText = candidateId;
     document.getElementById('loginScreenView').style.display = 'none';
     document.getElementById('instructionsScreenView').style.display = 'flex';
