@@ -69,43 +69,58 @@
         /* Login Screen */
         .login-screen { 
             display: flex; flex-direction: column; align-items: center; justify-content: center; 
-            min-height: 100vh; background-image: url('nust.jpg'); background-size: cover; 
-            background-position: center; background-repeat: no-repeat; position: relative;
+            min-height: 100vh; 
+            /* Gradient replacing the image */
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            position: relative;
             padding: 16px;
         }
         .login-screen::before {
             content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(135deg, rgba(0,30,80,0.4), rgba(0,0,0,0.45));
+            /* Soft overlay to maintain contrast with the white container */
+            background: linear-gradient(135deg, rgba(40,167,69,0.1), rgba(0,0,0,0.05));
         }
         .login-container {
-            width: 100%; max-width: 440px; background: rgba(255,255,255,0.90);
-            padding: 28px 30px; border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+            width: 100%; 
+            max-width: 440px; 
+            background: rgba(255, 255, 255, 0.4); /* 40% Transparency */
+            padding: 28px 30px; 
+            border-radius: 4px; /* Sharp Corners */
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
             animation: fadeInUp 0.7s ease-out;
-            z-index: 1; position: relative;
-            border: 4px solid rgba(0,85,165,0.2);
+            z-index: 1; 
+            position: relative;
+            border: 2px solid rgba(40, 167, 69, 0.3); /* Green Tint */
+            backdrop-filter: blur(8px);
         }
 
         /* Instructions Screen */
         .instructions-screen {
             display: none; flex-direction: column; align-items: center; justify-content: flex-start;
-            min-height: 100vh; background-image: url('nust.jpg'); background-size: cover;
-            background-position: center; background-repeat: no-repeat; padding: 16px;
+            min-height: 100vh; 
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            padding: 16px;
             position: relative;
         }
         .instructions-screen::before {
             content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(135deg, rgba(0,30,80,0.4), rgba(0,0,0,0.45));
+            background: linear-gradient(135deg, rgba(40,167,69,0.1), rgba(0,0,0,0.05));
         }
-        .instructions-container {
-            width: 100%; max-width: 660px; background: rgba(255,255,255,0.90);
-            padding: 26px 28px; border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.25);
-            max-height: 90vh; overflow-y: auto;
+       .instructions-container {
+            width: 100%; 
+            max-width: 660px; 
+            background: rgba(255, 255, 255, 0.4); /* 40% Transparency */
+            padding: 26px 28px; 
+            border-radius: 4px; /* Sharp Corners */
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            max-height: 90vh; 
+            overflow-y: auto;
             animation: fadeInUp 0.7s ease-out;
-            z-index: 1; position: relative;
-            border: 4px solid rgba(0,85,165,0.2);
+            z-index: 1; 
+            position: relative;
+            border: 2px solid rgba(40, 167, 69, 0.3); /* Green Tint */
             margin-top: 10px;
+            backdrop-filter: blur(8px);
         }
         .instructions-container::-webkit-scrollbar { width: 5px; }
         .instructions-container::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 3px; }
@@ -163,21 +178,27 @@
         /* Field Select Screen */
         .field-select-screen { 
             display: none; flex-direction: column; align-items: center; justify-content: center; 
-            min-height: 100vh; background-image: url('nust.jpg'); background-size: cover; 
-            background-position: center; background-repeat: no-repeat; position: relative;
+            min-height: 100vh; 
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            position: relative;
             padding: 16px;
         }
         .field-select-screen::before {
             content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(135deg, rgba(0,30,80,0.4), rgba(0,0,0,0.45));
+            background: linear-gradient(135deg, rgba(40,167,69,0.1), rgba(0,0,0,0.05));
         }
         .field-select-container {
-            width: 100%; max-width: 500px; background: rgba(255,255,255,0.90);
-            padding: 26px 28px; border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+            width: 100%; 
+            max-width: 500px; 
+            background: rgba(255, 255, 255, 0.4); /* 40% Transparency */
+            padding: 26px 28px; 
+            border-radius: 4px; /* Sharp Corners */
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
             animation: scaleIn 0.6s ease-out;
-            z-index: 1; position: relative;
-            border: 4px solid rgba(0,85,165,0.2);
+            z-index: 1; 
+            position: relative;
+            border: 2px solid rgba(40, 167, 69, 0.3); /* Green Tint */
+            backdrop-filter: blur(8px);
         }
 
         .login-header { 
@@ -230,7 +251,7 @@
             box-shadow: 0 4px 12px rgba(0,51,153,0.25);
         }
         .login-btn:hover { 
-            background: linear-gradient(135deg, #003399, #002266); 
+            background: linear-gradient(135deg, #218838, #1e7e34); 
             transform: translateY(-1px); 
             box-shadow: 0 6px 18px rgba(0,51,153,0.35);
         }
@@ -474,45 +495,58 @@
             display: grid; grid-template-columns: repeat(4, 1fr);
             gap: 8px; margin: 14px 0;
         }
+       /* Result Stats Cards */
         .result-stat-card {
-            background: #F8F9FA; border-radius: 10px; padding: 12px 8px;
-            border: 1px solid #E5E7E9; animation: fadeInUp 0.35s ease-out both;
+            background: #F8F9FA; 
+            border-radius: 4px; /* Sharp corners */
+            padding: 12px 8px;
+            border: 1px solid #d4edda; /* Light green border */
+            animation: fadeInUp 0.35s ease-out both;
             transition: all 0.2s ease;
         }
-        .result-stat-card:hover { transform: translateY(-2px); box-shadow: 0 3px 10px rgba(0,0,0,0.08); }
         .result-stat-card .stat-value {
-            font-size: 22px; font-weight: 800; color: #003399; font-family: monospace;
+            font-size: 22px; font-weight: 800; 
+            color: #1e7e34; /* Green color */
+            font-family: monospace;
         }
-        .result-stat-card .stat-label {
-            font-size: 9.5px; color: #777; text-transform: uppercase; letter-spacing: 0.3px;
-            margin-top: 3px; font-weight: 600;
-        }
-
+        
+        /* Review Section Header */
         .review-header { 
-            background: linear-gradient(135deg, #003399, #0055A5); color: white; 
+            background: linear-gradient(135deg, #28a745, #218838); 
+            color: white; 
             text-align: left; padding: 9px 15px; font-size: 13px; font-weight: bold; 
-            margin-top: 18px; text-transform: uppercase; border-radius: 7px;
-            box-shadow: 0 2px 8px rgba(0,51,153,0.18);
+            margin-top: 18px; text-transform: uppercase; border-radius: 4px; /* Sharp corners */
+            box-shadow: 0 2px 8px rgba(40,167,69,0.18);
         }
+        
+        /* Review Boxes */
         .review-box { 
-            border: 1px solid #E5E7E9; text-align: left; padding: 13px; margin-top: 7px; 
-            font-size: 12.5px; line-height: 1.55; background: #FFF9F9; 
-            border-left: 4px solid #FF0000; border-radius: 6px;
+            border: 1px solid #e2e6ea; 
+            text-align: left; padding: 13px; margin-top: 7px; 
+            font-size: 12.5px; line-height: 1.55; background: #fffdfd; 
+            border-left: 4px solid #dc3545; /* Red for incorrect */
+            border-radius: 4px; /* Sharp corners */
             transition: all 0.2s ease;
         }
-        .review-box:hover { transform: translateX(3px); box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
-        .review-box.box-correct { background: #F4FBF7; border-left: 4px solid #2ECC71; }
-
-        .review-filter-bar {
-            display: flex; gap: 7px; margin: 16px 0 10px 0; flex-wrap: wrap; justify-content: center;
+        .review-box.box-correct { 
+            background: #f1fcf4; 
+            border-left: 4px solid #28a745; /* Green for correct */
         }
+        
+        /* Review Filter Buttons */
         .review-filter-btn {
-            padding: 5px 14px; border: 1.5px solid #D5DBDB; border-radius: 18px;
-            font-size: 10.5px; font-weight: 700; cursor: pointer; background: #FAFAFA;
-            color: #555; transition: all 0.25s ease;
+            padding: 5px 14px; 
+            border: 1.5px solid #28a745; 
+            border-radius: 4px; /* Sharp corners */
+            font-size: 10.5px; font-weight: 700; cursor: pointer; background: #fff;
+            color: #1e7e34; transition: all 0.25s ease;
         }
-        .review-filter-btn.active { border-color: #003399; background: #003399; color: white; }
-        .review-filter-btn:hover:not(.active) { border-color: #0055A5; color: #0055A5; background: #F5F9FF; }
+        .review-filter-btn.active { 
+            border-color: #28a745; background: #28a745; color: white; 
+        }
+        .review-filter-btn:hover:not(.active) { 
+            border-color: #218838; color: #fff; background: #28a745; 
+        }
 
         .hidden { display: none !important; }
         .katex-display { display: inline-block; margin: 0; }
