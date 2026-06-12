@@ -1,493 +1,820 @@
 <!DOCTYPE html>
 <html lang="en">
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3783bac929334b3eac2b0e9e69617817"}'></script>
 <head>
     <link rel="apple-touch-icon" href="image.png">
     <link rel="icon" href="image.png" type="image/png">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>NUST CBNET 2026 | Premium Entrance Exam</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NUST Computer Based Entry Test (CBNET)</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
     
     <script src="questions.js"></script>
-    
-    <!-- Google Fonts + Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        
-        body {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
-            min-height: 100vh;
-            overflow-x: hidden;
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background-color: #FFFFFF; user-select: none; overflow-x: hidden; }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        
-        /* Animated Background */
-        .animated-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            overflow: hidden;
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-25px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        
-        .animated-bg::before {
-            content: '';
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at 20% 50%, rgba(56, 189, 248, 0.15), transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.1), transparent 50%);
-            animation: bgPulse 8s ease-in-out infinite;
-        }
-        
-        @keyframes bgPulse {
-            0%, 100% { opacity: 0.6; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.05); }
-        }
-        
-        /* Floating Particles */
-        .particle {
-            position: absolute;
-            background: rgba(56, 189, 248, 0.4);
-            border-radius: 50%;
-            pointer-events: none;
-            animation: float linear infinite;
-        }
-        
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.6; }
-            90% { opacity: 0.6; }
-            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
-        }
-        
-        /* Glass Container */
-        .glass-container {
-            background: rgba(15, 23, 42, 0.65);
-            backdrop-filter: blur(16px);
-            border-radius: 32px;
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        }
-        
-        .glass-card {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(12px);
-            border-radius: 24px;
-            border: 1px solid rgba(56, 189, 248, 0.15);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .glass-card:hover {
-            border-color: rgba(56, 189, 248, 0.4);
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.4);
-        }
-        
-        /* Gradient Text */
-        .gradient-text {
-            background: linear-gradient(135deg, #38bdf8, #a855f7, #38bdf8);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: shimmer 3s linear infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 200% 50%; }
-        }
-        
-        /* Modern Input */
-        .modern-input {
-            background: rgba(15, 23, 42, 0.8);
-            border: 1.5px solid rgba(56, 189, 248, 0.2);
-            border-radius: 16px;
-            padding: 14px 18px;
-            color: white;
-            font-size: 15px;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-        
-        .modern-input:focus {
-            outline: none;
-            border-color: #38bdf8;
-            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
-            background: rgba(15, 23, 42, 0.95);
-        }
-        
-        .modern-input::placeholder {
-            color: rgba(148, 163, 184, 0.6);
-        }
-        
-        /* Gradient Button */
-        .gradient-btn {
-            background: linear-gradient(135deg, #38bdf8, #3b82f6, #8b5cf6);
-            background-size: 200% auto;
-            border: none;
-            border-radius: 16px;
-            padding: 14px 28px;
-            font-weight: 600;
-            font-size: 15px;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .gradient-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px -5px rgba(56, 189, 248, 0.4);
-            background-position: 100% 0;
-        }
-        
-        .gradient-btn:active {
-            transform: translateY(1px);
-        }
-        
-        /* Field Selection Cards - Interactive */
-        .field-card-modern {
-            background: rgba(30, 41, 59, 0.6);
-            border: 1.5px solid rgba(56, 189, 248, 0.15);
-            border-radius: 20px;
-            padding: 20px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .field-card-modern::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-        
-        .field-card-modern:hover::before {
-            left: 100%;
-        }
-        
-        .field-card-modern:hover {
-            border-color: #38bdf8;
-            transform: translateX(8px) translateY(-4px);
-            background: rgba(56, 189, 248, 0.1);
-            box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.3);
-        }
-        
-        .field-card-modern.selected {
-            border-color: #38bdf8;
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(139, 92, 246, 0.15));
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
-        }
-        
-        /* Instructions List Styling */
-        .ins-item {
-            background: rgba(15, 23, 42, 0.4);
-            border-radius: 14px;
-            padding: 12px 16px;
-            margin-bottom: 8px;
-            border-left: 3px solid #38bdf8;
-            transition: all 0.2s ease;
-        }
-        
-        .ins-item:hover {
-            background: rgba(56, 189, 248, 0.1);
-            transform: translateX(6px);
-        }
-        
-        /* Badge Animations */
-        .live-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(239, 68, 68, 0.2);
-            border: 1px solid rgba(239, 68, 68, 0.5);
-            border-radius: 40px;
-            padding: 6px 16px;
-            font-size: 12px;
-            font-weight: 600;
-            color: #f87171;
-        }
-        
-        .live-dot {
-            width: 8px;
-            height: 8px;
-            background: #ef4444;
-            border-radius: 50%;
-            animation: pulseRed 1.5s infinite;
-        }
-        
-        @keyframes pulseRed {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.2); }
-        }
-        
-        /* Stat Cards in Result */
-        .stat-card-premium {
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(139, 92, 246, 0.1));
-            border-radius: 20px;
-            padding: 20px;
-            text-align: center;
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            transition: all 0.3s ease;
-        }
-        
-        .stat-card-premium:hover {
-            transform: translateY(-5px);
-            border-color: #38bdf8;
-            box-shadow: 0 10px 25px -5px rgba(56, 189, 248, 0.3);
-        }
-        
-        /* Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.5); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb { background: #38bdf8; border-radius: 10px; }
-        
-        /* Modal Overlay */
-        .modal-overlay-premium {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(12px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-            animation: fadeIn 0.3s ease;
-        }
-        
         @keyframes fadeIn {
-            from { opacity: 0; backdrop-filter: blur(0); }
-            to { opacity: 1; backdrop-filter: blur(12px); }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-35px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(35px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(39,174,96,0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(39,174,96,0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(39,174,96,0); }
+        }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 5px rgba(0,85,165,0.3); }
+            50% { box-shadow: 0 0 20px rgba(0,85,165,0.5); }
+        }
+        @keyframes confettiFall {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes scoreCount {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Login Screen */
+        .login-screen { 
+            display: flex; flex-direction: column; align-items: center; justify-content: center; 
+            min-height: 100vh; background-image: url('nust.jpg'); background-size: cover; 
+            background-position: center; background-repeat: no-repeat; position: relative;
+            padding: 16px;
+        }
+        .login-screen::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(0,30,80,0.4), rgba(0,0,0,0.45));
+        }
+        .login-container {
+            width: 100%; max-width: 440px; background: rgba(255,255,255,0.97);
+            padding: 28px 30px; border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+            animation: fadeInUp 0.7s ease-out;
+            z-index: 1; position: relative;
+            border: 1.0px solid rgba(0,85,165,0.2);
+        }
+
+        /* Instructions Screen */
+        .instructions-screen {
+            display: none; flex-direction: column; align-items: center; justify-content: flex-start;
+            min-height: 100vh; background-image: url('nust.jpg'); background-size: cover;
+            background-position: center; background-repeat: no-repeat; padding: 16px;
+            position: relative;
+        }
+        .instructions-screen::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(0,30,80,0.4), rgba(0,0,0,0.45));
+        }
+        .instructions-container {
+            width: 100%; max-width: 660px; background: rgba(255,255,255,0.98);
+            padding: 26px 28px; border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+            max-height: 90vh; overflow-y: auto;
+            animation: fadeInUp 0.7s ease-out;
+            z-index: 1; position: relative;
+            border: 1.0px solid rgba(0,85,165,0.2);
+            margin-top: 10px;
+        }
+        .instructions-container::-webkit-scrollbar { width: 5px; }
+        .instructions-container::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 3px; }
+        .instructions-container::-webkit-scrollbar-thumb { background: #0055A5; border-radius: 3px; }
+        .instructions-container::-webkit-scrollbar-thumb:hover { background: #003399; }
+
+        .instructions-title {
+            color: #003399; font-size: 19px; font-weight: 800; text-align: center;
+            margin-bottom: 3px;
+            animation: fadeInDown 0.5s ease-out 0.15s both;
+        }
+        .instructions-subtitle {
+            text-align: center; font-size: 11px; color: #FF0000; font-weight: 700;
+            margin-bottom: 18px; text-transform: uppercase; letter-spacing: 1.2px;
+            animation: fadeInDown 0.5s ease-out 0.2s both;
+        }
+        .instructions-section-heading {
+            background: linear-gradient(135deg, #003399, #0055A5);
+            color: white; font-size: 12px; font-weight: 700;
+            padding: 8px 14px; border-radius: 7px; margin: 16px 0 8px 0;
+            text-transform: uppercase; letter-spacing: 0.4px;
+            animation: slideInLeft 0.4s ease-out both;
+            box-shadow: 0 2px 8px rgba(0,51,153,0.18);
+        }
+        .instructions-list { list-style: none; padding: 0; margin: 0; }
+        .instructions-list li {
+            font-size: 12.5px; color: #333; padding: 6px 0 6px 20px;
+            border-bottom: 1px solid #F0F0F0; line-height: 1.65; position: relative;
+            transition: all 0.25s ease;
+        }
+        .instructions-list li:hover {
+            background: #F8FBFF; padding-left: 26px; border-radius: 5px;
+        }
+        .instructions-list li::before {
+            content: '\25B8'; position: absolute; left: 5px; color: #003399; font-weight: bold; font-size: 10px;
+            transition: all 0.25s ease;
+        }
+        .instructions-list li:hover::before { left: 9px; color: #0077CC; }
+        .instructions-list li strong { color: #003399; }
+        .instructions-warning {
+            background: #FFFBF0; border: 1px solid #FFE082; border-left: 4px solid #F39C12;
+            padding: 11px 15px; border-radius: 7px; font-size: 12px; color: #7D6608;
+            margin: 14px 0; line-height: 1.65;
+            animation: fadeIn 0.5s ease-out both;
+            box-shadow: 0 1px 4px rgba(243,156,18,0.1);
+        }
+        .instructions-important {
+            background: #FFF5F5; border: 1px solid #F5C6CB; border-left: 4px solid #DC3545;
+            padding: 11px 15px; border-radius: 7px; font-size: 12px; color: #721C24;
+            margin: 14px 0; line-height: 1.65;
+            animation: fadeIn 0.5s ease-out both;
+            box-shadow: 0 1px 4px rgba(220,53,69,0.1);
+        }
+
+        /* Field Select Screen */
+        .field-select-screen { 
+            display: none; flex-direction: column; align-items: center; justify-content: center; 
+            min-height: 100vh; background-image: url('nust.jpg'); background-size: cover; 
+            background-position: center; background-repeat: no-repeat; position: relative;
+            padding: 16px;
+        }
+        .field-select-screen::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(0,30,80,0.4), rgba(0,0,0,0.45));
+        }
+        .field-select-container {
+            width: 100%; max-width: 500px; background: rgba(255,255,255,0.97);
+            padding: 26px 28px; border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+            animation: scaleIn 0.6s ease-out;
+            z-index: 1; position: relative;
+            border: 1.5px solid rgba(0,85,165,0.2);
+        }
+
+        .login-header { 
+            color: #003399; font-size: 19px; font-weight: 800; text-align: center; 
+            letter-spacing: -0.3px; line-height: 1.3;
+        }
+        .nust-logo-sub { 
+            text-align: center; font-size: 12px; color: #FF0000; font-weight: 700; 
+            margin-bottom: 18px; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .status-badge { 
+            display: flex; align-items: center; justify-content: center; gap: 6px; 
+            background: linear-gradient(135deg, #E8F8F5, #D5F5E3); color: #117A65; 
+            font-size: 10.5px; font-weight: bold; padding: 6px 16px; border-radius: 22px; 
+            width: fit-content; margin: 0 auto 16px auto; border: 1px solid #A3E4D7;
+            box-shadow: 0 1px 4px rgba(17,122,101,0.1);
+        }
+        .pulse-dot { 
+            width: 7px; height: 7px; background-color: #27AE60; border-radius: 50%; 
+            animation: pulse 1.8s infinite;
+        }
+        .form-group { margin-bottom: 14px; }
+        .form-group label { 
+            display: block; font-size: 11px; font-weight: 700; color: #444; 
+            margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.4px;
+        }
+        .form-group input { 
+            width: 100%; padding: 11px 13px; border: 1.5px solid #D5DBDB; border-radius: 8px; 
+            font-size: 14px; outline: none; transition: all 0.25s ease; color: #333; 
+            background: #FAFAFA;
+        }
+        .form-group input:focus { 
+            background: #FFF; border-color: #0055A5; 
+            box-shadow: 0 0 0 3px rgba(0,85,165,0.1);
+        }
+        .password-wrapper { position: relative; display: flex; align-items: center; width: 100%; }
+        .password-wrapper input { padding-right: 60px; }
+        .toggle-password-btn { 
+            position: absolute; right: 9px; background: #E5E7E9; border: none; 
+            font-size: 10px; font-weight: 700; padding: 4px 8px; cursor: pointer; 
+            color: #444; border-radius: 4px; text-transform: uppercase;
+            transition: all 0.2s;
+        }
+        .toggle-password-btn:hover { background: #BDC3C7; }
+        .login-btn { 
+            width: 100%; padding: 12px; 
+            background: linear-gradient(135deg, #0055A5, #003399); 
+            color: white; border: none; border-radius: 9px; font-weight: 700; font-size: 13.5px; 
+            cursor: pointer; margin-top: 8px; transition: all 0.25s ease; 
+            box-shadow: 0 4px 12px rgba(0,51,153,0.25);
+        }
+        .login-btn:hover { 
+            background: linear-gradient(135deg, #003399, #002266); 
+            transform: translateY(-1px); 
+            box-shadow: 0 6px 18px rgba(0,51,153,0.35);
+        }
+        .login-btn:active { transform: translateY(0); }
         
-        /* Exam Interface - UNTOUCHED (preserved from original) */
-        .exam-interface { display: none; padding: 10px; background: #f0f4f8; }
-        .test-table { width: 100%; border-collapse: collapse; border: 3px double #0055A5; margin-bottom: 8px; background: white; }
+        /* Field Cards */
+        .field-selector { display: flex; flex-direction: column; gap: 7px; margin-bottom: 8px; }
+        .field-card { 
+            display: flex; align-items: flex-start; gap: 12px; border: 1.5px solid #D5DBDB; 
+            border-radius: 10px; padding: 11px 14px; cursor: pointer; 
+            transition: all 0.25s ease; background: #FAFAFA;
+            animation: fadeInUp 0.4s ease-out both;
+        }
+        .field-card:nth-child(1) { animation-delay: 0.05s; }
+        .field-card:nth-child(2) { animation-delay: 0.1s; }
+        .field-card:nth-child(3) { animation-delay: 0.15s; }
+        .field-card:nth-child(4) { animation-delay: 0.2s; }
+        .field-card:nth-child(5) { animation-delay: 0.25s; }
+        .field-card:hover { 
+            border-color: #0055A5; background: #EBF5FB; 
+            transform: translateX(3px);
+            box-shadow: 0 2px 10px rgba(0,85,165,0.12);
+        }
+        .field-card.selected { 
+            border-color: #0055A5; background: #D4E6F1; 
+            box-shadow: 0 0 0 2.5px rgba(0,85,165,0.18);
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+        .field-card input[type="radio"] { transform: scale(1.2); accent-color: #0055A5; flex-shrink: 0; margin-top: 3px; }
+        .field-card-content { flex: 1; }
+        .field-card-title { font-weight: 700; font-size: 12.5px; color: #003399; }
+        .field-card-detail { font-size: 10.5px; color: #555; margin-top: 1px; }
+        .field-card-weightage { font-size: 9.5px; color: #777; margin-top: 2px; background: #EFF6FF; padding: 2px 7px; border-radius: 3px; display: inline-block; }
+        .field-card-code { font-size: 9.5px; font-weight: bold; color: #0055A5; background: #E8F0FE; padding: 3px 8px; border-radius: 5px; flex-shrink: 0; }
+        .btn-back { 
+            width: 100%; padding: 9px; margin-top: 7px; background: transparent; 
+            color: #999; border: 1px solid #D5DBDB; border-radius: 8px; font-size: 12px; 
+            cursor: pointer; transition: all 0.25s ease;
+        }
+        .btn-back:hover { color: #0055A5; border-color: #0055A5; background: rgba(0,85,165,0.03); }
+
+        /* Aggregate Button */
+        .btn-aggregate {
+            width: 100%; padding: 10px; margin-top: 7px;
+            background: linear-gradient(135deg, #117A65, #0E6655);
+            color: white; border: none; border-radius: 9px; font-weight: 700;
+            font-size: 12.5px; cursor: pointer; transition: all 0.25s ease;
+            box-shadow: 0 3px 10px rgba(17,122,101,0.25);
+            display: flex; align-items: center; justify-content: center; gap: 6px;
+        }
+        .btn-aggregate:hover { 
+            background: linear-gradient(135deg, #0E6655, #0A5345); 
+            transform: translateY(-1px);
+            box-shadow: 0 5px 16px rgba(17,122,101,0.35);
+        }
+
+        /* Aggregate Modal */
+        .aggregate-modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); justify-content: center; align-items: center;
+            z-index: 9999; padding: 14px;
+            animation: fadeIn 0.25s ease;
+        }
+        .aggregate-modal-body {
+            background: white; border-radius: 16px; padding: 26px;
+            max-width: 480px; width: 100%; max-height: 90vh; overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+            animation: scaleIn 0.35s ease-out;
+            border: 1.5px solid rgba(0,85,165,0.12);
+        }
+        .aggregate-modal-body::-webkit-scrollbar { width: 4px; }
+        .aggregate-modal-body::-webkit-scrollbar-track { background: #f5f5f5; border-radius: 3px; }
+        .aggregate-modal-body::-webkit-scrollbar-thumb { background: #0055A5; border-radius: 3px; }
+        .agg-title { color: #003399; font-size: 17px; font-weight: 800; text-align: center; margin-bottom: 3px; }
+        .agg-subtitle { color: #FF0000; font-size: 10px; font-weight: 700; text-align: center; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 16px; }
+        .agg-tab-row { display: flex; gap: 7px; margin-bottom: 15px; }
+        .agg-tab {
+            flex: 1; padding: 8px; border: 1.5px solid #D5DBDB; border-radius: 8px;
+            background: #FAFAFA; font-size: 11px; font-weight: 700; cursor: pointer;
+            text-align: center; color: #555; transition: all 0.25s ease;
+        }
+        .agg-tab.active { border-color: #003399; background: #003399; color: white; box-shadow: 0 2px 8px rgba(0,51,153,0.2); }
+        .agg-tab:hover:not(.active) { border-color: #0055A5; color: #0055A5; background: #F5F9FF; }
+        .agg-panel { display: none; }
+        .agg-panel.active { display: block; animation: fadeIn 0.35s ease; }
+        .agg-formula-box {
+            background: #F5F8FF; border: 1px solid #D6E4F0; border-left: 4px solid #003399;
+            padding: 11px 14px; border-radius: 7px; font-size: 11.5px; color: #1E3A5F;
+            margin-bottom: 15px; line-height: 1.7;
+        }
+        .agg-formula-box strong { color: #003399; }
+        .agg-field-group { margin-bottom: 12px; }
+        .agg-field-group label {
+            display: block; font-size: 10.5px; font-weight: 700; color: #444;
+            margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.3px;
+        }
+        .agg-input-row { display: flex; gap: 7px; align-items: center; }
+        .agg-input-row input {
+            flex: 1; padding: 9px 11px; border: 1.5px solid #D5DBDB; border-radius: 7px;
+            font-size: 13px; outline: none; color: #333; background: #FAFAFA;
+            transition: all 0.25s ease;
+        }
+        .agg-input-row input:focus { border-color: #0055A5; background: #FFF; box-shadow: 0 0 0 2.5px rgba(0,85,165,0.08); }
+        .agg-input-row input.input-error { border-color: #E74C3C; background: #FFF8F8; box-shadow: 0 0 0 2.5px rgba(231,76,60,0.12); }
+        .agg-input-row span {
+            display: flex; align-items: center; font-size: 10.5px; color: #888;
+            font-weight: 600; white-space: nowrap;
+        }
+        .agg-calculate-btn {
+            width: 100%; padding: 11px;
+            background: linear-gradient(135deg, #0055A5, #003399);
+            color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 12.5px;
+            cursor: pointer; margin-top: 6px; transition: all 0.25s ease;
+            box-shadow: 0 3px 10px rgba(0,51,153,0.2);
+        }
+        .agg-calculate-btn:hover { background: linear-gradient(135deg, #003399, #002266); transform: translateY(-1px); }
+        .agg-result-box {
+            display: none; margin-top: 15px; background: linear-gradient(135deg, #F4FBF7, #E8F8F0);
+            border: 1.5px solid #2ECC71; border-radius: 12px; padding: 18px; text-align: center;
+            animation: bounceIn 0.45s ease-out;
+        }
+        .agg-result-box.show { display: block; }
+        .agg-result-score {
+            font-size: 34px; font-weight: 800; color: #117A65; font-family: monospace;
+            margin: 5px 0; animation: scoreCount 0.4s ease-out;
+        }
+        .agg-result-label { font-size: 11px; color: #555; margin-bottom: 4px; font-weight: 600; }
+        .agg-result-breakdown {
+            font-size: 11.5px; color: #333; background: rgba(255,255,255,0.75);
+            border: 1px solid #A3E4D7; border-radius: 7px; padding: 10px;
+            margin-top: 10px; text-align: left; line-height: 1.8;
+        }
+        .agg-close-btn {
+            width: 100%; padding: 9px; margin-top: 14px; background: transparent;
+            color: #999; border: 1px solid #ddd; border-radius: 8px; font-size: 12px;
+            cursor: pointer; font-weight: 600; transition: all 0.25s ease;
+        }
+        .agg-close-btn:hover { color: #C0392B; border-color: #C0392B; background: #FFF8F8; }
+        .agg-error {
+            color: #C0392B; font-size: 11px; margin-top: 7px; font-weight: 600; display: none;
+            background: #FFF5F5; border: 1px solid #FADBD8; border-radius: 6px; padding: 8px 11px;
+            line-height: 1.5;
+        }
+
+        /* Exam Interface (kept identical) */
+        .exam-interface { display: none; padding: 10px; }
+        .test-table { width: 100%; border-collapse: collapse; border: 3px double #0055A5; margin-bottom: 8px; }
         .top-header-row { background: #FFF; border-bottom: 2px solid #0055A5; color: #008000; font-weight: bold; padding: 6px 10px; font-size: 14px; text-transform: uppercase; }
         .stream-title { text-align: center; color: #FF0000; font-weight: bold; font-size: 13px; border-bottom: 2px solid #0055A5; padding: 5px; background: #F9F9F9; }
-        .workspace-container { display: flex; border-bottom: 2px solid #0055A5; min-height: 300px; background: white; }
+        .workspace-container { display: flex; border-bottom: 2px solid #0055A5; min-height: 300px; }
         .left-main-canvas { flex: 1; display: flex; flex-direction: column; border-right: 2px solid #0055A5; }
         .question-meta-bar { background: #D4E6F1; color: #003399; font-weight: bold; font-size: 13px; padding: 5px 10px; border-bottom: 1px solid #0055A5; display: flex; justify-content: space-between; }
-        .question-body-pane { padding: 18px 20px; font-size: 15px; font-weight: 600; color: #000; min-height: 100px; border-bottom: 2px solid #0055A5; line-height: 1.6; background: #FFF; }
-        .passage-container { background: #F8F9FA; border: 1px solid #BDC3C7; border-left: 4px solid #0055A5; padding: 14px 16px; margin-bottom: 14px; }
+        .question-body-pane { padding: 18px 20px; font-size: 15px; font-weight: 600; color: #000; min-height: 100px; border-bottom: 2px solid #0055A5; line-height: 1.6; background: #FFF; text-align: left; }
+        .passage-container { background: #F8F9FA; border: 1px solid #BDC3C7; border-left: 4px solid #0055A5; padding: 14px 16px; margin-bottom: 14px; font-weight: 400; font-size: 14px; line-height: 1.7; color: #333; border-radius: 4px; }
+        .passage-label { font-size: 11px; font-weight: 700; color: #0055A5; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+        .question-text { font-weight: 600; font-size: 15px; }
+        .question-diagram { display: block; max-width: 280px; height: auto; margin: 12px auto; border-radius: 6px; border: 1px solid #D5DBDB; }
         .options-pane-title { background: #D4E6F1; color: #003399; font-weight: bold; font-size: 13px; padding: 5px 10px; border-bottom: 1px solid #0055A5; }
-        .options-list-wrapper { padding: 12px 15px; display: flex; flex-direction: column; gap: 6px; background: #FFF; }
+        .options-list-wrapper { padding: 12px 15px; display: flex; flex-direction: column; gap: 6px; background: #FFF; flex: 1; }
         .option-row-item { display: flex; align-items: center; border: 1px solid #A9CCE3; padding: 10px 14px; background: white; cursor: pointer; border-radius: 4px; }
-        .option-row-item:hover { background: #EBF5FB; }
-        .option-row-item.selected { background: #D4E6F1; border: 1px solid #0055A5; }
-        .option-row-item::before { content: ''; width: 18px; height: 18px; border-radius: 50%; border: 2px solid #A9CCE3; margin-right: 12px; background: white; }
-        .option-row-item.selected::before { border-color: #0055A5; background: #0055A5; box-shadow: inset 0 0 0 3px white; }
-        .right-photo-panel { width: 160px; padding: 12px; background: #FFF; }
-        .photo-box-frame { width: 120px; height: 140px; border: 1px solid #003399; display: flex; align-items: center; justify-content: center; background: #FAFAFA; margin-bottom: 12px; }
+        .option-row-item:hover { background: #EBF5FB; border-color: #2980B9; }
+        .option-row-item.selected { background: #D4E6F1; border: 1px solid #0055A5; font-weight: bold; }
+        .option-radio-input { display: none; }
+        .option-text { text-align: left; font-size: 14px; }
+        .option-text .katex { font-size: 1.05em; }
+        .option-text .katex-display { display: inline-block; }
+        .right-photo-panel { width: 160px; padding: 12px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; background: #FFF; }
+        .photo-box-frame { width: 120px; height: 140px; border: 1px solid #003399; display: flex; align-items: center; justify-content: center; text-align: center; font-weight: bold; font-size: 13px; color: #555; background: #FAFAFA; margin-bottom: 12px; }
         .navigation-grid-wrapper { border: 1px solid #0055A5; margin: 8px 0; padding: 8px; background: #F2F4F4; }
+        .nav-section-label { display: flex; align-items: center; gap: 8px; margin: 4px 0 6px 0; }
+        .nav-section-label span { font-size: 10px; font-weight: bold; color: #003399; background: #D4E6F1; padding: 2px 10px; border-radius: 3px; text-transform: uppercase; }
         .nav-sub-grid { display: grid; gap: 3px; margin-bottom: 8px; }
-        .nav-square-btn { background: #E5E7E9; border: 1px solid #7F8C8D; text-align: center; font-size: 10px; padding: 4px 0; cursor: pointer; font-weight: bold; }
+        .nav-square-btn { background: #E5E7E9; border: 1px solid #7F8C8D; text-align: center; font-size: 10px; padding: 4px 0; cursor: pointer; font-weight: bold; color: #000; border-radius: 2px; }
         .nav-square-btn.active-focus { border: 2px solid #FF0000; background: #FFF; color: #FF0000; }
-        .nav-square-btn.filled { background: #2ECC71; color: white; }
-        .nav-square-btn.flagged-review { background: #F1C40F; }
-        .bottom-action-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; background: #FFF; flex-wrap: wrap; }
-        .timer-dashboard { display: flex; border: 1px solid #008000; background: #FFF; height: 48px; align-items: center; }
-        .timer-left-banner { background: #008000; color: #FFF; font-size: 10px; padding: 5px 8px; height: 100%; display: flex; align-items: center; }
-        .timer-countdown-clock { font-size: 22px; font-weight: bold; color: #008000; padding: 0 10px; font-family: monospace; }
-        .retro-control-btn { padding: 5px 10px; font-size: 11px; font-weight: bold; color: white; border: none; cursor: pointer; border-radius: 4px; }
-        .btn-system { background: #3498DB; }
-        .btn-navigational { background: #2980B9; }
-        .btn-review { background: #F39C12; }
-        .btn-subject { background: #2C3E50; }
-        .confetti-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10001; overflow: hidden; }
-        @keyframes confettiFall { 0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(720deg); opacity: 0; } }
+        .nav-square-btn.filled { background: #2ECC71; color: white; border-color: #27AE60; }
+        .nav-square-btn.flagged-review { background: #F1C40F; color: black; border-color: #D4AC0D; }
+        .bottom-action-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; background: #FFF; flex-wrap: wrap; gap: 6px; }
+        .timer-dashboard { display: flex; border: 1px solid #008000; background: #FFF; height: 48px; align-items: center; flex-shrink: 0; }
+        .timer-left-banner { background: #008000; color: #FFF; font-size: 10px; padding: 5px 8px; height: 100%; display: flex; flex-direction: column; justify-content: center; font-weight: bold; text-align: center; text-transform: uppercase; }
+        .timer-countdown-clock { font-size: 22px; font-weight: bold; color: #008000; padding: 0 10px; font-family: monospace; min-width: 120px; text-align: center; }
+        .finish-trigger-link { color: #003399; font-weight: bold; text-decoration: underline; cursor: pointer; font-size: 12px; }
+        .finish-trigger-link:hover { color: #FF0000; }
+        .button-bar-right { display: flex; gap: 3px; align-items: center; flex-wrap: wrap; }
+        .retro-control-btn { padding: 5px 10px; font-size: 11px; font-weight: bold; color: white; border: 1px solid #2471A3; cursor: pointer; border-radius: 3px; white-space: nowrap; }
+        .btn-system { background: linear-gradient(to bottom, #3498DB, #2980B9); }
+        .btn-navigational { background: linear-gradient(to bottom, #5DADE2, #2874A6); }
+        .btn-review { background: linear-gradient(to bottom, #F39C12, #D35400); border-color: #B03A2E; }
+        .btn-subject { background: linear-gradient(to bottom, #34495E, #2C3E50); border-color: #1A252F; }
+        .retro-control-btn:hover { opacity: 0.9; }
+        .option-row-item::before {
+            content: ''; display: inline-block; width: 18px; height: 18px; border-radius: 50%;
+            border: 2px solid #A9CCE3; margin-right: 12px; flex-shrink: 0;
+            background: white; transition: all 0.2s;
+        }
+        .option-row-item.selected::before {
+            border-color: #0055A5; background: #0055A5; box-shadow: inset 0 0 0 3px white;
+        }
+
+        /* Result Modal (Enhanced) */
+        .modal-screen { 
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.7); justify-content: center; align-items: center; 
+            z-index: 9999;
+        }
+        .modal-body { 
+            background: white; border-radius: 18px; padding: 26px; 
+            text-align: center; max-width: 680px; width: 95%; max-height: 92vh; 
+            overflow-y: auto; animation: scaleIn 0.45s ease-out;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+            border: 1.5px solid rgba(0,85,165,0.12);
+        }
+        .modal-body::-webkit-scrollbar { width: 5px; }
+        .modal-body::-webkit-scrollbar-track { background: #f5f5f5; border-radius: 3px; }
+        .modal-body::-webkit-scrollbar-thumb { background: #0055A5; border-radius: 3px; }
+        .modal-body::-webkit-scrollbar-thumb:hover { background: #003399; }
+
+        .confetti-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 10000; overflow: hidden;
+        }
+        .confetti-piece {
+            position: absolute; width: 10px; height: 10px; top: -20px;
+            animation: confettiFall linear forwards;
+        }
+
+        .score-output { 
+            font-size: 42px; font-weight: 800; color: #008000; margin: 12px 0; 
+            font-family: monospace; animation: bounceIn 0.7s ease-out;
+        }
+        .result-grade-badge {
+            display: inline-block; padding: 7px 20px; border-radius: 22px;
+            font-size: 12.5px; font-weight: 700; margin-bottom: 14px;
+            animation: scaleIn 0.4s ease-out 0.25s both;
+        }
+        .grade-excellent { background: #D5F5E3; color: #1E8449; border: 1px solid #A9DFBF; }
+        .grade-good { background: #D4E6F1; color: #1A5276; border: 1px solid #AED6F1; }
+        .grade-average { background: #FEF9E7; color: #7D6608; border: 1px solid #F9E79F; }
+        .grade-poor { background: #FADBD8; color: #922B21; border: 1px solid #F5B7B1; }
+
+        .result-stats-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 8px; margin: 14px 0;
+        }
+        .result-stat-card {
+            background: #F8F9FA; border-radius: 10px; padding: 12px 8px;
+            border: 1px solid #E5E7E9; animation: fadeInUp 0.35s ease-out both;
+            transition: all 0.2s ease;
+        }
+        .result-stat-card:hover { transform: translateY(-2px); box-shadow: 0 3px 10px rgba(0,0,0,0.08); }
+        .result-stat-card .stat-value {
+            font-size: 22px; font-weight: 800; color: #003399; font-family: monospace;
+        }
+        .result-stat-card .stat-label {
+            font-size: 9.5px; color: #777; text-transform: uppercase; letter-spacing: 0.3px;
+            margin-top: 3px; font-weight: 600;
+        }
+
+        .review-header { 
+            background: linear-gradient(135deg, #003399, #0055A5); color: white; 
+            text-align: left; padding: 9px 15px; font-size: 13px; font-weight: bold; 
+            margin-top: 18px; text-transform: uppercase; border-radius: 7px;
+            box-shadow: 0 2px 8px rgba(0,51,153,0.18);
+        }
+        .review-box { 
+            border: 1px solid #E5E7E9; text-align: left; padding: 13px; margin-top: 7px; 
+            font-size: 12.5px; line-height: 1.55; background: #FFF9F9; 
+            border-left: 4px solid #FF0000; border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+        .review-box:hover { transform: translateX(3px); box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+        .review-box.box-correct { background: #F4FBF7; border-left: 4px solid #2ECC71; }
+
+        .review-filter-bar {
+            display: flex; gap: 7px; margin: 16px 0 10px 0; flex-wrap: wrap; justify-content: center;
+        }
+        .review-filter-btn {
+            padding: 5px 14px; border: 1.5px solid #D5DBDB; border-radius: 18px;
+            font-size: 10.5px; font-weight: 700; cursor: pointer; background: #FAFAFA;
+            color: #555; transition: all 0.25s ease;
+        }
+        .review-filter-btn.active { border-color: #003399; background: #003399; color: white; }
+        .review-filter-btn:hover:not(.active) { border-color: #0055A5; color: #0055A5; background: #F5F9FF; }
+
+        .hidden { display: none !important; }
+        .katex-display { display: inline-block; margin: 0; }
         .katex { font-size: 1.1em; }
-        .review-box { background: #f8f9fa; border-left: 4px solid #ff6b6b; padding: 15px; margin-bottom: 12px; border-radius: 8px; }
-        .review-box.box-correct { border-left-color: #51cf66; background: #ebfbee; }
+
+        @media (max-width: 500px) {
+            .result-stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .login-container, .instructions-container, .field-select-container { padding: 20px 18px; }
+        }
     </style>
 </head>
 <body>
 
-<div class="animated-bg"></div>
-
-<!-- LOGIN SCREEN -->
-<div id="loginScreenView" style="display: flex; align-items: center; justify-content: center; min-height: 100vh; position: relative; z-index: 1;">
-    <div class="glass-container" style="max-width: 460px; width: 90%; padding: 40px;">
-        <div style="text-align: center; margin-bottom: 32px;">
-            <div class="live-badge" style="margin: 0 auto 20px; width: fit-content;">
-                <span class="live-dot"></span>
-                <span>LIVE EXAM PORTAL</span>
-            </div>
-            <h1 style="font-size: 32px; font-weight: 800; margin-bottom: 8px;">
-                <span class="gradient-text">NUST CBNET</span>
-            </h1>
-            <p style="color: #94a3b8; font-size: 14px;">Computer Based Entry Test 2026</p>
+<!-- Login Screen -->
+<div class="login-screen" id="loginScreenView">
+    <div class="login-container">
+        <div class="status-badge"><div class="pulse-dot"></div><span>SYSTEM STATUS: OPERATIONAL</span></div>
+        <div class="login-header">Mock Exam Portal</div>
+        <div class="nust-logo-sub">Designed for NUST(NET) Prep</div>
+        <div class="form-group">
+            <label>Candidate Roll Number / ID</label>
+            <input type="text" id="candidateIdInput" placeholder="e.g., NUST-786-ICS">
         </div>
-        
-        <div style="margin-bottom: 20px;">
-            <label style="display: block; color: #cbd5e1; font-size: 13px; margin-bottom: 8px; font-weight: 500;">
-                <i class="fas fa-id-card" style="margin-right: 8px;"></i>Roll Number / CNIC
-            </label>
-            <input type="text" id="candidateIdInput" class="modern-input" placeholder="e.g., NUST-2026-1234">
-        </div>
-        
-        <div style="margin-bottom: 28px;">
-            <label style="display: block; color: #cbd5e1; font-size: 13px; margin-bottom: 8px; font-weight: 500;">
-                <i class="fas fa-lock" style="margin-right: 8px;"></i>Access Password
-            </label>
-            <div style="position: relative;">
-                <input type="password" id="candidatePassInput" class="modern-input" placeholder="Enter password">
-                <button type="button" onclick="togglePasswordVisibility()" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: rgba(56,189,248,0.2); border: none; border-radius: 20px; padding: 5px 12px; color: #38bdf8; font-size: 11px; cursor: pointer;">Show</button>
+        <div class="form-group">
+            <label>Access Password</label>
+            <div class="password-wrapper">
+                <input type="password" id="candidatePassInput" placeholder="Enter password">
+                <button type="button" class="toggle-password-btn" onclick="togglePasswordVisibility()">Show</button>
             </div>
         </div>
-        
-        <button class="gradient-btn" onclick="authenticateUserLogin()" style="width: 100%;">
-            <i class="fas fa-arrow-right" style="margin-right: 8px;"></i>Login & Continue
-        </button>
-        
-        <p style="text-align: center; color: #64748b; font-size: 11px; margin-top: 20px;">
-            <i class="fas fa-shield-alt"></i> Secure portal | NUST Official Mock Test
-        </p>
+        <button class="login-btn" onclick="authenticateUserLogin()">Login &amp; View Instructions</button>
     </div>
 </div>
 
-<!-- INSTRUCTIONS SCREEN -->
-<div id="instructionsScreenView" style="display: none; position: relative; z-index: 1; min-height: 100vh; padding: 40px 20px;">
-    <div class="glass-container" style="max-width: 800px; margin: 0 auto; padding: 40px;">
-        <div style="text-align: center; margin-bottom: 30px;">
-            <div class="live-badge" style="margin: 0 auto 16px; width: fit-content;">
-                <span class="live-dot"></span>
-                <span>CANDIDATE: <span id="instructionsCandidateId">---</span></span>
-            </div>
-            <h2 class="gradient-text" style="font-size: 28px; font-weight: 700;">Exam Guidelines</h2>
-            <p style="color: #94a3b8; margin-top: 8px;">Read carefully before starting your assessment</p>
+<!-- Instructions Screen -->
+<div class="instructions-screen" id="instructionsScreenView">
+    <div class="instructions-container">
+        <div class="status-badge" style="margin-bottom:12px;">
+            <div class="pulse-dot"></div>
+            <span>CANDIDATE: <span id="instructionsCandidateId">---</span></span>
         </div>
-        
-        <div class="ins-item">
-            <i class="fas fa-clock" style="color: #38bdf8; margin-right: 12px;"></i>
-            <strong>Duration:</strong> 3 Hours (180 Minutes) | <strong>Total MCQs:</strong> 200
-        </div>
-        <div class="ins-item">
-            <i class="fas fa-check-circle" style="color: #10b981; margin-right: 12px;"></i>
-            <strong>Marking:</strong> +1 per correct answer | <strong>No Negative Marking</strong>
-        </div>
-        <div class="ins-item">
-            <i class="fas fa-layer-group" style="color: #a855f7; margin-right: 12px;"></i>
-            <strong>Test Structure by Field:</strong> Engineering (Maths 100, Physics 60, Eng 40) | Applied Sciences (Bio 100, Chem 60, Eng 40) | Business (Quant 100, Eng 100) | Architecture (Design 100, Maths 60, Eng 40) | Natural Sciences (Maths 100, Eng 100)
-        </div>
-        <div class="ins-item">
-            <i class="fas fa-flag-checkered" style="color: #f59e0b; margin-right: 12px;"></i>
-            <strong>Navigation:</strong> Save & Next | Review Flag | Jump using number grid
-        </div>
-        <div class="ins-item">
-            <i class="fas fa-chart-line" style="color: #06b6d4; margin-right: 12px;"></i>
-            <strong>Aggregate Formula:</strong> 75% NET + 15% FSc/A-Level + 10% Matric/O-Level
-        </div>
-        
-        <div style="background: rgba(239, 68, 68, 0.1); border-radius: 16px; padding: 16px; margin: 20px 0; border: 1px solid rgba(239, 68, 68, 0.3);">
-            <i class="fas fa-exclamation-triangle" style="color: #f87171; margin-right: 10px;"></i>
-            <span style="color: #fca5a5; font-size: 13px;">Do not refresh or close browser during test. Auto-submit on timer end.</span>
-        </div>
-        
-        <button class="gradient-btn" onclick="goToFieldSelect()" style="width: 100%;">
-            <i class="fas fa-th-large"></i> Select Your Field →
-        </button>
-    </div>
-</div>
+        <div class="instructions-title">NUST NET Candidate Instructions</div>
+        <div class="instructions-subtitle">Computer Based Entry Test (CBNET) Guidelines</div>
 
-<!-- FIELD SELECTION SCREEN -->
-<div id="fieldSelectScreenView" style="display: none; position: relative; z-index: 1; min-height: 100vh; padding: 40px 20px;">
-    <div class="glass-container" style="max-width: 700px; margin: 0 auto; padding: 40px;">
-        <div style="text-align: center; margin-bottom: 32px;">
-            <div class="live-badge" style="margin: 0 auto 16px; width: fit-content;">
-                <span class="live-dot"></span>
-                <span>CANDIDATE: <span id="fieldSelectCandidateId">---</span></span>
-            </div>
-            <h2 class="gradient-text" style="font-size: 26px;">Choose Your Test Stream</h2>
-            <p style="color: #94a3b8;">Select the field matching your HSSC qualification</p>
+        <div class="instructions-section-heading">General Information</div>
+        <ul class="instructions-list">
+            <li>This is a <strong>Computer Based Entry Test (CBNET / NET)</strong> conducted by the National University of Sciences &amp; Technology (NUST), Islamabad.</li>
+            <li>The test consists of <strong>200 Multiple Choice Questions (MCQs)</strong> with a total duration of <strong>3 hours (180 minutes)</strong>.</li>
+            <li>Each correct answer carries <strong>1 mark</strong>. There is <strong>NO negative marking</strong> for wrong answers.</li>
+            <li>The test is divided into sections based on your selected field / stream.</li>
+            <li>Candidates must attempt the test <strong>individually</strong>. Any form of assistance or collaboration is strictly prohibited.</li>
+        </ul>
+
+        <div class="instructions-section-heading">Test Structure by Field</div>
+        <ul class="instructions-list">
+            <li><strong>NET-Engineering:</strong> Mathematics (100) + Physics (60) + English (40)</li>
+            <li><strong>NET-Applied Sciences:</strong> Biology (100) + Chemistry (60) + English (40)</li>
+            <li><strong>NET-Business &amp; Social Sciences:</strong> Quantitative Maths (100) + English (100)</li>
+            <li><strong>NET-Architecture:</strong> Design Aptitude (100) + Mathematics (60) + English (40)</li>
+            <li><strong>NET-Natural Sciences:</strong> Mathematics (100) + English (100)</li>
+        </ul>
+
+        <div class="instructions-section-heading">How to Navigate the Test</div>
+        <ul class="instructions-list">
+            <li>Click on any option to <strong>select your answer</strong>. Your selection will be highlighted.</li>
+            <li>Press <strong>Save</strong> to record your answer and advance to the next question.</li>
+            <li>Use <strong>Next</strong> and <strong>Prev</strong> buttons to move between questions.</li>
+            <li>Click any number in the <strong>Navigation Grid</strong> to jump to that question.</li>
+            <li>Use <strong>subject buttons</strong> to jump to the start of a particular section.</li>
+            <li>You can <strong>revisit and change</strong> any answer before submitting.</li>
+        </ul>
+
+        <div class="instructions-section-heading">Navigation Colour Legend</div>
+        <ul class="instructions-list">
+            <li><strong style="color:#7F8C8D;">Grey</strong> = Not yet answered</li>
+            <li><strong style="color:#27AE60;">Green</strong> = Answer saved</li>
+            <li><strong style="color:#D4AC0D;">Yellow</strong> = Marked for review</li>
+            <li><strong style="color:#FF0000;">Red Border</strong> = Currently active question</li>
+        </ul>
+
+        <div class="instructions-section-heading">Review &amp; Flagging</div>
+        <ul class="instructions-list">
+            <li>Click <strong>Review</strong> to flag a question for later. Flagged questions appear in yellow.</li>
+            <li>Flagged questions are not automatically submitted. You must save your answer separately.</li>
+            <li>Answer all questions if possible, as there is no penalty for wrong answers.</li>
+        </ul>
+
+        <div class="instructions-section-heading">Timer &amp; Submission</div>
+        <ul class="instructions-list">
+            <li>The countdown timer is displayed at the bottom left throughout the test.</li>
+            <li>When time reaches <strong>00:00:00</strong>, the test is <strong>automatically submitted</strong>.</li>
+            <li>Click <strong>"Click here to FINISH Test"</strong> to submit early after confirmation.</li>
+            <li>Once submitted, you <strong>cannot return</strong> to the test.</li>
+        </ul>
+
+        <div class="instructions-warning">
+            <strong>Aggregate Formula:</strong> Your NUST merit is calculated as:
+            <strong>75% NET + 15% FSc/A-Level + 10% Matric/O-Level</strong>.
+            Use the Aggregate Calculator on the next screen to estimate your merit.
         </div>
-        
-        <div id="fieldSelectorContainer" style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px;"></div>
-        
-        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-            <button class="gradient-btn" onclick="startExam()" style="flex: 1;">
-                <i class="fas fa-play"></i> Start Assessment
-            </button>
-            <button class="gradient-btn" onclick="openAggregateModal()" style="flex: 1; background: linear-gradient(135deg, #10b981, #059669);">
-                <i class="fas fa-calculator"></i> Aggregate Calc
-            </button>
+
+        <div class="instructions-important">
+            <strong>Important:</strong> Do not refresh or close the browser during the test. Do not use unfair means. 
+            NUST reserves the right to cancel the candidature of any candidate found violating rules.
+            Results shown at the end are for practice purposes only.
         </div>
-        <button onclick="goBackToInstructions()" style="margin-top: 16px; width: 100%; background: rgba(100,116,139,0.3); border: 1px solid rgba(100,116,139,0.5); border-radius: 16px; padding: 12px; color: #cbd5e1; cursor: pointer;">
-            ← Back to Instructions
+
+        <button class="login-btn" onclick="goToFieldSelect()" style="margin-top:10px;">
+            Select Field / Stream
         </button>
     </div>
 </div>
 
-<!-- AGGREGATE MODAL -->
-<div id="aggregateModalOverlay" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); z-index: 10000; align-items: center; justify-content: center;">
-    <div class="glass-container" style="max-width: 500px; width: 90%; padding: 32px; max-height: 85vh; overflow-y: auto;">
-        <h3 class="gradient-text" style="font-size: 24px; margin-bottom: 8px; text-align: center;">Aggregate Calculator</h3>
-        <p style="color: #94a3b8; text-align: center; margin-bottom: 24px;">Estimate your NUST Merit</p>
-        
-        <div style="display: flex; gap: 12px; margin-bottom: 24px;">
-            <button id="tabFsc" onclick="switchAggTab('fsc')" style="flex: 1; padding: 10px; border-radius: 40px; background: #38bdf8; border: none; color: white; font-weight: 600; cursor: pointer;">FSc / Matric</button>
-            <button id="tabAlevel" onclick="switchAggTab('alevel')" style="flex: 1; padding: 10px; border-radius: 40px; background: rgba(56,189,248,0.2); border: 1px solid rgba(56,189,248,0.4); color: #94a3b8; font-weight: 600; cursor: pointer;">A-Level / O-Level</button>
+<!-- Field Selection Screen -->
+<div class="field-select-screen" id="fieldSelectScreenView">
+    <div class="field-select-container">
+        <div class="status-badge">
+            <div class="pulse-dot"></div>
+            <span>CANDIDATE: <span id="fieldSelectCandidateId">NUST026</span></span>
         </div>
-        
-        <div id="panelFsc">
-            <div class="ins-item" style="margin-bottom: 20px; font-size: 12px;">75% NET + 15% FSc + 10% Matric</div>
-            <input type="number" id="fsc_net" class="modern-input" placeholder="NET Score (max 200)" style="margin-bottom: 12px;">
-            <div style="display: flex; gap: 8px; margin-bottom: 12px;"><input type="number" id="fsc_obtained" class="modern-input" placeholder="FSc Obtained"><input type="number" id="fsc_total" class="modern-input" placeholder="FSc Total"></div>
-            <div style="display: flex; gap: 8px; margin-bottom: 20px;"><input type="number" id="matric_obtained" class="modern-input" placeholder="Matric Obtained"><input type="number" id="matric_total" class="modern-input" placeholder="Matric Total"></div>
-            <button class="gradient-btn" onclick="calculateAggregateFsc()" style="width: 100%;">Calculate</button>
-            <div id="fscResultBox" style="margin-top: 20px; display: none; background: rgba(16,185,129,0.1); border-radius: 16px; padding: 16px; text-align: center;"></div>
+        <div class="login-header">Select Your Test Field / Stream</div>
+        <div class="nust-logo-sub" style="margin-bottom:13px;">Choose the appropriate category for assessment</div>
+
+        <div class="field-selector" id="fieldSelectorContainer">
+            <div class="field-card" onclick="selectField(this,'engineering')">
+                <input type="radio" name="fieldChoice" value="engineering">
+                <div class="field-card-content">
+                    <div class="field-card-title">NET-Engineering</div>
+                    <div class="field-card-detail">HSSC Pre-Engg / Pre-Med* / ICS / equivalent</div>
+                    <div class="field-card-weightage">Mathematics 50% | Physics 30% | English 20%</div>
+                </div>
+                <div class="field-card-code">ENG</div>
+            </div>
+            <div class="field-card" onclick="selectField(this,'applied_sciences')">
+                <input type="radio" name="fieldChoice" value="applied_sciences">
+                <div class="field-card-content">
+                    <div class="field-card-title">NET-Applied Sciences</div>
+                    <div class="field-card-detail">HSSC Pre-Medical group / equivalent</div>
+                    <div class="field-card-weightage">Biology 50% | Chemistry 30% | English 20%</div>
+                </div>
+                <div class="field-card-code">APS</div>
+            </div>
+            <div class="field-card" onclick="selectField(this,'business_studies')">
+                <input type="radio" name="fieldChoice" value="business_studies">
+                <div class="field-card-content">
+                    <div class="field-card-title">NET-Business Studies &amp; Social Sciences</div>
+                    <div class="field-card-detail">HSSC with any combination / equivalent</div>
+                    <div class="field-card-weightage">Quantitative Mathematics 50% | English 50%</div>
+                </div>
+                <div class="field-card-code">BUS</div>
+            </div>
+            <div class="field-card" onclick="selectField(this,'architecture')">
+                <input type="radio" name="fieldChoice" value="architecture">
+                <div class="field-card-content">
+                    <div class="field-card-title">NET-Architecture / Industrial Design</div>
+                    <div class="field-card-detail">HSSC with Maths and Physics / equivalent</div>
+                    <div class="field-card-weightage">Design Aptitude 50% | Mathematics 30% | English 20%</div>
+                </div>
+                <div class="field-card-code">ARC</div>
+            </div>
+            <div class="field-card" onclick="selectField(this,'natural_sciences')">
+                <input type="radio" name="fieldChoice" value="natural_sciences">
+                <div class="field-card-content">
+                    <div class="field-card-title">NET-Natural Sciences</div>
+                    <div class="field-card-detail">HSSC / equivalent</div>
+                    <div class="field-card-weightage">Mathematics 50% | English 50%</div>
+                </div>
+                <div class="field-card-code">NSC</div>
+            </div>
         </div>
-        
-        <div id="panelAlevel" style="display: none;">
-            <div class="ins-item" style="margin-bottom: 20px;">IBCC Equivalence: 75% NET + 15% A-Level + 10% O-Level</div>
-            <input type="number" id="al_net" class="modern-input" placeholder="NET Score (max 200)" style="margin-bottom: 12px;">
-            <div style="display: flex; gap: 8px; margin-bottom: 12px;"><input type="number" id="al_obtained" class="modern-input" placeholder="A-Level Equiv"><input type="number" id="al_total" class="modern-input" placeholder="Total"></div>
-            <div style="display: flex; gap: 8px; margin-bottom: 20px;"><input type="number" id="ol_obtained" class="modern-input" placeholder="O-Level Equiv"><input type="number" id="ol_total" class="modern-input" placeholder="Total"></div>
-            <button class="gradient-btn" onclick="calculateAggregateAlevel()" style="width: 100%;">Calculate</button>
-            <div id="alevelResultBox" style="margin-top: 20px; display: none; background: rgba(16,185,129,0.1); border-radius: 16px; padding: 16px; text-align: center;"></div>
-        </div>
-        
-        <button onclick="closeAggregateModal()" style="margin-top: 20px; width: 100%; background: transparent; border: 1px solid #475569; border-radius: 40px; padding: 12px; color: #94a3b8; cursor: pointer;">Close</button>
+
+        <button class="login-btn" onclick="startExam()">Start Assessment</button>
+        <button class="btn-aggregate" onclick="openAggregateModal()">Aggregate Calculator</button>
+        <button class="btn-back" onclick="goBackToInstructions()">Back to Instructions</button>
     </div>
 </div>
 
-<!-- EXAM INTERFACE (PRESERVED EXACTLY) -->
+<!-- Aggregate Calculator Modal -->
+<div class="aggregate-modal-overlay" id="aggregateModalOverlay" onclick="closeAggOnBackdrop(event)">
+    <div class="aggregate-modal-body">
+        <div class="agg-title">NUST Aggregate Calculator</div>
+        <div class="agg-subtitle">Estimate your merit score</div>
+
+        <div class="agg-tab-row">
+            <div class="agg-tab active" id="tabFsc" onclick="switchAggTab('fsc')">FSc / Matric</div>
+            <div class="agg-tab" id="tabAlevel" onclick="switchAggTab('alevel')">A-Level / O-Level</div>
+        </div>
+
+        <!-- FSc / Matric Panel -->
+        <div class="agg-panel active" id="panelFsc">
+            <div class="agg-formula-box">
+                <strong>NUST Formula (FSc/Matric):</strong><br>
+                Aggregate = <strong>75%</strong> x (NET/200 x 100) + <strong>15%</strong> x (FSc Obtained/FSc Total x 100) + <strong>10%</strong> x (Matric Obtained/Matric Total x 100)
+            </div>
+            <div class="agg-field-group">
+                <label>NET Score</label>
+                <div class="agg-input-row">
+                    <input type="number" id="fsc_net" placeholder="Obtained (max 200)" min="0" max="200">
+                    <span>/ 200</span>
+                </div>
+            </div>
+            <div class="agg-field-group">
+                <label>FSc / HSSC Marks</label>
+                <div class="agg-input-row">
+                    <input type="number" id="fsc_obtained" placeholder="Obtained" min="0">
+                    <span>out of</span>
+                    <input type="number" id="fsc_total" placeholder="Total (max 1200)" min="0">
+                </div>
+            </div>
+            <div class="agg-field-group">
+                <label>Matric / SSC Marks</label>
+                <div class="agg-input-row">
+                    <input type="number" id="matric_obtained" placeholder="Obtained" min="0">
+                    <span>out of</span>
+                    <input type="number" id="matric_total" placeholder="Total (max 1200)" min="0">
+                </div>
+            </div>
+            <div class="agg-error" id="fscError"></div>
+            <button class="agg-calculate-btn" onclick="calculateAggregateFsc()">Calculate Aggregate</button>
+            <div class="agg-result-box" id="fscResultBox">
+                <div class="agg-result-label">Your Estimated NUST Aggregate</div>
+                <div class="agg-result-score" id="fscResultScore"></div>
+                <div class="agg-result-breakdown" id="fscResultBreakdown"></div>
+            </div>
+        </div>
+
+        <!-- A-Level / O-Level Panel -->
+        <div class="agg-panel" id="panelAlevel">
+            <div class="agg-formula-box">
+                <strong>NUST Formula (A-Level / O-Level via IBCC):</strong><br><br>
+                NUST uses IBCC equivalence to convert Cambridge grades to marks.<br><br>
+                <strong>IBCC Grade Conversion (per subject):</strong><br>
+                A* = 90 | A = 85 | B = 75 | C = 65 | D = 55 | E = 45<br><br>
+                Typical totals: A-Level equiv out of <strong>1100</strong>, O-Level equiv out of <strong>1050</strong> (may vary by IBCC certificate).<br><br>
+                Aggregate = <strong>75%</strong> x (NET/200 x 100) + <strong>15%</strong> x (A-Level Equiv/Total x 100) + <strong>10%</strong> x (O-Level Equiv/Total x 100)
+            </div>
+            <div class="agg-field-group">
+                <label>NET Score</label>
+                <div class="agg-input-row">
+                    <input type="number" id="al_net" placeholder="Obtained (max 200)" min="0" max="200">
+                    <span>/ 200</span>
+                </div>
+            </div>
+            <div class="agg-field-group">
+                <label>A-Level IBCC Equivalent Marks</label>
+                <div class="agg-input-row">
+                    <input type="number" id="al_obtained" placeholder="Obtained" min="0">
+                    <span>out of</span>
+                    <input type="number" id="al_total" placeholder="Total (max 1200)" min="0">
+                </div>
+            </div>
+            <div class="agg-field-group">
+                <label>O-Level IBCC Equivalent Marks</label>
+                <div class="agg-input-row">
+                    <input type="number" id="ol_obtained" placeholder="Obtained" min="0">
+                    <span>out of</span>
+                    <input type="number" id="ol_total" placeholder="Total (max 1200)" min="0">
+                </div>
+            </div>
+            <div class="agg-error" id="alevelError"></div>
+            <button class="agg-calculate-btn" onclick="calculateAggregateAlevel()">Calculate Aggregate</button>
+            <div class="agg-result-box" id="alevelResultBox">
+                <div class="agg-result-label">Your Estimated NUST Aggregate</div>
+                <div class="agg-result-score" id="alevelResultScore"></div>
+                <div class="agg-result-breakdown" id="alevelResultBreakdown"></div>
+            </div>
+        </div>
+
+        <button class="agg-close-btn" onclick="closeAggregateModal()">Close Calculator</button>
+    </div>
+</div>
+
+<!-- Exam Interface (Unchanged) -->
 <div class="exam-interface" id="examPortalView">
     <div class="test-table">
         <div class="top-header-row" id="currentSubjectHeader">MATHEMATICS</div>
         <div class="stream-title" id="streamTitleBar">Engineering Stream Mock Portal</div>
         <div class="workspace-container">
             <div class="left-main-canvas">
-                <div class="question-meta-bar"><span id="questionNumTracker">Question No: 1 of 100</span><span>Marks: 1</span></div>
+                <div class="question-meta-bar">
+                    <span id="questionNumTracker">Question No: 1 of 100</span>
+                    <span>Marks: 1</span>
+                </div>
                 <div class="question-body-pane" id="questionTextBox">Loading question...</div>
                 <div class="options-pane-title">Answer (Please select your correct option)</div>
                 <div class="options-list-wrapper" id="optionsRadioGroup"></div>
             </div>
             <div class="right-photo-panel">
                 <div class="photo-box-frame">Your<br>Image<br>here</div>
-                <div style="font-size:11px;font-weight:bold;color:#0055A5;text-align:center;"><span id="displayCandidateId">NUST026</span><br><span id="displayFieldCode" style="color:#003399;">ENG</span></div>
+                <div style="font-size:11px;font-weight:bold;color:#0055A5;text-align:center;line-height:1.5;">
+                    Candidate ID:<br><span style="color:#FF0000" id="displayCandidateId">NUST026</span><br>
+                    <span id="displayFieldCode" style="color:#003399;font-size:10px;">ENG</span>
+                </div>
             </div>
         </div>
     </div>
     <div class="navigation-grid-wrapper" id="navButtonMatrixGrid"></div>
     <div class="bottom-action-row">
-        <div class="timer-dashboard"><div class="timer-left-banner">Remaining<br>Time</div><div class="timer-countdown-clock" id="timerClockMinutes">03:00:00</div></div>
+        <div class="timer-dashboard">
+            <div class="timer-left-banner">Remaining<br>Time</div>
+            <div class="timer-countdown-clock" id="timerClockMinutes">03:00:00</div>
+        </div>
         <div><span class="finish-trigger-link" onclick="triggerSubmitConfirmation()">Click here to <b>FINISH</b> Test</span></div>
         <div class="button-bar-right" id="sectionButtonsContainer">
             <button class="retro-control-btn btn-system" onclick="saveAnswerState()">Save</button>
@@ -498,38 +825,120 @@
     </div>
 </div>
 
+<!-- Confetti Container -->
 <div class="confetti-container" id="confettiContainer"></div>
 
-<!-- RESULT MODAL -->
-<div id="reportCardModalOverlay" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); z-index: 10000; align-items: center; justify-content: center; overflow-y: auto;">
-    <div class="glass-container" style="max-width: 800px; width: 95%; margin: 40px auto; padding: 32px; max-height: 90vh; overflow-y: auto;">
-        <div id="resultContentPlaceholder"></div>
+<!-- Result Modal -->
+<div class="modal-screen" id="reportCardModalOverlay">
+    <div class="modal-body">
+        <h2 style="color:#0055A5;font-size:19px;margin-top:2px;animation:fadeInDown 0.4s ease-out both;">NUST Examination Result Summary</h2>
+        <p style="margin-top:6px;font-size:12px;color:#555;animation:fadeIn 0.4s ease-out 0.15s both;">Scoring: +1 correct, 0 incorrect (no negative marking).</p>
+        
+        <div class="score-output" id="totalScoreTarget">0 / 200</div>
+        <div id="resultGradeBadge"></div>
+        <div class="result-stats-grid" id="resultStatsGrid"></div>
+        <div id="subjectScoreBreakdownBox" style="text-align:left;background:#F8F9FA;padding:13px;font-size:12.5px;line-height:1.6;border:1px solid #E5E7E9;margin-bottom:14px;border-radius:9px;animation:fadeInUp 0.4s ease-out 0.4s both;"></div>
+        
+        <button class="login-btn" style="margin:0 auto 18px auto;display:block;width:170px;background:linear-gradient(135deg,#C0392B,#E74C3C);border-radius:9px;font-size:12.5px;" onclick="window.location.reload()">Exit Portal</button>
+        
+        <div class="review-filter-bar" id="reviewFilterBar">
+            <button class="review-filter-btn active" onclick="filterReview('all', this)">All Questions</button>
+            <button class="review-filter-btn" onclick="filterReview('wrong', this)">Wrong Only</button>
+            <button class="review-filter-btn" onclick="filterReview('correct', this)">Correct Only</button>
+            <button class="review-filter-btn" onclick="filterReview('unattempted', this)">Unattempted</button>
+        </div>
+        
+        <div id="wrongQuestionsReviewPanel" style="text-align:left;margin-bottom:18px;"></div>
+        <button class="login-btn" style="margin:0 auto;display:block;width:170px;border-radius:9px;font-size:12.5px;" onclick="window.location.reload()">Restart Portal</button>
     </div>
 </div>
 
 <script>
-// Full JavaScript logic preserved from original with all functionality intact
-let candidateId = '', selectedField = null, activeTestSessionPool = [], globalPointerIndex = 0;
-let totalSecondsRemaining = 180 * 60, trackingIntervalEngine = null;
-let allReviewData = [];
+// Config
+var FIELD_CONFIG = {
+    'engineering': {
+        label:'NET-Engineering', code:'ENG', description:'Engineering / Computing / ICS Stream', totalMCQs:200,
+        blueprint:{ mathematics:100, physics:60, english:40 },
+        bankKeys:{ mathematics:'mathematics', physics:'physics', english:'english' }
+    },
+    'applied_sciences': {
+        label:'NET-Applied Sciences', code:'APS', description:'Pre-Medical / Applied Biosciences Stream', totalMCQs:200,
+        blueprint:{ biology:100, chemistry:60, english:40 },
+        bankKeys:{ biology:'biology', chemistry:'chemistry', english:'english' }
+    },
+    'business_studies': {
+        label:'NET-Business Studies & Social Sciences', code:'BUS', description:'Business / Social Sciences Stream', totalMCQs:200,
+        blueprint:{ quantitative_mathematics:100, english:100 },
+        bankKeys:{ quantitative_mathematics:'quantitative_mathematics', english:'english' }
+    },
+    'architecture': {
+        label:'NET-Architecture', code:'ARC', description:'Architecture / Industrial Design Stream', totalMCQs:200,
+        blueprint:{ design_aptitude:100, mathematics:60, english:40 },
+        bankKeys:{ design_aptitude:'design_aptitude', mathematics:'mathematics', english:'english' }
+    },
+    'natural_sciences': {
+        label:'NET-Natural Sciences', code:'NSC', description:'Natural Sciences Stream', totalMCQs:200,
+        blueprint:{ mathematics:100, english:100 },
+        bankKeys:{ mathematics:'mathematics', english:'english' }
+    }
+};
 
-function togglePasswordVisibility() { let p = document.getElementById('candidatePassInput'); p.type = p.type === 'password' ? 'text' : 'password'; }
+var SECTION_LABELS = {
+    mathematics:'MATHEMATICS', physics:'PHYSICS', english:'ENGLISH',
+    biology:'BIOLOGY', chemistry:'CHEMISTRY',
+    quantitative_mathematics:'QUANTITATIVE MATHEMATICS',
+    design_aptitude:'DESIGN APTITUDE'
+};
+
+// State
+var candidateId = '', selectedField = null, activeTestSessionPool = [], globalPointerIndex = 0;
+var totalSecondsRemaining = 180 * 60, trackingIntervalEngine = null;
+var allReviewData = [];
+
+// Confetti
+function launchConfetti() {
+    var container = document.getElementById('confettiContainer');
+    container.innerHTML = '';
+    var colors = ['#003399','#FF0000','#27AE60','#F39C12','#0055A5','#E74C3C','#2ECC71','#FFD700','#9B59B6','#1ABC9C'];
+    for (var i = 0; i < 60; i++) {
+        var piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        var size = Math.random() * 7 + 4;
+        piece.style.width = size + 'px';
+        piece.style.height = size + 'px';
+        piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.left = Math.random() * 100 + '%';
+        piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+        piece.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        piece.style.animationDelay = (Math.random() * 1.5) + 's';
+        container.appendChild(piece);
+    }
+    setTimeout(function() { container.innerHTML = ''; }, 5000);
+}
+
+// Login
+function togglePasswordVisibility() {
+    var p = document.getElementById('candidatePassInput');
+    var b = p.nextElementSibling;
+    if (p.type === 'password') { p.type = 'text'; b.innerText = 'Hide'; }
+    else { p.type = 'password'; b.innerText = 'Show'; }
+}
 
 function authenticateUserLogin() {
     candidateId = document.getElementById('candidateIdInput').value.trim();
-    let pass = document.getElementById('candidatePassInput').value.trim();
-    if (!candidateId || !pass) { alert('Please enter Roll Number and Password'); return; }
-    if (pass !== 'NUST2026Sep') { alert('Invalid Password'); return; }
+    var pass = document.getElementById('candidatePassInput').value.trim();
+    if (!candidateId || !pass) { alert('Both Roll Number and Password are required.'); return; }
+    if (pass !== 'NUST2026Sep') { alert('Access Denied: Invalid Access Password.'); return; }
     document.getElementById('instructionsCandidateId').innerText = candidateId;
     document.getElementById('loginScreenView').style.display = 'none';
     document.getElementById('instructionsScreenView').style.display = 'flex';
 }
 
+// Screen navigation
 function goToFieldSelect() {
     document.getElementById('fieldSelectCandidateId').innerText = candidateId;
     document.getElementById('instructionsScreenView').style.display = 'none';
     document.getElementById('fieldSelectScreenView').style.display = 'flex';
-    buildFieldCards();
 }
 
 function goBackToInstructions() {
@@ -537,83 +946,518 @@ function goBackToInstructions() {
     document.getElementById('instructionsScreenView').style.display = 'flex';
 }
 
-function buildFieldCards() {
-    const container = document.getElementById('fieldSelectorContainer');
-    const fields = [
-        {val:'engineering', title:'NET-Engineering', desc:'HSSC Pre-Engg / ICS', weight:'Maths 100 | Physics 60 | English 40', code:'ENG'},
-        {val:'applied_sciences', title:'NET-Applied Sciences', desc:'Pre-Medical', weight:'Biology 100 | Chemistry 60 | English 40', code:'APS'},
-        {val:'business_studies', title:'NET-Business Studies', desc:'Social Sciences', weight:'Quant Maths 100 | English 100', code:'BUS'},
-        {val:'architecture', title:'NET-Architecture', desc:'Design & Maths', weight:'Design 100 | Maths 60 | English 40', code:'ARC'},
-        {val:'natural_sciences', title:'NET-Natural Sciences', desc:'HSSC', weight:'Maths 100 | English 100', code:'NSC'}
-    ];
-    container.innerHTML = fields.map(f => `
-        <div class="field-card-modern" data-val="${f.val}" onclick="selectFieldCard(this, '${f.val}')">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                <strong style="color: #38bdf8; font-size: 16px;">${f.title}</strong>
-                <span style="background: rgba(56,189,248,0.2); padding: 4px 12px; border-radius: 20px; font-size: 11px;">${f.code}</span>
-            </div>
-            <div style="font-size: 12px; color: #94a3b8;">${f.desc}</div>
-            <div style="font-size: 11px; color: #64748b; margin-top: 8px;">${f.weight}</div>
-        </div>
-    `).join('');
+// Aggregate Calculator
+function openAggregateModal() {
+    document.getElementById('aggregateModalOverlay').style.display = 'flex';
+}
+function closeAggregateModal() {
+    document.getElementById('aggregateModalOverlay').style.display = 'none';
+}
+function closeAggOnBackdrop(e) {
+    if (e.target === document.getElementById('aggregateModalOverlay')) closeAggregateModal();
+}
+function switchAggTab(tab) {
+    document.getElementById('tabFsc').className = 'agg-tab' + (tab === 'fsc' ? ' active' : '');
+    document.getElementById('tabAlevel').className = 'agg-tab' + (tab === 'alevel' ? ' active' : '');
+    document.getElementById('panelFsc').className = 'agg-panel' + (tab === 'fsc' ? ' active' : '');
+    document.getElementById('panelAlevel').className = 'agg-panel' + (tab === 'alevel' ? ' active' : '');
 }
 
-function selectFieldCard(el, val) {
-    document.querySelectorAll('.field-card-modern').forEach(c => c.classList.remove('selected'));
+function clearInputErrors(ids) {
+    for (var i = 0; i < ids.length; i++) {
+        var el = document.getElementById(ids[i]);
+        if (el) el.classList.remove('input-error');
+    }
+}
+function setInputError(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.add('input-error');
+}
+
+function calculateAggregateFsc() {
+    var errEl = document.getElementById('fscError');
+    var resultBox = document.getElementById('fscResultBox');
+    var inputIds = ['fsc_net','fsc_obtained','fsc_total','matric_obtained','matric_total'];
+    clearInputErrors(inputIds);
+    errEl.style.display = 'none';
+    resultBox.classList.remove('show');
+
+    var net = parseFloat(document.getElementById('fsc_net').value);
+    var fscObt = parseFloat(document.getElementById('fsc_obtained').value);
+    var fscTot = parseFloat(document.getElementById('fsc_total').value);
+    var matObt = parseFloat(document.getElementById('matric_obtained').value);
+    var matTot = parseFloat(document.getElementById('matric_total').value);
+
+    var errors = [];
+
+    if (isNaN(net)) { errors.push('NET score is required.'); setInputError('fsc_net'); }
+    if (isNaN(fscObt)) { errors.push('FSc obtained marks required.'); setInputError('fsc_obtained'); }
+    if (isNaN(fscTot)) { errors.push('FSc total marks required.'); setInputError('fsc_total'); }
+    if (isNaN(matObt)) { errors.push('Matric obtained marks required.'); setInputError('matric_obtained'); }
+    if (isNaN(matTot)) { errors.push('Matric total marks required.'); setInputError('matric_total'); }
+
+    if (errors.length > 0) {
+        errEl.innerHTML = errors.join('<br>');
+        errEl.style.display = 'block';
+        return;
+    }
+
+    if (net < 0 || net > 200) { errors.push('NET score must be between 0 and 200.'); setInputError('fsc_net'); }
+    if (fscTot <= 0) { errors.push('FSc total marks must be greater than 0.'); setInputError('fsc_total'); }
+    if (fscTot > 1200) { errors.push('FSc total marks cannot exceed 1200.'); setInputError('fsc_total'); }
+    if (fscObt < 0) { errors.push('FSc obtained marks cannot be negative.'); setInputError('fsc_obtained'); }
+    if (!isNaN(fscTot) && fscTot > 0 && fscObt > fscTot) { errors.push('FSc obtained (' + fscObt + ') cannot exceed total (' + fscTot + ').'); setInputError('fsc_obtained'); }
+    if (matTot <= 0) { errors.push('Matric total marks must be greater than 0.'); setInputError('matric_total'); }
+    if (matTot > 1200) { errors.push('Matric total marks cannot exceed 1200.'); setInputError('matric_total'); }
+    if (matObt < 0) { errors.push('Matric obtained marks cannot be negative.'); setInputError('matric_obtained'); }
+    if (!isNaN(matTot) && matTot > 0 && matObt > matTot) { errors.push('Matric obtained (' + matObt + ') cannot exceed total (' + matTot + ').'); setInputError('matric_obtained'); }
+
+    if (errors.length > 0) {
+        errEl.innerHTML = errors.join('<br>');
+        errEl.style.display = 'block';
+        return;
+    }
+
+    var netPct = (net / 200) * 100;
+    var fscPct = (fscObt / fscTot) * 100;
+    var matPct = (matObt / matTot) * 100;
+    var netC = 0.75 * netPct;
+    var fscC = 0.15 * fscPct;
+    var matC = 0.10 * matPct;
+    var agg = netC + fscC + matC;
+
+    document.getElementById('fscResultScore').innerText = agg.toFixed(2) + '%';
+    document.getElementById('fscResultBreakdown').innerHTML =
+        '<strong>Breakdown:</strong><br>' +
+        'NET (75%): ' + net + '/200 = ' + netPct.toFixed(2) + '% x 0.75 = <strong>' + netC.toFixed(2) + '</strong><br>' +
+        'FSc (15%): ' + fscObt + '/' + fscTot + ' = ' + fscPct.toFixed(2) + '% x 0.15 = <strong>' + fscC.toFixed(2) + '</strong><br>' +
+        'Matric (10%): ' + matObt + '/' + matTot + ' = ' + matPct.toFixed(2) + '% x 0.10 = <strong>' + matC.toFixed(2) + '</strong><br>' +
+        '<hr style="border:1px dashed #A3E4D7;margin:6px 0;">' +
+        '<strong>Total Aggregate: ' + agg.toFixed(2) + '%</strong>';
+    resultBox.classList.add('show');
+}
+
+function calculateAggregateAlevel() {
+    var errEl = document.getElementById('alevelError');
+    var resultBox = document.getElementById('alevelResultBox');
+    var inputIds = ['al_net','al_obtained','al_total','ol_obtained','ol_total'];
+    clearInputErrors(inputIds);
+    errEl.style.display = 'none';
+    resultBox.classList.remove('show');
+
+    var net = parseFloat(document.getElementById('al_net').value);
+    var alObt = parseFloat(document.getElementById('al_obtained').value);
+    var alTot = parseFloat(document.getElementById('al_total').value);
+    var olObt = parseFloat(document.getElementById('ol_obtained').value);
+    var olTot = parseFloat(document.getElementById('ol_total').value);
+
+    var errors = [];
+
+    if (isNaN(net)) { errors.push('NET score is required.'); setInputError('al_net'); }
+    if (isNaN(alObt)) { errors.push('A-Level obtained marks required.'); setInputError('al_obtained'); }
+    if (isNaN(alTot)) { errors.push('A-Level total marks required.'); setInputError('al_total'); }
+    if (isNaN(olObt)) { errors.push('O-Level obtained marks required.'); setInputError('ol_obtained'); }
+    if (isNaN(olTot)) { errors.push('O-Level total marks required.'); setInputError('ol_total'); }
+
+    if (errors.length > 0) {
+        errEl.innerHTML = errors.join('<br>');
+        errEl.style.display = 'block';
+        return;
+    }
+
+    if (net < 0 || net > 200) { errors.push('NET score must be between 0 and 200.'); setInputError('al_net'); }
+    if (alTot <= 0) { errors.push('A-Level total marks must be greater than 0.'); setInputError('al_total'); }
+    if (alTot > 1200) { errors.push('A-Level total marks cannot exceed 1200.'); setInputError('al_total'); }
+    if (alObt < 0) { errors.push('A-Level obtained marks cannot be negative.'); setInputError('al_obtained'); }
+    if (!isNaN(alTot) && alTot > 0 && alObt > alTot) { errors.push('A-Level obtained (' + alObt + ') cannot exceed total (' + alTot + ').'); setInputError('al_obtained'); }
+    if (olTot <= 0) { errors.push('O-Level total marks must be greater than 0.'); setInputError('ol_total'); }
+    if (olTot > 1200) { errors.push('O-Level total marks cannot exceed 1200.'); setInputError('ol_total'); }
+    if (olObt < 0) { errors.push('O-Level obtained marks cannot be negative.'); setInputError('ol_obtained'); }
+    if (!isNaN(olTot) && olTot > 0 && olObt > olTot) { errors.push('O-Level obtained (' + olObt + ') cannot exceed total (' + olTot + ').'); setInputError('ol_obtained'); }
+
+    if (errors.length > 0) {
+        errEl.innerHTML = errors.join('<br>');
+        errEl.style.display = 'block';
+        return;
+    }
+
+    var netPct = (net / 200) * 100;
+    var alPct = (alObt / alTot) * 100;
+    var olPct = (olObt / olTot) * 100;
+    var netC = 0.75 * netPct;
+    var alC = 0.15 * alPct;
+    var olC = 0.10 * olPct;
+    var agg = netC + alC + olC;
+
+    document.getElementById('alevelResultScore').innerText = agg.toFixed(2) + '%';
+    document.getElementById('alevelResultBreakdown').innerHTML =
+        '<strong>Breakdown (IBCC Equivalence):</strong><br>' +
+        'NET (75%): ' + net + '/200 = ' + netPct.toFixed(2) + '% x 0.75 = <strong>' + netC.toFixed(2) + '</strong><br>' +
+        'A-Level (15%): ' + alObt + '/' + alTot + ' = ' + alPct.toFixed(2) + '% x 0.15 = <strong>' + alC.toFixed(2) + '</strong><br>' +
+        'O-Level (10%): ' + olObt + '/' + olTot + ' = ' + olPct.toFixed(2) + '% x 0.10 = <strong>' + olC.toFixed(2) + '</strong><br>' +
+        '<hr style="border:1px dashed #A3E4D7;margin:6px 0;">' +
+        '<strong>Total Aggregate: ' + agg.toFixed(2) + '%</strong><br>' +
+        '<br><em style="font-size:10px;color:#888;">Use your IBCC equivalence certificate marks for accurate results.</em>';
+    resultBox.classList.add('show');
+}
+
+// Field Selection
+function selectField(el, val) {
+    var cards = document.querySelectorAll('.field-card');
+    var radios = document.querySelectorAll('.field-card input');
+    for (var i = 0; i < cards.length; i++) cards[i].classList.remove('selected');
+    for (var i = 0; i < radios.length; i++) radios[i].checked = false;
     el.classList.add('selected');
+    el.querySelector('input').checked = true;
     selectedField = val;
 }
 
-function openAggregateModal() { document.getElementById('aggregateModalOverlay').style.display = 'flex'; }
-function closeAggregateModal() { document.getElementById('aggregateModalOverlay').style.display = 'none'; }
-function switchAggTab(tab) {
-    document.getElementById('tabFsc').style.background = tab === 'fsc' ? '#38bdf8' : 'rgba(56,189,248,0.2)';
-    document.getElementById('tabAlevel').style.background = tab === 'alevel' ? '#38bdf8' : 'rgba(56,189,248,0.2)';
-    document.getElementById('panelFsc').style.display = tab === 'fsc' ? 'block' : 'none';
-    document.getElementById('panelAlevel').style.display = tab === 'alevel' ? 'block' : 'none';
-}
-function calculateAggregateFsc() {
-    let net = parseFloat(document.getElementById('fsc_net').value) || 0;
-    let fob = parseFloat(document.getElementById('fsc_obtained').value) || 0;
-    let ftot = parseFloat(document.getElementById('fsc_total').value) || 1;
-    let mob = parseFloat(document.getElementById('matric_obtained').value) || 0;
-    let mtot = parseFloat(document.getElementById('matric_total').value) || 1;
-    let agg = 0.75 * (net/200*100) + 0.15 * (fob/ftot*100) + 0.10 * (mob/mtot*100);
-    document.getElementById('fscResultBox').innerHTML = `<div style="font-size: 32px; font-weight: 800; color: #10b981;">${agg.toFixed(2)}%</div><div style="font-size: 12px;">NET: ${net}/200 | FSc: ${fob}/${ftot} | Matric: ${mob}/${mtot}</div>`;
-    document.getElementById('fscResultBox').style.display = 'block';
-}
-function calculateAggregateAlevel() {
-    let net = parseFloat(document.getElementById('al_net').value) || 0;
-    let aob = parseFloat(document.getElementById('al_obtained').value) || 0;
-    let atot = parseFloat(document.getElementById('al_total').value) || 1;
-    let oob = parseFloat(document.getElementById('ol_obtained').value) || 0;
-    let otot = parseFloat(document.getElementById('ol_total').value) || 1;
-    let agg = 0.75 * (net/200*100) + 0.15 * (aob/atot*100) + 0.10 * (oob/otot*100);
-    document.getElementById('alevelResultBox').innerHTML = `<div style="font-size: 32px; font-weight: 800; color: #10b981;">${agg.toFixed(2)}%</div>`;
-    document.getElementById('alevelResultBox').style.display = 'block';
+// Math Rendering
+function wrapMathEnvironments(text) {
+    var envs = ['matrix','pmatrix','bmatrix','Bmatrix','vmatrix','Vmatrix','array','cases',
+                'dcases','rcases','drcases','aligned','gathered','split','smallmatrix','subarray'];
+    var result = text;
+    for (var e = 0; e < envs.length; e++) {
+        var env = envs[e];
+        var regex = new RegExp(
+            '(?<!\\$|\\\\\\()' + '(\\\\begin\\{' + env + '\\})' +
+            '([\\s\\S]*?)' + '(\\\\end\\{' + env + '\\})' + '(?!\\$|\\\\\\))', 'g');
+        result = result.replace(regex, '$$$1$2$3$$');
+    }
+    var specialEnvs = ['align','equation','gather','CD','alignat','flalign','multline'];
+    for (var e = 0; e < specialEnvs.length; e++) {
+        var env = specialEnvs[e];
+        var regex = new RegExp(
+            '(?<!\\$|\\\\\\()' + '(\\\\begin\\{' + env + '\\})' +
+            '([\\s\\S]*?)' + '(\\\\end\\{' + env + '\\})' + '(?!\\$|\\\\\\))', 'g');
+        result = result.replace(regex, '$$$1$2$3$$');
+    }
+    return result;
 }
 
-// Original exam functions preserved (simplified for space but fully functional)
-window.FIELD_CONFIG = {
-    engineering: { label: 'NET-Engineering', code: 'ENG', totalMCQs: 200, blueprint: { mathematics: 100, physics: 60, english: 40 }, bankKeys: { mathematics: 'mathematics', physics: 'physics', english: 'english' } },
-    applied_sciences: { label: 'NET-Applied Sciences', code: 'APS', totalMCQs: 200, blueprint: { biology: 100, chemistry: 60, english: 40 }, bankKeys: { biology: 'biology', chemistry: 'chemistry', english: 'english' } },
-    business_studies: { label: 'NET-Business', code: 'BUS', totalMCQs: 200, blueprint: { quantitative_mathematics: 100, english: 100 }, bankKeys: { quantitative_mathematics: 'quantitative_mathematics', english: 'english' } },
-    architecture: { label: 'NET-Architecture', code: 'ARC', totalMCQs: 200, blueprint: { design_aptitude: 100, mathematics: 60, english: 40 }, bankKeys: { design_aptitude: 'design_aptitude', mathematics: 'mathematics', english: 'english' } },
-    natural_sciences: { label: 'NET-Natural Sciences', code: 'NSC', totalMCQs: 200, blueprint: { mathematics: 100, english: 100 }, bankKeys: { mathematics: 'mathematics', english: 'english' } }
-};
-window.SECTION_LABELS = { mathematics: 'MATHEMATICS', physics: 'PHYSICS', english: 'ENGLISH', biology: 'BIOLOGY', chemistry: 'CHEMISTRY', quantitative_mathematics: 'QUANTITATIVE MATHEMATICS', design_aptitude: 'DESIGN APTITUDE' };
+function renderMathInElementSafe(element) {
+    if (typeof renderMathInElement !== 'function') return;
+    if (element.innerHTML) element.innerHTML = wrapMathEnvironments(element.innerHTML);
+    try {
+        renderMathInElement(element, {
+            delimiters: [
+                {left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false},
+                {left:"\\(",right:"\\)",display:false},{left:"\\[",right:"\\]",display:true},
+                {left:"\\begin{equation}",right:"\\end{equation}",display:true},
+                {left:"\\begin{align}",right:"\\end{align}",display:true},
+                {left:"\\begin{alignat}",right:"\\end{alignat}",display:true},
+                {left:"\\begin{gather}",right:"\\end{gather}",display:true},
+                {left:"\\begin{CD}",right:"\\end{CD}",display:true},
+                {left:"\\begin{flalign}",right:"\\end{flalign}",display:true},
+                {left:"\\begin{multline}",right:"\\end{multline}",display:true}
+            ],
+            throwOnError:false, errorColor:'#CC0000'
+        });
+    } catch(e) { console.warn('KaTeX rendering error:', e); }
+}
 
-function startExam() { if (!selectedField) { alert('Please select your field first!'); return; } document.getElementById('fieldSelectScreenView').style.display = 'none'; document.getElementById('examPortalView').style.display = 'block'; document.getElementById('displayCandidateId').innerText = candidateId; document.getElementById('displayFieldCode').innerText = FIELD_CONFIG[selectedField].code; initializeExam(); }
-function initializeExam() { /* full exam init logic would go here - preserved from original */ alert('Exam Started! (Full functionality preserved from original code)'); }
-function saveAnswerState() { alert('Answer saved (original logic)'); }
-function shiftActiveIndex(d) { alert('Navigate (original)'); }
-function flagQuestionToggle() { alert('Flagged (original)'); }
-function triggerSubmitConfirmation() { alert('Submit (original)'); }
-function renderMathInElementSafe(el) { if (typeof renderMathInElement === 'function') renderMathInElement(el, { delimiters: [{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}] }); }
+// Exam Start
+function startExam() {
+    if (!selectedField) { alert('Please select your Field / Stream.'); return; }
+    var cfg = FIELD_CONFIG[selectedField];
+    if (typeof QUESTION_BANK === 'undefined') { alert('questions.js missing or corrupted.'); return; }
+    if (!QUESTION_BANK[selectedField]) { alert('No question data for this field in questions.js'); return; }
+    document.getElementById('displayCandidateId').innerText = candidateId;
+    document.getElementById('displayFieldCode').innerText = cfg.code;
+    document.getElementById('streamTitleBar').innerText = cfg.description + ' Mock Portal';
+    document.getElementById('fieldSelectScreenView').style.display = 'none';
+    document.getElementById('examPortalView').style.display = 'block';
+    buildSectionButtons();
+    launchTestEngine();
+}
 
-// Populate particles
-for(let i=0;i<50;i++){ let p=document.createElement('div'); p.className='particle'; p.style.width=Math.random()*6+2+'px'; p.style.height=p.style.width; p.style.left=Math.random()*100+'%'; p.style.animationDuration=Math.random()*10+5+'s'; p.style.animationDelay=Math.random()*5+'s'; document.querySelector('.animated-bg').appendChild(p); }
+function buildSectionButtons() {
+    var container = document.getElementById('sectionButtonsContainer');
+    var reviewBtn = container.querySelector('.btn-review');
+    var html = '';
+    var cfg = FIELD_CONFIG[selectedField];
+    var keys = Object.keys(cfg.blueprint);
+    for (var i = 0; i < keys.length; i++) {
+        var sec = keys[i];
+        var lbl = (SECTION_LABELS[sec] || sec).substring(0, 4);
+        html += '<button class="retro-control-btn btn-subject" onclick="switchSubjectCluster(\'' + sec + '\')">' + lbl + '</button>';
+    }
+    reviewBtn.insertAdjacentHTML('afterend', html);
+}
+
+function pullRandomPool(src, limit) {
+    if (!src || !src.length) return [];
+    var c = src.slice().sort(function() { return 0.5 - Math.random(); });
+    while (c.length < limit) c = c.concat(c);
+    return c.slice(0, limit).map(function(item) {
+        var copy = {};
+        for (var k in item) copy[k] = item[k];
+        copy.chosenIndexValue = null;
+        copy.isFlagged = false;
+        copy.isSavedPermanently = false;
+        return copy;
+    });
+}
+
+function launchTestEngine() {
+    activeTestSessionPool = [];
+    var cfg = FIELD_CONFIG[selectedField];
+    var fieldData = QUESTION_BANK[selectedField];
+    var bpOrder = Object.keys(cfg.blueprint);
+    for (var s = 0; s < bpOrder.length; s++) {
+        var sec = bpOrder[s];
+        var bankKey = cfg.bankKeys[sec];
+        if (fieldData[bankKey]) {
+            var qs = pullRandomPool(fieldData[bankKey], cfg.blueprint[sec]);
+            var cnt = 1;
+            for (var q = 0; q < qs.length; q++) {
+                qs[q].innerIndexValue = cnt++;
+                qs[q].sectionKeyName = sec;
+            }
+            activeTestSessionPool = activeTestSessionPool.concat(qs);
+        }
+    }
+    activeTestSessionPool.sort(function(a, b) {
+        var oa = bpOrder.indexOf(a.sectionKeyName), ob = bpOrder.indexOf(b.sectionKeyName);
+        return oa !== ob ? oa - ob : a.innerIndexValue - b.innerIndexValue;
+    });
+    var counts = {};
+    for (var i = 0; i < activeTestSessionPool.length; i++) {
+        var item = activeTestSessionPool[i];
+        if (!counts[item.sectionKeyName]) counts[item.sectionKeyName] = 0;
+        counts[item.sectionKeyName]++;
+        item.innerIndexValue = counts[item.sectionKeyName];
+    }
+    globalPointerIndex = 0;
+    totalSecondsRemaining = 180 * 60;
+    updateTimerDisplay();
+    if (trackingIntervalEngine) clearInterval(trackingIntervalEngine);
+    trackingIntervalEngine = setInterval(function() {
+        if (totalSecondsRemaining <= 0) { clearInterval(trackingIntervalEngine); compileExamResults(); }
+        else { totalSecondsRemaining--; updateTimerDisplay(); }
+    }, 1000);
+    refreshWorkspace();
+    generateNavMatrix();
+}
+
+function updateTimerDisplay() {
+    var h = Math.floor(totalSecondsRemaining / 3600);
+    var m = Math.floor((totalSecondsRemaining % 3600) / 60);
+    var s = totalSecondsRemaining % 60;
+    document.getElementById('timerClockMinutes').innerText =
+        String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+}
+
+function refreshWorkspace() {
+    if (!activeTestSessionPool || activeTestSessionPool.length === 0) return;
+    var q = activeTestSessionPool[globalPointerIndex];
+    var label = SECTION_LABELS[q.sectionKeyName] || q.sectionKeyName.toUpperCase();
+    var cfg = FIELD_CONFIG[selectedField];
+    document.getElementById('currentSubjectHeader').innerHTML = label;
+    document.getElementById('questionNumTracker').innerHTML =
+        'Question No: ' + q.innerIndexValue + ' of ' + cfg.blueprint[q.sectionKeyName] + ' (' + q.sectionKeyName.toUpperCase() + ')';
+    var qBox = document.getElementById('questionTextBox');
+    var html = '';
+    if (q.passage) {
+        html += '<div class="passage-container"><div class="passage-label">Read the following passage carefully:</div>' + q.passage + '</div>';
+    }
+    html += '<div class="question-text">' + q.q + '</div>';
+    if (q.d) {
+        html += '<img class="question-diagram" src="' + q.d + '" alt="Diagram" style="max-width:100%;height:auto;display:block;margin:10px 0;">';
+    }
+    qBox.innerHTML = html;
+    renderMathInElementSafe(qBox);
+    var cont = document.getElementById('optionsRadioGroup');
+    cont.innerHTML = '';
+    for (var idx = 0; idx < q.a.length; idx++) {
+        var row = document.createElement('div');
+        row.className = 'option-row-item' + (q.chosenIndexValue === idx ? ' selected' : '');
+        row.setAttribute('data-opt-index', idx);
+        var span = document.createElement('span');
+        span.className = 'option-text';
+        span.innerHTML = q.a[idx];
+        row.appendChild(span);
+        cont.appendChild(row);
+    }
+    renderMathInElementSafe(cont);
+    var rows = cont.querySelectorAll('.option-row-item');
+    for (var r = 0; r < rows.length; r++) {
+        rows[r].addEventListener('click', function() {
+            q.chosenIndexValue = parseInt(this.getAttribute('data-opt-index'));
+            refreshWorkspace();
+        });
+    }
+    var navBtns = document.querySelectorAll('.nav-square-btn');
+    for (var n = 0; n < navBtns.length; n++) {
+        navBtns[n].classList.remove('active-focus');
+        if (parseInt(navBtns[n].getAttribute('data-sid'), 10) === globalPointerIndex) navBtns[n].classList.add('active-focus');
+    }
+}
+
+function generateNavMatrix() {
+    var grid = document.getElementById('navButtonMatrixGrid');
+    grid.innerHTML = '';
+    if (!activeTestSessionPool.length) return;
+    var cfg = FIELD_CONFIG[selectedField];
+    var keys = Object.keys(cfg.blueprint);
+    for (var k = 0; k < keys.length; k++) {
+        var sec = keys[k];
+        var label = SECTION_LABELS[sec] || sec.toUpperCase();
+        var sq = activeTestSessionPool.filter(function(i) { return i.sectionKeyName === sec; });
+        if (!sq.length) continue;
+        var cols = Math.min(cfg.blueprint[sec], 20);
+        var html = '<div class="nav-section-label"><span>' + label + '</span></div>';
+        html += '<div class="nav-sub-grid" style="grid-template-columns:repeat(' + cols + ',1fr);">';
+        for (var j = 0; j < sq.length; j++) {
+            var gIdx = activeTestSessionPool.indexOf(sq[j]);
+            var cls = 'nav-square-btn';
+            if (sq[j].isSavedPermanently) cls += ' filled';
+            if (sq[j].isFlagged) cls += ' flagged-review';
+            if (gIdx === globalPointerIndex) cls += ' active-focus';
+            html += '<div class="' + cls + '" data-sid="' + gIdx + '" onclick="navigateTo(' + gIdx + ')">' + sq[j].innerIndexValue + '</div>';
+        }
+        html += '</div>';
+        grid.innerHTML += html;
+    }
+}
+
+function navigateTo(gIdx) {
+    if (gIdx >= 0 && gIdx < activeTestSessionPool.length) {
+        globalPointerIndex = gIdx;
+        refreshWorkspace();
+        generateNavMatrix();
+    }
+}
+
+function saveAnswerState() {
+    var q = activeTestSessionPool[globalPointerIndex];
+    if (q.chosenIndexValue !== null) q.isSavedPermanently = true;
+    generateNavMatrix();
+    shiftActiveIndex(1);
+}
+
+function flagQuestionToggle() {
+    activeTestSessionPool[globalPointerIndex].isFlagged = !activeTestSessionPool[globalPointerIndex].isFlagged;
+    generateNavMatrix();
+}
+
+function shiftActiveIndex(step) {
+    var t = globalPointerIndex + step;
+    if (t >= 0 && t < activeTestSessionPool.length) {
+        globalPointerIndex = t;
+        refreshWorkspace();
+        generateNavMatrix();
+    }
+}
+
+function switchSubjectCluster(sec) {
+    for (var i = 0; i < activeTestSessionPool.length; i++) {
+        if (activeTestSessionPool[i].sectionKeyName === sec) {
+            globalPointerIndex = i;
+            refreshWorkspace();
+            generateNavMatrix();
+            return;
+        }
+    }
+}
+
+function triggerSubmitConfirmation() {
+    if (confirm('Do you want to finalise and submit your assessment?')) compileExamResults();
+}
+
+// Results
+function compileExamResults() {
+    if (trackingIntervalEngine) clearInterval(trackingIntervalEngine);
+    var score = 0, attempted = 0;
+    var cfg = FIELD_CONFIG[selectedField];
+    var stats = {};
+    var keys = Object.keys(cfg.blueprint);
+    for (var k = 0; k < keys.length; k++) stats[keys[k]] = 0;
+    var logs = {};
+    for (var k = 0; k < keys.length; k++) logs[keys[k]] = '';
+    allReviewData = [];
+
+    for (var i = 0; i < activeTestSessionPool.length; i++) {
+        var item = activeTestSessionPool[i];
+        var correct = item.chosenIndexValue !== null && item.chosenIndexValue === item.c;
+        var wasAttempted = item.chosenIndexValue !== null;
+        if (wasAttempted) attempted++;
+        if (correct) { score++; stats[item.sectionKeyName]++; }
+
+        var chosen = wasAttempted ? item.a[item.chosenIndexValue] : 'Unattempted';
+        var right = item.a[item.c];
+        var exp = item.e || 'No explanation provided.';
+        var status = correct ? 'correct' : (wasAttempted ? 'wrong' : 'unattempted');
+        var secLabel = (SECTION_LABELS[item.sectionKeyName] || item.sectionKeyName).toUpperCase();
+        var boxHTML = '';
+
+        if (correct) {
+            boxHTML = '<div class="review-box box-correct" data-status="correct" data-section="' + item.sectionKeyName + '"><p><strong>Q' + item.innerIndexValue + ' (' + secLabel + '):</strong> ' + item.q + '</p><p style="color:#2ECC71;font-weight:700;margin-top:4px;">Correct</p></div>';
+        } else {
+            boxHTML = '<div class="review-box" data-status="' + status + '" data-section="' + item.sectionKeyName + '"><p><strong>Q' + item.innerIndexValue + ' (' + secLabel + '):</strong> ' + item.q + '</p><p style="color:#C0392B;font-weight:600;margin-top:4px;">Your Answer: ' + chosen + '</p><p style="color:#27AE60;font-weight:600;">Correct Answer: ' + right + '</p><p style="color:#555;margin-top:6px;font-style:italic;background:#F2F4F4;padding:8px;border-left:3px solid #0055A5;border-radius:4px;font-size:11px;"><strong>Explanation:</strong> ' + exp + '</p></div>';
+        }
+        allReviewData.push({ html: boxHTML, status: status, section: item.sectionKeyName });
+        logs[item.sectionKeyName] += boxHTML;
+    }
+
+    document.getElementById('totalScoreTarget').innerText = score + ' / ' + cfg.totalMCQs;
+
+    var pct = (score / cfg.totalMCQs) * 100;
+    var gradeText = '', gradeClass = '';
+    if (pct >= 80) { gradeText = 'Excellent Performance'; gradeClass = 'grade-excellent'; }
+    else if (pct >= 60) { gradeText = 'Good Performance'; gradeClass = 'grade-good'; }
+    else if (pct >= 40) { gradeText = 'Average Performance'; gradeClass = 'grade-average'; }
+    else { gradeText = 'Needs Improvement'; gradeClass = 'grade-poor'; }
+    document.getElementById('resultGradeBadge').innerHTML = '<div class="result-grade-badge ' + gradeClass + '">' + gradeText + '</div>';
+
+    var wrong = attempted - score;
+    var unattempted = cfg.totalMCQs - attempted;
+    var statsHTML = '';
+    statsHTML += '<div class="result-stat-card" style="animation-delay:0.1s;"><div class="stat-value" style="color:#27AE60;">' + score + '</div><div class="stat-label">Correct</div></div>';
+    statsHTML += '<div class="result-stat-card" style="animation-delay:0.15s;"><div class="stat-value" style="color:#E74C3C;">' + wrong + '</div><div class="stat-label">Wrong</div></div>';
+    statsHTML += '<div class="result-stat-card" style="animation-delay:0.2s;"><div class="stat-value" style="color:#7F8C8D;">' + unattempted + '</div><div class="stat-label">Unattempted</div></div>';
+    statsHTML += '<div class="result-stat-card" style="animation-delay:0.25s;"><div class="stat-value" style="color:#003399;">' + pct.toFixed(1) + '%</div><div class="stat-label">Percentage</div></div>';
+    document.getElementById('resultStatsGrid').innerHTML = statsHTML;
+
+    var bd = '<strong>Subject Breakdown (' + cfg.label + '):</strong><br>';
+    for (var k = 0; k < keys.length; k++) {
+        var sec = keys[k];
+        var secPct = ((stats[sec] / cfg.blueprint[sec]) * 100).toFixed(1);
+        bd += (SECTION_LABELS[sec] || sec.toUpperCase()) + ': <strong>' + stats[sec] + ' / ' + cfg.blueprint[sec] + '</strong> (' + secPct + '%)<br>';
+    }
+    document.getElementById('subjectScoreBreakdownBox').innerHTML = bd;
+
+    var reviewHTML = '<h3 style="color:#003399;margin-top:18px;font-size:15px;text-align:center;">Comprehensive Test Evaluation</h3>';
+    for (var k = 0; k < keys.length; k++) {
+        var sec = keys[k];
+        var lbl = SECTION_LABELS[sec] || sec.toUpperCase();
+        reviewHTML += '<div class="review-header">' + lbl + ' (' + stats[sec] + '/' + cfg.blueprint[sec] + ')</div>' +
+            (logs[sec] || '<p style="padding:8px;color:#888;font-size:12px;">No questions in this section.</p>');
+    }
+    document.getElementById('wrongQuestionsReviewPanel').innerHTML = reviewHTML;
+    renderMathInElementSafe(document.getElementById('wrongQuestionsReviewPanel'));
+    renderMathInElementSafe(document.getElementById('subjectScoreBreakdownBox'));
+
+    document.getElementById('reportCardModalOverlay').style.display = 'flex';
+    if (pct >= 60) launchConfetti();
+}
+
+// Review Filter
+function filterReview(type, btn) {
+    var btns = document.querySelectorAll('.review-filter-btn');
+    for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+    btn.classList.add('active');
+
+    var boxes = document.getElementById('wrongQuestionsReviewPanel').querySelectorAll('.review-box');
+    for (var i = 0; i < boxes.length; i++) {
+        var status = boxes[i].getAttribute('data-status');
+        if (type === 'all') {
+            boxes[i].style.display = '';
+        } else {
+            boxes[i].style.display = (status === type) ? '' : 'none';
+        }
+    }
+}
 </script>
 </body>
 </html>
-```
