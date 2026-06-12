@@ -15,8 +15,19 @@
     <script src="questions.js"></script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; }
-        body { background-color: #FFFFFF; user-select: none; overflow-x: hidden; }
-
+    body {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        background-attachment: fixed; /* Ensures the gradient covers the full viewport */
+        user-select: none;
+        overflow-x: hidden;
+        min-height: 100vh; /* Ensures the background covers the full screen height */
+    }
+    
+    /* Update your container/card class to have sharper corners */
+    /* Assuming your main container has a class like .card, .container, or .modal */
+    .card, .container, .modal {
+        border-radius: 4px; /* Adjust this value (e.g., 2px-6px) for the desired sharpness */
+    }
         /* Animations */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
