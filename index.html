@@ -6,7 +6,7 @@
     <link rel="icon" href="image.png" type="image/png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NUST Computer Based Entry Test (CBNET)</title>
+    <title>NUST Computer Based Mock Test</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
@@ -15,19 +15,8 @@
     <script src="questions.js"></script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; }
-    body {
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        background-attachment: fixed; /* Ensures the gradient covers the full viewport */
-        user-select: none;
-        overflow-x: hidden;
-        min-height: 100vh; /* Ensures the background covers the full screen height */
-    }
-    
-    /* Update your container/card class to have sharper corners */
-    /* Assuming your main container has a class like .card, .container, or .modal */
-    .card, .container, .modal {
-        border-radius: 4px; /* Adjust this value (e.g., 2px-6px) for the desired sharpness */
-    }
+        body { background-color: #FFFFFF; user-select: none; overflow-x: hidden; }
+
         /* Animations */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
@@ -89,12 +78,12 @@
             background: linear-gradient(135deg, rgba(0,30,80,0.4), rgba(0,0,0,0.45));
         }
         .login-container {
-            width: 100%; max-width: 440px; background: rgba(255,255,255,0.97);
+            width: 100%; max-width: 440px; background: rgba(255,255,255,0.90);
             padding: 28px 30px; border-radius: 16px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.25);
             animation: fadeInUp 0.7s ease-out;
             z-index: 1; position: relative;
-            border: 1.0px solid rgba(0,85,165,0.2);
+            border: 4px solid rgba(0,85,165,0.2);
         }
 
         /* Instructions Screen */
@@ -109,13 +98,13 @@
             background: linear-gradient(135deg, rgba(0,30,80,0.4), rgba(0,0,0,0.45));
         }
         .instructions-container {
-            width: 100%; max-width: 660px; background: rgba(255,255,255,0.98);
+            width: 100%; max-width: 660px; background: rgba(255,255,255,0.90);
             padding: 26px 28px; border-radius: 16px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.25);
             max-height: 90vh; overflow-y: auto;
             animation: fadeInUp 0.7s ease-out;
             z-index: 1; position: relative;
-            border: 1.0px solid rgba(0,85,165,0.2);
+            border: 4px solid rgba(0,85,165,0.2);
             margin-top: 10px;
         }
         .instructions-container::-webkit-scrollbar { width: 5px; }
@@ -183,12 +172,12 @@
             background: linear-gradient(135deg, rgba(0,30,80,0.4), rgba(0,0,0,0.45));
         }
         .field-select-container {
-            width: 100%; max-width: 500px; background: rgba(255,255,255,0.97);
+            width: 100%; max-width: 500px; background: rgba(255,255,255,0.90);
             padding: 26px 28px; border-radius: 16px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.25);
             animation: scaleIn 0.6s ease-out;
             z-index: 1; position: relative;
-            border: 1.5px solid rgba(0,85,165,0.2);
+            border: 4px solid rgba(0,85,165,0.2);
         }
 
         .login-header { 
@@ -235,7 +224,7 @@
         .toggle-password-btn:hover { background: #BDC3C7; }
         .login-btn { 
             width: 100%; padding: 12px; 
-            background: linear-gradient(135deg, #0055A5, #003399); 
+            background: linear-gradient(135deg, #28a745, #218838); 
             color: white; border: none; border-radius: 9px; font-weight: 700; font-size: 13.5px; 
             cursor: pointer; margin-top: 8px; transition: all 0.25s ease; 
             box-shadow: 0 4px 12px rgba(0,51,153,0.25);
